@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/general.css" />
+    <link rel="stylesheet" href="css/style.css" />
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule=""
+      src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js"
+    ></script>
+
+    <script
+      defer
+      src="https://unpkg.com/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js"
+    ></script>
+    <script defer src="js/form.js"></script>
+    <script defer src="js/script.js"></script>
+
+    <title>Bookstack</title>
+  </head>
+  <body class="bg-light">
+    <header class="header">
+      <a href="#" class="logo">Bookstack</a>
+
+      <nav class="main-nav">
+        <ul class="main-nav-list">
+          <li><a class="main-nav-link" href="index.html">Home</a></li>
+          <li><a class="main-nav-link" href="browse.html">Browse</a></li>
+          <li><a class="main-nav-link" href="account.html">Account</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="register-section">
+        <form method="POST" class="form">
+          <p class="form-title">Sign up</p>
+          <div class="form-group">
+            <label for="firstname"
+              ><ion-icon class="form-icon" name="person-outline"></ion-icon
+            ></label>
+            <input
+              type="text"
+              name="firstname"
+              id="firstname"
+              placeholder="First Name"
+            />
+          </div>
+          <div class="form-group">
+            <label for="lastname"
+              ><ion-icon class="form-icon" name="person"></ion-icon
+            ></label>
+            <input
+              type="text"
+              name="lastname"
+              id="lastname"
+              placeholder="Last Name"
+            />
+          </div>
+          <div class="form-group">
+            <label for="username"
+              ><ion-icon class="form-icon" name="person-circle"></ion-icon
+            ></label>
+            <input
+              type="text"
+              name="username"
+              id="username"
+              placeholder="Username"
+            />
+          </div>
+          <div class="form-group">
+            <label for="email"
+              ><ion-icon class="form-icon" name="mail-open"></ion-icon
+            ></label>
+            <input type="email" name="email" id="email" placeholder="Email" />
+          </div>
+          <div class="form-group">
+            <label for="password"
+              ><ion-icon class="form-icon" name="lock-open"></ion-icon
+            ></label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Password"
+            />
+          </div>
+          <div class="form-group">
+            <label for="confirm_password"
+              ><ion-icon class="form-icon" name="lock-closed"></ion-icon
+            ></label>
+            <input
+              type="password"
+              name="confirm_password"
+              id="confirm_password"
+              placeholder="Confirm Password"
+            />
+          </div>
+          <a class="form-btn" href="#">Register</a>
+          <a class="form-link" href="#">Already have an account?</a>
+        </form>
+      </section>
+
+      <section class="login-section">
+        <form method="POST" class="form">
+          <p class="form-title">Sign in</p>
+          <div class="form-group">
+            <label for="email"
+              ><ion-icon class="form-icon" name="mail-open"></ion-icon
+            ></label>
+            <input type="text" name="email" id="email" placeholder="Email" />
+          </div>
+          <div class="form-group">
+            <label for="password"
+              ><ion-icon class="form-icon" name="lock-closed"></ion-icon
+            ></label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Password"
+            />
+          </div>
+          <a class="form-btn" href="#">Log in</a>
+          <a class="form-link" href="#">Not a member yet?</a>
+        </form>
+      </section>
+
+      <section class="entry-isbn-section">
+        <form method="POST" class="form">
+          <p class="form-title">Search with ISBN</p>
+          <div class="form-group">
+            <label for="isbn"
+              ><ion-icon class="form-icon" name="barcode"></ion-icon
+            ></label>
+            <input type="text" name="isbn" id="isbn" placeholder="ISBN" />
+          </div>
+          <a class="form-btn" href="#">Search</a>
+        </form>
+      </section>
+
+      <section class="entry-section">
+        <form method="POST" class="form">
+          <p class="form-title">Trade-in your book</p>
+          <div class="form-group">
+            <label for="isbn"
+              ><ion-icon class="form-icon" name="barcode"></ion-icon
+            ></label>
+            <input type="text" name="isbn" id="isbn" placeholder="ISBN" />
+          </div>
+
+          <div class="form-group">
+            <label for="title"
+              ><ion-icon class="form-icon" name="barcode"></ion-icon
+            ></label>
+            <input type="text" name="title" id="title" placeholder="Title" />
+          </div>
+
+          <div class="form-group">
+            <label for="subtitle"
+              ><ion-icon class="form-icon" name="barcode"></ion-icon
+            ></label>
+            <input
+              type="text"
+              name="subtitle"
+              id="subtitle"
+              placeholder="Subtitle"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="author"
+              ><ion-icon class="form-icon" name="barcode"></ion-icon
+            ></label>
+            <input type="text" name="author" id="author" placeholder="Author" />
+          </div>
+
+          <div class="form-group">
+            <label for="publisher"
+              ><ion-icon class="form-icon" name="barcode"></ion-icon
+            ></label>
+            <input
+              type="text"
+              name="publisher"
+              id="publisher"
+              placeholder="Publisher"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="publish_date"
+              ><ion-icon class="form-icon" name="barcode"></ion-icon
+            ></label>
+            <input
+              type="text"
+              name="publish_date"
+              id="publish_date"
+              placeholder="Publish Date"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="page_count"
+              ><ion-icon class="form-icon" name="barcode"></ion-icon
+            ></label>
+            <input
+              type="number"
+              name="page_count"
+              id="page_count"
+              placeholder="Number of pages"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="thumbnail_url"
+              ><ion-icon class="form-icon" name="barcode"></ion-icon
+            ></label>
+            <input
+              type="text"
+              name="thumbnail_url"
+              id="thumbnail_url"
+              placeholder="Cover Image url"
+            />
+          </div>
+
+          <div class="custom-select" style="width: 200px">
+            <select>
+              <option value="0">Subject</option>
+              <option value="1">Action and Adventure</option>
+              <option value="2">Business</option>
+              <option value="3">Comic</option>
+              <option value="4">Mystery</option>
+            </select>
+          </div>
+          <a class="form-btn" href="#">Search</a>
+        </form>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="grid grid--footer">
+        <div class="brand-col">
+          <a href="#" class="footer-logo">Bookstack</a>
+
+          <ul class="social-links">
+            <li>
+              <a class="footer-link" href="#"
+                ><ion-icon class="social-icon" name="logo-instagram"></ion-icon
+              ></a>
+            </li>
+            <li>
+              <a class="footer-link" href="#"
+                ><ion-icon class="social-icon" name="logo-facebook"></ion-icon
+              ></a>
+            </li>
+            <li>
+              <a class="footer-link" href="#"
+                ><ion-icon class="social-icon" name="logo-twitter"></ion-icon
+              ></a>
+            </li>
+          </ul>
+
+          <p class="copyright">
+            Copyright &copy; <span class="year">2023</span> by Bookstack, Inc.
+            All rights reserved.
+          </p>
+        </div>
+
+        <div class="address-col">
+          <p class="footer-heading">Contact us</p>
+          <address class="contacts">
+            <a class="footer-link" href="tel:216-200-6490">216-200-6490</a>
+            <a class="footer-link" href="mailto:info@bookstack.com"
+              >info@bookstack.com</a
+            >
+            <p class="address">Themidos 23, Marousi, 15124</p>
+          </address>
+        </div>
+
+        <nav class="nav-col">
+          <p class="footer-heading">Account &#38; Resources</p>
+          <ul class="footer-nav">
+            <li><a class="footer-link" href="#">Create account</a></li>
+            <li><a class="footer-link" href="#">Sign in</a></li>
+            <li><a class="footer-link" href="#">Privacy & Terms</a></li>
+          </ul>
+        </nav>
+
+        <div class="map-col">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3384.4516696569203!2d-81.13585100132882!3d31.97576928976012!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88fb74937c28cc75%3A0xecaea065efcb6a12!2s23%20Austin%20Dr%2C%20Savannah%2C%20GA%2031419%2C%20USA!5e0!3m2!1sen!2sgr!4v1638221563819!5m2!1sen!2sgr"
+            width="300"
+            height="200"
+            style="border: 0"
+            allowfullscreen=""
+            loading="lazy"
+          ></iframe>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
