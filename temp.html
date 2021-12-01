@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/general.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/queries.css" />
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule=""
+      src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js"
+    ></script>
+
+    <script
+      defer
+      src="https://unpkg.com/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js"
+    ></script>
+    <script defer src="js/script.js"></script>
+
+    <title>Bookstack</title>
+  </head>
+  <body>
+    <header class="header bg-light">
+      <a href="#" class="logo">Bookstack</a>
+
+      <nav class="main-nav">
+        <ul class="main-nav-list">
+          <li><a class="main-nav-link" href="#">Home</a></li>
+          <li><a class="main-nav-link" href="browse.html">Browse</a></li>
+          <li><a class="main-nav-link" href="account.html">Account</a></li>
+        </ul>
+      </nav>
+
+      <button class="btn-mobile-nav">
+        <ion-icon class="icon-mobile-nav" name="menu-outline"></ion-icon>
+        <ion-icon class="icon-mobile-nav" name="close-outline"></ion-icon>
+      </button>
+    </header>
+
+    <main>
+      <section class="section-hero">
+        <div class="hero">
+          <div class="hero-text-box">
+            <h1 class="heading-secondary">
+              Trade books online by letting us find someone with the next read
+              for you
+            </h1>
+            <p class="hero-text">
+              We love reading books. Lots of them. But there always comes a time
+              where you are not sure what your next read is going to be. That is
+              where trading books comes into handy. <br />
+              <br />
+              Do you have books laying around? Through Bookstack you can
+              trade-in books, get rewarded with points and acquire new ones
+              without having to find someone with mutual interests.
+            </p>
+          </div>
+          <div class="hero-img-box">
+            <img
+              src="img/hero.jpg"
+              class="hero-img"
+              alt="Person reading book"
+            />
+          </div>
+        </div>
+        <div class="books-traded-box">
+          <span class="books-traded"
+            >So far <strong>21.350</strong> books have been traded through
+            Bookstack</span
+          >
+        </div>
+      </section>
+
+      <section class="section-how-it-works">
+        <div class="container">
+          <span class="subheading">How it works</span>
+          <h2 class="heading-secondary">
+            Trade books with the following steps
+          </h2>
+        </div>
+
+        <div class="container grid grid--2-cols grid--center-v">
+          <!-- STEP 01 -->
+          <div class="step-text-box">
+            <p class="step-number">01</p>
+            <h3 class="heading-tertiary">Submit your book</h3>
+            <p class="step-description">
+              After creating an account you can trade-in one of your books by
+              filling in a new entry form. Simply type in your book's ISBN (10
+              or 13 digit code usually on the back cover). Then the book
+              information should be returned together with the amount of credits
+              you will earn.
+            </p>
+          </div>
+
+          <div class="step-img-box">
+            <img
+              src="img/submit.jpg"
+              class="step-img"
+              alt="Person typing into his computer"
+            />
+          </div>
+
+          <!-- STEP 02 -->
+          <div class="step-img-box">
+            <img
+              src="img/shipping.jpg"
+              class="step-img"
+              alt="Delivery truck in traffic"
+            />
+          </div>
+
+          <div class="step-text-box">
+            <p class="step-number">02</p>
+            <h3 class="heading-tertiary">Ship your book to our warehouse</h3>
+            <p class="step-description">
+              After submitting your book on our platform, you are kindly asked
+              to send it to our warehouse. This way, we can guarantee that every
+              book is in at least an average condition and also so that we can
+              handle the shipping to the next owner.
+            </p>
+          </div>
+
+          <!-- STEP 03 -->
+          <div class="step-text-box">
+            <p class="step-number">03</p>
+            <h3 class="heading-tertiary">Acquire Books</h3>
+            <p class="step-description">
+              As soon as your book arrives at our wharehouse and we make sure
+              its condition is decent, you will be rewarded with the
+              predetermined credits. Now you can acquire any book that you like
+              from the browse section if you have enough credits. Fill in your
+              address and we will ship it right to you.
+            </p>
+          </div>
+
+          <div class="step-img-box">
+            <img
+              src="img/books.jpg"
+              class="step-img"
+              alt="Person typing into his computer"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section class="browse-section">
+        <div class="browse">
+          <p class="browse-heading">Browse Books</p>
+          <div class="information">
+            <div class="browse-credits">
+              <ion-icon class="credits-icon" name="cash-outline"></ion-icon>
+              <span class="credits">1.100</span>
+            </div>
+
+            <a class="btn btn-md btn-trade" href="#">Trade-in</a>
+          </div>
+        </div>
+
+        <div class="browse-container grid-browse">
+          <div class="item-container flex-item">
+            <div class="itm-img-box">
+              <img
+                class="itm-img"
+                src="https://m.media-amazon.com/images/I/51rl1STCyoL.jpg"
+                alt="book cover"
+              />
+            </div>
+            <div class="itm-description-box">
+              <p class="itm-title">Better Off Dead</p>
+              <p class="itm-author">Lee Child, Andrew Child</p>
+              <a class="btn btn-sm btn-itm" href="#">View Details</a>
+            </div>
+          </div>
+
+          <div class="item-container flex-item">
+            <div class="itm-img-box">
+              <img
+                class="itm-img"
+                src="https://images-na.ssl-images-amazon.com/images/I/71iud2Nk92L.jpg"
+                alt="book cover"
+              />
+            </div>
+            <div class="itm-description-box">
+              <p class="itm-title">Unscripted</p>
+              <p class="itm-author">M. J. Demarco</p>
+              <a class="btn btn-sm btn-itm" href="book_preview.html"
+                >View Details</a
+              >
+            </div>
+          </div>
+
+          <div class="item-container flex-item">
+            <div class="itm-img-box">
+              <img
+                class="itm-img"
+                src="http://books.google.com/books/content?id=eifwjwEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+                alt="book cover"
+              />
+            </div>
+            <div class="itm-description-box">
+              <p class="itm-title">The Subtle Art of Not Giving a F*ck</p>
+              <p class="itm-author">Mark Manson</p>
+              <a class="btn btn-sm btn-itm" href="#">View Details</a>
+            </div>
+          </div>
+
+          <div class="item-container flex-item">
+            <div class="itm-img-box">
+              <img
+                class="itm-img"
+                src="https://images-na.ssl-images-amazon.com/images/I/51Ua3JTN8iS._SX338_BO1,204,203,200_.jpg"
+                alt="book cover"
+              />
+            </div>
+            <div class="itm-description-box">
+              <p class="itm-title">Big Shot Diary of a Wimpy Kid Book 16</p>
+              <p class="itm-author">Jeff Kinney</p>
+              <a class="btn btn-sm btn-itm" href="#">View Details</a>
+            </div>
+          </div>
+
+          <div class="item-container flex-item">
+            <div class="itm-img-box">
+              <img
+                class="itm-img"
+                src="https://m.media-amazon.com/images/I/61qSRYof0-L.jpg"
+                alt="book cover"
+              />
+            </div>
+            <div class="itm-description-box">
+              <p class="itm-title">
+                Magnus Chase and the Gods of Asgard, Book 1
+              </p>
+              <p class="itm-author">Rick Riordan</p>
+              <a class="btn btn-sm btn-itm" href="#">View Details</a>
+            </div>
+          </div>
+
+          <div class="item-container flex-item">
+            <div class="itm-img-box">
+              <img
+                class="itm-img"
+                src="https://images-na.ssl-images-amazon.com/images/I/516LGPjsgLL._SX387_BO1,204,203,200_.jpg"
+              />
+            </div>
+            <div class="itm-description-box">
+              <p class="itm-title">Lore Olympus</p>
+              <p class="itm-author">Rachel Smythe</p>
+              <a class="btn btn-sm btn-itm" href="#">View Details</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="pagination">
+          <button class="btn-page">
+            <ion-icon class="btn-icon" name="chevron-back-outline"></ion-icon>
+          </button>
+
+          <a href="#" class="page-link">1</a>
+          <a href="#" class="page-link">2</a>
+          <a href="#" class="page-link page-link--current">3</a>
+          <a href="#" class="page-link">4</a>
+          <a href="#" class="page-link">5</a>
+          <a href="#" class="page-link pagination-dots">...</a>
+          <a href="#" class="page-link">13</a>
+
+          <button class="btn-page">
+            <ion-icon
+              class="btn-icon"
+              name="chevron-forward-outline"
+            ></ion-icon>
+          </button>
+        </div>
+      </section>
+
+      <section class="itm-preview-section">
+        <div class="itm-preview-container">
+          <div class="itm-img-col">
+            <div class="img-box-preview">
+              <img
+                class="itm-img-preview"
+                src="https://images-na.ssl-images-amazon.com/images/I/71iud2Nk92L.jpg"
+                alt="book cover"
+              />
+            </div>
+          </div>
+          <div class="itm-description-col">
+            <p class="itm-isbn">ISBN: 9780984358168</p>
+            <h1 class="itm-title-preview">Unscripted</h1>
+            <p class="itm-subtitle">
+              Life, Liberty, and the Pursuit of Entrepreneurship
+            </p>
+            <p class="itm-preview">Authors Name: M. J. Demarco</p>
+            <p class="itm-preview">Publisher: Viperion Corporation</p>
+            <p class="itm-preview">Publish Date: 2017-05-23</p>
+            <p class="itm-preview">Page Count: 428</p>
+            <p class="itm-preview">Subject: Business</p>
+            <p class="itm-preview">Language: en</p>
+            <div class="itm-credits-preview">
+              <ion-icon class="credits-icon" name="cash-outline"></ion-icon>
+              <span class="itm-credits">300</span>
+            </div>
+            <a class="btn btn-sm" href="#">Acquire</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="profile-section">
+        <div class="profile-heading-container">
+          <h2 class="heading-profile">Profile</h2>
+          <a class="btn btn-md btn-edit-profile" href="#">Edit</a>
+        </div>
+
+        <div class="profile">
+          <div class="container profile-grid">
+            <div class="profile-element">
+              <p class="label">Fullname</p>
+              <p class="value">John Doe</p>
+            </div>
+            <div class="profile-element">
+              <p class="label">Username</p>
+              <p class="value">johndoe01</p>
+            </div>
+            <div class="profile-element">
+              <p class="label">Email</p>
+              <p class="value">johndoe01@somewhere.com</p>
+            </div>
+            <div class="profile-element">
+              <p class="label">Language</p>
+              <p class="value">English</p>
+            </div>
+          </div>
+
+          <div class="container profile-stats-grid">
+            <div class="profile-credits">
+              <ion-icon class="credits-icon" name="cash-outline"></ion-icon>
+              <span class="credits">1.100</span>
+            </div>
+            <p class="books-traded-in">
+              Books Traded: &nbsp;<strong>4</strong>
+            </p>
+            <p class="books-acquired">
+              Books Acquired: &nbsp;<strong>2</strong>
+            </p>
+          </div>
+
+          <div class="container profile-grid">
+            <div class="profile-element">
+              <p class="label">Address</p>
+              <p class="value">4316 Walnut Street</p>
+            </div>
+            <div class="profile-element">
+              <p class="label">City</p>
+              <p class="value">Philadelphia</p>
+            </div>
+            <div class="profile-element">
+              <p class="label">Region</p>
+              <p class="value">Pennsylvania</p>
+            </div>
+            <div class="profile-element">
+              <p class="label">Postal Code</p>
+              <p class="value">19104</p>
+            </div>
+            <div class="profile-element">
+              <p class="label">Phone Number</p>
+              <p class="value">(555) 555-1234</p>
+            </div>
+            <div class="profile-element">
+              <p class="label">Country</p>
+              <p class="value">United States</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="browse-section">
+        <div class="profile-heading-container mb-sm">
+          <h2 class="heading-profile">Your Entries</h2>
+          <a class="btn btn-md" href="#">Trade-in</a>
+        </div>
+
+        
+        <div class="browse-container grid-browse">
+          <div class="item-container flex-item">
+            <div class="itm-img-box">
+              <img
+                class="itm-img"
+                src="https://images-na.ssl-images-amazon.com/images/I/71iud2Nk92L.jpg"
+                alt="book cover"
+              />
+            </div>
+            <div class="itm-description-box">
+              <p class="itm-title">Unscripted</p>
+              <p class="itm-author">M. J. Demarco</p>
+              <a class="btn btn-sm btn-itm" href="#">Edit Entry</a>
+            </div>
+          </div>
+
+          <div class="item-container flex-item">
+            <div class="itm-img-box">
+              <img
+                class="itm-img"
+                src="http://books.google.com/books/content?id=eifwjwEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+                alt="book cover"
+              />
+            </div>
+            <div class="itm-description-box">
+              <p class="itm-title">The Subtle Art of Not Giving a F*ck</p>
+              <p class="itm-author">Mark Manson</p>
+              <a class="btn btn-sm btn-itm" href="#">Edit Entry</a>
+            </div>
+          </div>
+
+          <div class="item-container flex-item">
+            <div class="itm-img-box">
+              <img
+                class="itm-img"
+                src="https://m.media-amazon.com/images/I/61qSRYof0-L.jpg"
+                alt="book cover"
+              />
+            </div>
+            <div class="itm-description-box">
+              <p class="itm-title">
+                Magnus Chase and the Gods of Asgard, Book 1
+              </p>
+              <p class="itm-author">Rick Riordan</p>
+              <a class="btn btn-sm btn-itm" href="#">Edit Entry</a>
+            </div>
+          </div>
+      </section>
+
+      <section class="form-section">
+        <form method="POST" class="form">
+          <div class="form-container">
+            <p class="form-title">Book found</p>
+            <div class="form-group">
+              <label for="isbn"
+                ><ion-icon class="form-icon" name="barcode"></ion-icon
+              ></label>
+              <input
+                disabled
+                value="9780984358168"
+                type="text"
+                name="isbn"
+                id="isbn"
+                placeholder="ISBN"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="title"
+                ><ion-icon class="form-icon" name="text"></ion-icon
+              ></label>
+              <input
+                disabled
+                value="Unscripted"
+                type="text"
+                name="title"
+                id="title"
+                placeholder="Title"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="subtitle"
+                ><ion-icon class="form-icon" name="text-outline"></ion-icon
+              ></label>
+              <input
+                disabled
+                value="Life, Liberty, and the Pursuit of Entrepreneurship"
+                type="text"
+                name="subtitle"
+                id="subtitle"
+                placeholder="Subtitle"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="author"
+                ><ion-icon class="form-icon" name="person"></ion-icon
+              ></label>
+              <input
+                type="text"
+                name="author"
+                id="author"
+                placeholder="Author"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="publisher"
+                ><ion-icon class="form-icon" name="person-circle"></ion-icon
+              ></label>
+              <input
+                disabled
+                value="Viperion Corporation"
+                type="text"
+                name="publisher"
+                id="publisher"
+                placeholder="Publisher"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="publish_date"
+                ><ion-icon class="form-icon" name="calendar"></ion-icon
+              ></label>
+              <input
+                disabled
+                value="2017-05-23"
+                type="text"
+                name="publish_date"
+                id="publish_date"
+                placeholder="Publish Date"
+                onfocus="(this.type='date')"
+                onblur="(this.type='text')"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="page_count"
+                ><ion-icon class="form-icon" name="documents"></ion-icon
+              ></label>
+              <input
+                disabled
+                value="428"
+                type="number"
+                name="page_count"
+                id="page_count"
+                placeholder="Number of pages"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="thumbnail_url"
+                ><ion-icon class="form-icon" name="code"></ion-icon
+              ></label>
+              <input
+                disabled
+                value="http://books.google.com/books/content?id=IIoaMQAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+                type="text"
+                name="thumbnail_url"
+                id="thumbnail_url"
+                placeholder="Cover Image url"
+              />
+            </div>
+
+            <div class="custom-select form-group">
+              <label for="language"
+                ><ion-icon class="form-icon" name="earth"></ion-icon
+              ></label>
+              <select class="select" id="language" name="language" required>
+                <option value="">Select Language:</option>
+                <option value="en">English</option>
+                <option value="fr">French</option>
+                <option value="de">German</option>
+              </select>
+              <span class="remove-arrow"></span>
+            </div>
+            <div class="custom-select form-group">
+              <label for="subject"
+                ><ion-icon class="form-icon" name="menu"></ion-icon
+              ></label>
+              <select class="select disabled" id="subject" name="subject">
+                <option value="2">Business</option>
+              </select>
+              <span class="remove-arrow disabled"></span>
+            </div>
+            <a class="form-btn" href="#">Continue</a>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="grid grid--footer">
+        <div class="brand-col">
+          <a href="#" class="footer-logo">Bookstack</a>
+
+          <ul class="social-links">
+            <li>
+              <a class="footer-link" href="#"
+                ><ion-icon class="social-icon" name="logo-instagram"></ion-icon
+              ></a>
+            </li>
+            <li>
+              <a class="footer-link" href="#"
+                ><ion-icon class="social-icon" name="logo-facebook"></ion-icon
+              ></a>
+            </li>
+            <li>
+              <a class="footer-link" href="#"
+                ><ion-icon class="social-icon" name="logo-twitter"></ion-icon
+              ></a>
+            </li>
+          </ul>
+
+          <p class="copyright">
+            Copyright &copy; <span class="year">2023</span> by Bookstack, Inc.
+            All rights reserved.
+          </p>
+        </div>
+
+        <div class="address-col">
+          <p class="footer-heading">Contact us</p>
+          <address class="contacts">
+            <a class="footer-link" href="tel:216-200-6490">216-200-6490</a>
+            <a class="footer-link" href="mailto:info@bookstack.com"
+              >info@bookstack.com</a
+            >
+            <p class="address">23 Austin Drive, Savannah, Georgia, 31405, US</p>
+          </address>
+        </div>
+
+        <nav class="nav-col">
+          <p class="footer-heading">Account &#38; Resources</p>
+          <ul class="footer-nav">
+            <li><a class="footer-link" href="#">Create account</a></li>
+            <li><a class="footer-link" href="#">Sign in</a></li>
+            <li><a class="footer-link" href="#">Privacy & Terms</a></li>
+          </ul>
+        </nav>
+
+        <div class="map-col">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3384.4516696569203!2d-81.13585100132882!3d31.97576928976012!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88fb74937c28cc75%3A0xecaea065efcb6a12!2s23%20Austin%20Dr%2C%20Savannah%2C%20GA%2031419%2C%20USA!5e0!3m2!1sen!2sgr!4v1638221563819!5m2!1sen!2sgr"
+            class="map"
+            width="300"
+            height="200"
+            style="border: 0"
+            allowfullscreen=""
+            loading="lazy"
+          ></iframe>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

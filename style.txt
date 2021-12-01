@@ -10,7 +10,7 @@ Deafault: 1
 Text: 1.6
 --- 02 COLORS
 - Primary: #3f4e55
-- Tints: #f2f5f6 / #b2c3cb / #7E9BA9 / #657c87 / #4c5d65 / #323e44 
+- Tints: #f2f5f6 / #e5ebee / #b2c3cb / #7E9BA9 / #657c87 / #4c5d65 / #323e44 
 - Shades: 
 - Accents: 
 - Grays: 
