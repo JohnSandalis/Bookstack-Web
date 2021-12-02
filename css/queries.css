@@ -190,13 +190,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.5s ease-in;
+    transition: all 0.3s ease-in;
+    display: none;
     opacity: 0;
     pointer-events: none;
     visibility: hidden;
   }
 
   .nav-open .main-nav {
+    display: flex;
     opacity: 1;
     pointer-events: auto;
     visibility: visible;
@@ -361,12 +363,21 @@
 /**************************/
 
 @media (max-width: 34em) {
-  .grid--2-cols {
-    grid-template-columns: 1fr;
+  .header {
+    padding: 0 2.4rem;
+  }
+
+  .hero {
+    padding: 6.4rem 2.4rem;
   }
 
   .hero-text-box {
     padding: 0;
+  }
+
+  .hero-text {
+    padding: 0;
+    font-size: 1.7rem;
   }
 
   .books-traded-box {
@@ -375,7 +386,7 @@
   }
 
   .hero-img-box {
-    width: 30rem;
+    width: 35rem;
   }
 
   .step-img-box:nth-child(2) {
@@ -447,6 +458,10 @@
     justify-self: end;
   }
 
+  .profile-section {
+    padding: 0 2.4rem;
+  }
+
   .profile-heading-container {
     margin-bottom: 2.4rem;
   }
@@ -465,12 +480,17 @@
     grid-row: 3;
   }
 
+  .form-title {
+    text-align: center;
+  }
+
   .form-container {
-    padding: 5.6rem;
+    padding: 5.6rem 4rem;
   }
 
   .grid--footer {
     grid-template-columns: 1fr;
+    padding: 6.4rem 3.2rem;
   }
 
   .address-col {
@@ -506,6 +526,10 @@
   .map {
     width: 250px;
     height: 125px;
+  }
+
+  .grid--2-cols {
+    grid-template-columns: 1fr;
   }
 }
 
