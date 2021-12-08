@@ -55,6 +55,14 @@
     margin-bottom: 6.4rem;
   }
 
+  .section-error {
+    max-width: 80rem;
+  }
+
+  .error {
+    padding: 4.8rem 9.6rem;
+  }
+
   .grid {
     column-gap: 4.8rem;
     row-gap: 6.4rem;
@@ -329,6 +337,27 @@
     height: 110px;
   }
 
+  .section-error {
+    max-width: 50rem;
+  }
+
+  .error {
+    padding: 3.2rem 6.4rem;
+  }
+
+  h1.error-heading {
+    margin-bottom: 3.2rem;
+  }
+
+  .error-description-heading {
+    font-size: 1.8rem;
+    margin-bottom: 1.6rem;
+  }
+
+  .error-description {
+    font-size: 1.6rem;
+  }
+
   .heading-primary {
     font-size: 3rem;
   }
@@ -509,6 +538,19 @@
     grid-row: 4;
   }
 
+  .section-error {
+    max-width: 90%;
+    margin: 9.6rem auto;
+  }
+
+  .error {
+    padding: 2.4rem 4.8rem;
+  }
+
+  .error-description {
+    padding: 0.6rem 1.2rem;
+  }
+
   .footer-heading {
     font-size: 2.2rem;
   }
@@ -563,7 +605,7 @@
   }
 
   .map {
-    width: 225px;
+    width: 200px;
     height: 125px;
   }
 

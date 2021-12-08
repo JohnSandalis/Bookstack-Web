@@ -20,6 +20,10 @@ body {
   font-weight: 400;
   color: #3f4e55;
   overflow-x: hidden;
+
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 /************************/
