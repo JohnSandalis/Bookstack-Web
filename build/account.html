@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <link rel="icon" type="image/x-icon" href="images/bookstack_favicon.ico" />
+    
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -40,8 +42,8 @@
       <nav class="main-nav">
         <ul class="main-nav-list">
           <li><a class="main-nav-link" href="index.html">Home</a></li>
-          <li><a class="main-nav-link" href="#">Browse</a></li>
-          <li><a class="main-nav-link" href="account.html">Account</a></li>
+          <li><a class="main-nav-link" href="browse.html">Browse</a></li>
+          <li><a class="main-nav-link" href="#">Account</a></li>
         </ul>
       </nav>
 
@@ -52,62 +54,82 @@
     </header>
 
     <main>
-      <section class="section-hero">
-        <div class="hero">
-          <div class="hero-img-box">
-            <img
-              src="img/books-for-sale.jpg"
-              class="hero-img"
-              alt="Person reading book"
-            />
+      <section class="profile-section">
+        <div class="profile-heading-container">
+          <h2 class="heading-profile">Profile</h2>
+          <a class="btn btn-md btn-edit-profile" href="#">Edit</a>
+        </div>
+
+        <div class="profile">
+          <div class="container profile-grid">
+            <div class="profile-element">
+              <p class="label">Fullname</p>
+              <p class="value">John Doe</p>
+            </div>
+            <div class="profile-element">
+              <p class="label">Username</p>
+              <p class="value">johndoe01</p>
+            </div>
+            <div class="profile-element">
+              <p class="label">Email</p>
+              <p class="value">johndoe01@somewhere.com</p>
+            </div>
+            <div class="profile-element">
+              <p class="label">Language</p>
+              <p class="value">English</p>
+            </div>
           </div>
 
-          <div class="hero-text-box">
-            <h1 class="heading-primary">
-              Here you can find all the available books at our warehouse.
-            </h1>
-            <p class="hero-text">
-              Below are all of the books that can be acquired if someone has
-              enough credits. Take a look and if you find a book interesting you
-              can view more details about it. <br />
-              <br />
-              To acquire a book you need to provide us with your address and
-              have the required amount of credits. After requesting a book, we
-              will ship it right to your doorstep.
+          <div class="container profile-stats-grid">
+            <div class="profile-credits">
+              <ion-icon class="credits-icon" name="cash-outline"></ion-icon>
+              <span class="credits">1.100</span>
+            </div>
+            <p class="books-traded-in">
+              Books Traded: &nbsp;<strong>4</strong>
             </p>
+            <p class="books-acquired">
+              Books Acquired: &nbsp;<strong>2</strong>
+            </p>
+          </div>
+
+          <div class="container profile-grid">
+            <div class="profile-element">
+              <p class="label">Address</p>
+              <p class="value">4316 Walnut Street</p>
+            </div>
+            <div class="profile-element">
+              <p class="label">City</p>
+              <p class="value">Philadelphia</p>
+            </div>
+            <div class="profile-element">
+              <p class="label">Region</p>
+              <p class="value">Pennsylvania</p>
+            </div>
+            <div class="profile-element">
+              <p class="label">Postal Code</p>
+              <p class="value">19104</p>
+            </div>
+            <div class="profile-element">
+              <p class="label">Phone Number</p>
+              <p class="value">(555) 555-1234</p>
+            </div>
+            <div class="profile-element">
+              <p class="label">Country</p>
+              <p class="value">United States</p>
+            </div>
           </div>
         </div>
       </section>
 
       <section class="browse-section">
-        <div class="browse">
-          <p class="browse-heading">Browse Books</p>
-          <div class="information">
-            <div class="browse-credits">
-              <ion-icon class="credits-icon" name="cash-outline"></ion-icon>
-              <span class="credits">1.100</span>
-            </div>
-
-            <a class="btn btn-md btn-trade" href="#">Trade-in</a>
-          </div>
+        <div class="profile-heading-container mb-sm">
+          <h2 class="heading-profile">Your Entries</h2>
+          <a class="btn btn-md" href="#">Trade-in</a>
         </div>
 
+        
         <div class="browse-container grid-browse">
-          <div class="item-container flex-item">
-            <div class="itm-img-box">
-              <img
-                class="itm-img"
-                src="https://m.media-amazon.com/images/I/51rl1STCyoL.jpg"
-                alt="book cover"
-              />
-            </div>
-            <div class="itm-description-box">
-              <p class="itm-title">Better Off Dead</p>
-              <p class="itm-author">Lee Child, Andrew Child</p>
-              <a class="btn btn-sm btn-itm" href="#">View Details</a>
-            </div>
-          </div>
-
           <div class="item-container flex-item">
             <div class="itm-img-box">
               <img
@@ -119,9 +141,7 @@
             <div class="itm-description-box">
               <p class="itm-title">Unscripted</p>
               <p class="itm-author">M. J. Demarco</p>
-              <a class="btn btn-sm btn-itm" href="book_preview.html"
-                >View Details</a
-              >
+              <a class="btn btn-sm btn-itm" href="#">Edit Entry</a>
             </div>
           </div>
 
@@ -136,22 +156,7 @@
             <div class="itm-description-box">
               <p class="itm-title">The Subtle Art of Not Giving a F*ck</p>
               <p class="itm-author">Mark Manson</p>
-              <a class="btn btn-sm btn-itm" href="#">View Details</a>
-            </div>
-          </div>
-
-          <div class="item-container flex-item">
-            <div class="itm-img-box">
-              <img
-                class="itm-img"
-                src="https://images-na.ssl-images-amazon.com/images/I/51Ua3JTN8iS._SX338_BO1,204,203,200_.jpg"
-                alt="book cover"
-              />
-            </div>
-            <div class="itm-description-box">
-              <p class="itm-title">Big Shot Diary of a Wimpy Kid Book 16</p>
-              <p class="itm-author">Jeff Kinney</p>
-              <a class="btn btn-sm btn-itm" href="#">View Details</a>
+              <a class="btn btn-sm btn-itm" href="#">Edit Entry</a>
             </div>
           </div>
 
@@ -168,45 +173,9 @@
                 Magnus Chase and the Gods of Asgard, Book 1
               </p>
               <p class="itm-author">Rick Riordan</p>
-              <a class="btn btn-sm btn-itm" href="#">View Details</a>
+              <a class="btn btn-sm btn-itm" href="#">Edit Entry</a>
             </div>
           </div>
-
-          <div class="item-container flex-item">
-            <div class="itm-img-box">
-              <img
-                class="itm-img"
-                src="https://images-na.ssl-images-amazon.com/images/I/516LGPjsgLL._SX387_BO1,204,203,200_.jpg"
-              />
-            </div>
-            <div class="itm-description-box">
-              <p class="itm-title">Lore Olympus</p>
-              <p class="itm-author">Rachel Smythe</p>
-              <a class="btn btn-sm btn-itm" href="#">View Details</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="pagination">
-          <button class="btn-page">
-            <ion-icon class="btn-icon" name="chevron-back-outline"></ion-icon>
-          </button>
-
-          <a href="#" class="page-link">1</a>
-          <a href="#" class="page-link">2</a>
-          <a href="#" class="page-link page-link--current">3</a>
-          <a href="#" class="page-link">4</a>
-          <a href="#" class="page-link">5</a>
-          <a href="#" class="page-link pagination-dots">...</a>
-          <a href="#" class="page-link">13</a>
-
-          <button class="btn-page">
-            <ion-icon
-              class="btn-icon"
-              name="chevron-forward-outline"
-            ></ion-icon>
-          </button>
-        </div>
       </section>
     </main>
 
