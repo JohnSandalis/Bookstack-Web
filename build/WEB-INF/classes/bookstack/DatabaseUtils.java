@@ -22,26 +22,25 @@ public class DatabaseUtils {
 
     // Queries used in methods below
     private static final String SELECT_SUBMITTED_BOOKS = "SELECT * FROM books_submitted";
-    private static final String SELECT_BOOK_WITH_ISBN = "SELECT * FROM books WHERE isbn = '%s'";
-    private static final String SELECT_AUTHORS_OF_BOOK = "SELECT * FROM authors WHERE isbn = '%s'";
-    private static final String SELECT_BOOK_SUBJECTS = "SELECT * FROM books_subjects WHERE isbn = '%s'";
-    private static final String SELECT_SUBJECT_FROM_ID = "SELECT * FROM subjects WHERE id = '%d'";
-    private static final String SELECT_USER_FROM_EMAIL_AND_PASSWORD = "SELECT * FROM users WHERE" +
-            "email = '%s' AND password = '%s'";
-    private static final String SELECT_SUBJECT_ID_FROM_SUBJECT = "SELECT * FROM subjects WHERE name = '%s'";
-    private static final String SIGN_UP_USER = "INSERT INTO users VALUES(DEFAULT, '%s', '%s', 0, 0," +
-            "'%s', '%s',  NULL, NULL, NULL, NULL, NULL, NULL, NULL";
-    private static final String CREATE_NEW_BOOK = "INSERT INTO books VALUES('%s', '%s', '%s', %d, '%s', '%s', '%s'," +
-            "'%s', %d)";
-    private static final String CREATE_NEW_AUTHOR = "INSERT INTO authors VALUES(DEFAULT, '%s', '%s')";
-    private static final String CREATE_NEW_BOOK_SUBJECTS = "INSERT INTO book_subjects VALUES('%s', %d)";
-    private static final String CREATE_NEW_BOOK_SUBMITTED = "INSERT INTO books_submitted VALUES(DEFAULT, '%s', %d, '%s'";
-    private static final String CREATE_NEW_SUBJECT = "INSERT INTO subjects VALUES(DEFAULT, '%s')";
-    private static final String CREATE_MODIFICATION_REQUEST = "INSERT INTO modification_requests VALUES(DEFAULT, %d, " +
-            "'%s', '%s')";
-    private static final String UPDATE_USER_INFO = "UPDATE users SET address = '%s', country = '%s', " +
-            "postal_code = '%s', at_floor = %d, region = '%s', city = '%s', lang = '%s' WHERE id = %d";
-    private static final String UPDATE_USER_CREDITS = "UPDATE users SET credits = %d WHERE id = %d";
+    private static final String SELECT_BOOK_WITH_ISBN = "SELECT * FROM books WHERE isbn = ?";
+    private static final String SELECT_AUTHORS_OF_BOOK = "SELECT * FROM authors WHERE isbn = ?";
+    private static final String SELECT_BOOK_SUBJECTS = "SELECT * FROM books_subjects WHERE isbn = ?";
+    private static final String SELECT_SUBJECT_FROM_ID = "SELECT * FROM subjects WHERE id = ?";
+    private static final String SELECT_USER_FROM_EMAIL_AND_PASSWORD = "SELECT * FROM users " +
+            "WHERE email = ? AND password = ?";
+    private static final String SELECT_SUBJECT_ID_FROM_SUBJECT = "SELECT * FROM subjects WHERE name = ?";
+    private static final String SIGN_UP_USER = "INSERT INTO users VALUES(DEFAULT, ?, ?, 0, 0," +
+            "?, ?,  NULL, NULL, NULL, NULL, NULL, NULL, NULL)";
+    private static final String CREATE_NEW_BOOK = "INSERT INTO books VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    private static final String CREATE_NEW_AUTHOR = "INSERT INTO authors VALUES(DEFAULT, ?, ?)";
+    private static final String CREATE_NEW_BOOK_SUBJECTS = "INSERT INTO book_subjects VALUES(?, ?)";
+    private static final String CREATE_NEW_BOOK_SUBMITTED = "INSERT INTO books_submitted VALUES(DEFAULT, ?, ?, ?)";
+    private static final String CREATE_NEW_SUBJECT = "INSERT INTO subjects VALUES(DEFAULT, ?)";
+    private static final String CREATE_MODIFICATION_REQUEST = "INSERT INTO modification_requests VALUES(DEFAULT, ?, " +
+            "?, ?)";
+    private static final String UPDATE_USER_INFO = "UPDATE users SET address = ?, country = ?, " +
+            "postal_code = ?, at_floor = ?, region = ?, city = ?, lang = ? WHERE id = ?";
+    private static final String UPDATE_USER_CREDITS = "UPDATE users SET credits = ? WHERE id = ?";
 
     // Returns an active connection object to the project's database
     private static Connection createDatabaseConnection() throws SQLException {
@@ -87,8 +86,9 @@ public class DatabaseUtils {
      */
     public static Book getBookFromISBN(String isbn) throws SQLException {
         try (Connection connection = createDatabaseConnection()) {
-            Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery(String.format(SELECT_BOOK_WITH_ISBN, isbn));
+            PreparedStatement ps = connection.prepareStatement(SELECT_BOOK_WITH_ISBN);
+            ps.setString(1, isbn);
+            ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 String title = rs.getString("title");
                 String subtitle = rs.getString("subtitle");
@@ -118,8 +118,9 @@ public class DatabaseUtils {
     public static List<String> getAuthorsOfBook(String isbn) throws SQLException {
         try (Connection connection = createDatabaseConnection()) {
             List<String> authorNames = new ArrayList<>();
-            Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery(String.format(SELECT_AUTHORS_OF_BOOK, isbn));
+            PreparedStatement ps = connection.prepareStatement(SELECT_AUTHORS_OF_BOOK);
+            ps.setString(1, isbn);
+            ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 String name = rs.getString("name");
                 authorNames.add(name);
@@ -139,8 +140,9 @@ public class DatabaseUtils {
     public static List<String> getBookSubjects(String isbn) throws SQLException {
         try (Connection connection = createDatabaseConnection()) {
             List<String> bookSubjects = new ArrayList<>();
-            Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery(String.format(SELECT_BOOK_SUBJECTS, isbn));
+            PreparedStatement ps = connection.prepareStatement(SELECT_BOOK_SUBJECTS);
+            ps.setString(1, isbn);
+            ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String subject = getSubjectFromId(id);
@@ -160,8 +162,9 @@ public class DatabaseUtils {
      */
     public static String getSubjectFromId(int id) throws SQLException {
         try (Connection connection = createDatabaseConnection()) {
-            Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery(String.format(SELECT_SUBJECT_FROM_ID, id));
+            PreparedStatement ps = connection.prepareStatement(SELECT_SUBJECT_FROM_ID);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 return rs.getString("name");
             }
@@ -180,8 +183,10 @@ public class DatabaseUtils {
      */
     public static User getUserFromUsernameAndPassword(String email, String password) throws SQLException {
         try (Connection connection = createDatabaseConnection()) {
-            Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery(String.format(SELECT_USER_FROM_EMAIL_AND_PASSWORD, email, password));
+            PreparedStatement ps = connection.prepareStatement(SELECT_USER_FROM_EMAIL_AND_PASSWORD);
+            ps.setString(1, email);
+            ps.setString(2, password);
+            ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 int id = rs.getInt("id");
                 int credits = rs.getInt("credits");
@@ -213,9 +218,10 @@ public class DatabaseUtils {
     public static List<Integer> getSubjectsIdsFromSubjects(List<String> subjects) throws SQLException {
         try (Connection connection = createDatabaseConnection()) {
             List<Integer> ids = new ArrayList<>();
-            Statement statement = connection.createStatement();
             for (String subject : subjects) {
-                ResultSet rs = statement.executeQuery(String.format(SELECT_SUBJECT_ID_FROM_SUBJECT, subject));
+                PreparedStatement ps = connection.prepareStatement(SELECT_SUBJECT_ID_FROM_SUBJECT);
+                ps.setString(1, subject);
+                ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
                     int id = rs.getInt("id");
                     ids.add(id);
@@ -239,9 +245,13 @@ public class DatabaseUtils {
     public static void createNewUser(String firstName, String lastName, String username,
             String email, String password) throws SQLException {
         try (Connection connection = createDatabaseConnection()) {
-            Statement statement = connection.createStatement();
+            PreparedStatement ps = connection.prepareStatement(SIGN_UP_USER);
             String fullName = firstName + " " + lastName;
-            statement.executeUpdate(String.format(SIGN_UP_USER, email, password, username, fullName));
+            ps.setString(1, email);
+            ps.setString(2, password);
+            ps.setString(3, username);
+            ps.setString(4, fullName);
+            ps.executeUpdate();
         }
     }
 
@@ -261,14 +271,21 @@ public class DatabaseUtils {
      * @param subjects     The subjects of the book
      * @throws SQLException when a connection to the database cannot be established
      */
-    public static void createNewBook(String isbn, String title, String subtitle, int pagesCount,
-            String thumbnailUrl, String publisher, Date publishDate,
-            String lang, int price, List<String> authors,
-            List<String> subjects) throws SQLException {
+    public static void createNewBook(String isbn, String title, String subtitle, int pagesCount, String thumbnailUrl,
+                                     String publisher, Date publishDate, String lang, int price, List<String> authors,
+                                     List<String> subjects) throws SQLException {
         try (Connection connection = createDatabaseConnection()) {
-            Statement statement = connection.createStatement();
-            statement.executeUpdate(String.format(CREATE_NEW_BOOK, isbn, title, subtitle, pagesCount, thumbnailUrl,
-                    publisher, publishDate, lang, price));
+            PreparedStatement ps = connection.prepareStatement(CREATE_NEW_BOOK);
+            ps.setString(1, isbn);
+            ps.setString(2, title);
+            ps.setString(3, subtitle);
+            ps.setInt(4, pagesCount);
+            ps.setString(5, thumbnailUrl);
+            ps.setString(6, publisher);
+            ps.setDate(7, (java.sql.Date) publishDate);
+            ps.setString(8, lang);
+            ps.setInt(9, price);
+            ps.executeUpdate();
             createNewAuthors(isbn, authors);
             addBookSubjects(isbn, subjects);
         }
@@ -283,9 +300,11 @@ public class DatabaseUtils {
      */
     public static void createNewAuthors(String isbn, List<String> names) throws SQLException {
         try (Connection connection = createDatabaseConnection()) {
-            Statement statement = connection.createStatement();
             for (String name : names) {
-                statement.executeUpdate(String.format(CREATE_NEW_AUTHOR, isbn, name));
+                PreparedStatement ps = connection.prepareStatement(CREATE_NEW_AUTHOR);
+                ps.setString(1, isbn);
+                ps.setString(2, name);
+                ps.executeUpdate();
             }
         }
     }
@@ -300,11 +319,13 @@ public class DatabaseUtils {
      */
     public static void addBookSubjects(String isbn, List<String> subjects) throws SQLException {
         try (Connection connection = createDatabaseConnection()) {
-            Statement statement = connection.createStatement();
             List<Integer> ids = getSubjectsIdsFromSubjects(subjects);
             if (ids != null) {
                 for (Integer id : ids) {
-                    statement.executeUpdate(String.format(CREATE_NEW_BOOK_SUBJECTS, isbn, id));
+                    PreparedStatement ps = connection.prepareStatement(CREATE_NEW_BOOK_SUBJECTS);
+                    ps.setString(1, isbn);
+                    ps.setInt(2, id);
+                    ps.executeUpdate();
                 }
             }
         }
@@ -321,8 +342,11 @@ public class DatabaseUtils {
      */
     public static void addBooksSubmitted(Date timeOf, int userId, String isbn) throws SQLException {
         try (Connection connection = createDatabaseConnection()) {
-            Statement statement = connection.createStatement();
-            statement.executeUpdate(String.format(CREATE_NEW_BOOK_SUBMITTED, timeOf, userId, isbn));
+            PreparedStatement ps = connection.prepareStatement(CREATE_NEW_BOOK_SUBMITTED);
+            ps.setDate(1, (java.sql.Date) timeOf);
+            ps.setInt(2, userId);
+            ps.setString(3, isbn);
+            ps.executeUpdate();
         }
     }
 
@@ -335,8 +359,9 @@ public class DatabaseUtils {
      */
     public static void addNewSubject(String name) throws SQLException {
         try (Connection connection = createDatabaseConnection()) {
-            Statement statement = connection.createStatement();
-            statement.executeUpdate(String.format(CREATE_NEW_SUBJECT, name));
+            PreparedStatement ps = connection.prepareStatement(CREATE_NEW_SUBJECT);
+            ps.setString(1, name);
+            ps.executeUpdate();
         }
     }
 
@@ -350,10 +375,13 @@ public class DatabaseUtils {
      * @throws SQLException when a connection to the database cannot be established
      */
     public static void addNewModificationRequest(int userId, String bookIsbn,
-            String modifications) throws SQLException {
+                                                 String modifications) throws SQLException {
         try (Connection connection = createDatabaseConnection()) {
-            Statement statement = connection.createStatement();
-            statement.executeUpdate(String.format(CREATE_MODIFICATION_REQUEST, userId, bookIsbn, modifications));
+            PreparedStatement ps = connection.prepareStatement(CREATE_MODIFICATION_REQUEST);
+            ps.setInt(1, userId);
+            ps.setString(2, bookIsbn);
+            ps.setString(3, modifications);
+            ps.executeUpdate();
         }
     }
 
@@ -375,9 +403,16 @@ public class DatabaseUtils {
     public static void updateUserInfo(String address, String country, String postalCode, int atFloor,
             String region, String city, String lang, int id) throws SQLException {
         try (Connection connection = createDatabaseConnection()) {
-            Statement statement = connection.createStatement();
-            statement.executeUpdate(String.format(UPDATE_USER_INFO, address, country, postalCode,
-                    atFloor, region, city, lang, id));
+            PreparedStatement ps = connection.prepareStatement(UPDATE_USER_INFO);
+            ps.setString(1, address);
+            ps.setString(2, country);
+            ps.setString(3, postalCode);
+            ps.setInt(4, atFloor);
+            ps.setString(5, region);
+            ps.setString(6, city);
+            ps.setString(7, lang);
+            ps.setInt(8, id);
+            ps.executeUpdate();
         }
     }
 
@@ -389,8 +424,10 @@ public class DatabaseUtils {
      */
     public static void updateUserCredits(int id, int newCredits) throws SQLException {
         try(Connection connection = createDatabaseConnection()) {
-            Statement statement = connection.createStatement();
-            statement.executeUpdate(String.format(UPDATE_USER_CREDITS, newCredits, id);
+            PreparedStatement ps = connection.prepareStatement(UPDATE_USER_CREDITS);
+            ps.setInt(1, id);
+            ps.setInt(2, newCredits);
+            ps.executeUpdate();
         }
     }
 
