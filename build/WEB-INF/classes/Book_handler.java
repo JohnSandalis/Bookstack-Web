@@ -17,7 +17,6 @@ import org.json.JSONArray;
 
 public class Book_handler {
 
-    private static List<String> authors = new ArrayList<>();
     private static SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
 
     public static Book search_by_isbn(String isbn) throws IOException, JSONException {
@@ -29,6 +28,7 @@ public class Book_handler {
         String publisher = null;
         Date publish_date = null;
         String lang = null;
+        List<String> authors = new ArrayList<String>();
         try{
             JSONObject json = readJsonFromUrl(api_request);
             JSONArray items = json.getJSONArray("items");
@@ -74,7 +74,7 @@ public class Book_handler {
             } catch(Exception e) {}
             // Return book object
             Book book = new Book(isbn, title, subtitle, page_count, thumbnail_url,
-             publisher, publish_date, lang);
+             publisher, publish_date, lang, authors);
             return book;
         } catch(IOException | JSONException e) {
             return null;
@@ -94,6 +94,7 @@ public class Book_handler {
             System.out.println("Publish Date: " + book.getPublish_date());
             System.out.println("Language: " + book.getLang());
             System.out.print("Authors name: ");
+            List<String> authors = book.getAuthors();
             for (int i = 0; i < authors.size(); i++) {
                 if (i == authors.size() - 1) {
                     System.out.println(authors.get(i));
