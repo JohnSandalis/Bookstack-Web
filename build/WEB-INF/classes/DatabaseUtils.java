@@ -32,6 +32,7 @@ public class DatabaseUtils {
             "'%s', %d)";
     private static final String CREATE_NEW_AUTHOR = "INSERT INTO authors VALUES(DEFAULT, '%s', '%s')";
     private static final String CREATE_NEW_BOOK_SUBJECTS = "INSERT INTO book_subjects VALUES('%s', %d)";
+    private static final String CREATE_NEW_BOOK_SUBMITTED = "INSERT INTO books_submitted VALUES(DEFAULT, '%s', %d, '%s'";
 
     // Returns an active connection object to the project's database
     private static Connection createDatabaseConnection() throws SQLException {
@@ -269,7 +270,7 @@ public class DatabaseUtils {
      * Creates a connection to the database and adds the ids to the books_subjects table
      * @param isbn The isbn of the book that we're addng the subjects
      * @param subjects The subjects of the book
-     * @throws SQLException when a connection to the database cannot be stablished
+     * @throws SQLException when a connection to the database cannot be established
      */
     public static void addBookSubjects(String isbn, List<String> subjects) throws SQLException {
         try(Connection connection = createDatabaseConnection()) {
@@ -280,6 +281,20 @@ public class DatabaseUtils {
                     statement.executeUpdate(String.format(CREATE_NEW_BOOK_SUBJECTS, isbn, id));
                 }
             }
+        }
+    }
+
+    /**
+     * Creates a connection to the database and adds a book submission to the books_submitted table
+     * @param timeOf The time of the book submission
+     * @param userId The id of the user
+     * @param isbn The book isbn
+     * @throws SQLException when a connection to the database cannot be established
+     */
+    public static void addBooksSubmitted(Date timeOf, int userId, String isbn) throws SQLException {
+        try(Connection connection = createDatabaseConnection()) {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(String.format(CREATE_NEW_BOOK_SUBMITTED, timeOf, userId, isbn));
         }
     }
 
