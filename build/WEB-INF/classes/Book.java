@@ -1,3 +1,5 @@
+import java.util.Date;
+
 /**
  * Public constructor Book
  * 
@@ -6,17 +8,17 @@
  */
 public class Book {
 
-    private String isbn;
-    private String title;
-    private String subtitle;
-    private int page_count;
-    private String thumbnail_url;
-    private String publisher;
-    private String publish_date;
-    private String lang;
+    private final String isbn;
+    private final String title;
+    private final String subtitle;
+    private final int page_count;
+    private final String thumbnail_url;
+    private final String publisher;
+    private final Date publish_date;
+    private final String lang;
 
-    public Book(String isbn, String title, String subtitle, int page_count, String thumbnail_url,
-    String publisher, String publish_date, String lang) {
+    public Book(String isbn, String title, String subtitle, int page_count,
+                String thumbnail_url, String publisher, Date publish_date, String lang) {
         this.isbn = isbn;
         this.title = title;
         this.subtitle = subtitle;
@@ -27,35 +29,35 @@ public class Book {
         this.lang = lang;
     }
 
-    public String get_isbn() {
-        return this.isbn;
+    public String getIsbn() {
+        return isbn;
     }
-    
-    public String get_title() {
-        return this.title;
+
+    public String getTitle() {
+        return title;
     }
-    
-    public String get_subtitle() {
-        return this.subtitle;
+
+    public String getSubtitle() {
+        return subtitle;
     }
-    
-    public int get_page_count(){
-        return this.page_count;
+
+    public int getPage_count() {
+        return page_count;
     }
-    
-    public String get_thumbnail_url() {
-        return this.thumbnail_url;
+
+    public String getThumbnail_url() {
+        return thumbnail_url;
     }
-    
-    public String get_publisher() {
-        return this.publisher;
+
+    public String getPublisher() {
+        return publisher;
     }
-    
-    public String get_publish_date() {
-        return this.publish_date;
+
+    public Date getPublish_date() {
+        return publish_date;
     }
-    
-    public String get_lang() {
-        return this.lang;
+
+    public String getLang() {
+        return lang;
     }
 }
