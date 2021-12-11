@@ -22,7 +22,7 @@ public class DatabaseUtils {
     private static final String SELECT_BOOK_WITH_ISBN = "SELECT * FROM books WHERE isbn = '%s'";
     private static final String SELECT_AUTHORS_OF_BOOK = "SELECT * FROM authors WHERE isbn = '%s'";
     private static final String SELECT_BOOK_SUBJECTS = "SELECT * FROM books_subjects WHERE isbn = '%s'";
-    private static final String SELECT_SUBJECT_FROM_ID = "SELECT * FROM subjects WHERE id = '%d%";
+    private static final String SELECT_SUBJECT_FROM_ID = "SELECT * FROM subjects WHERE id = '%d'";
 
     // Returns an active connection object to the project's database
     private static Connection createDatabaseConnection() throws SQLException {
