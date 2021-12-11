@@ -28,7 +28,7 @@ public class DatabaseUtils {
     private static final String SELECT_SUBJECT_FROM_ID = "SELECT * FROM subjects WHERE id = ?";
     private static final String SELECT_USER_FROM_EMAIL_AND_PASSWORD = "SELECT * FROM users " +
             "WHERE email = ? AND password = ?";
-    private static final String SELECT_SUBJECT_ID_FROM_SUBJECT = "SELECT * FROM subjects WHERE name = ?";
+    private static final String SELECT_SUBJECT_ID_FROM_SUBJECT = "SELECT id FROM subjects WHERE name = ?";
     private static final String SIGN_UP_USER = "INSERT INTO users VALUES(DEFAULT, ?, ?, 0, 0," +
             "?, ?,  NULL, NULL, NULL, NULL, NULL, NULL, NULL)";
     private static final String CREATE_NEW_BOOK = "INSERT INTO books VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -229,6 +229,21 @@ public class DatabaseUtils {
                 return ids;
             }
             return null;
+        }
+    }
+
+    /**
+     * Returns true if the subject already exists in the subjects table
+     * @param name The name of the subject
+     * @return true if the subject already exists, false otherwise
+     * @throws SQLException when a connection to the database cannot be established
+     */
+    public static boolean subjectAlreadyExists(String name) throws SQLException {
+        try (Connection connection = createDatabaseConnection()) {
+            PreparedStatement ps = connection.prepareStatement(SELECT_SUBJECT_FROM_ID);
+            ps.setString(1, name);
+            ResultSet rs = ps.executeQuery();
+            return rs.next();
         }
     }
 
