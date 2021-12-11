@@ -7,6 +7,9 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -15,6 +18,7 @@ import org.json.JSONArray;
 public class Book_handler {
 
     private static List<String> authors = new ArrayList<>();
+    private static SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
 
     public static Book search_by_isbn(String isbn) throws IOException, JSONException {
         String api_request = "https://www.googleapis.com/books/v1/volumes?q=isbn:" + isbn;
@@ -23,7 +27,7 @@ public class Book_handler {
         int page_count = 0;
         String thumbnail_url = null;
         String publisher = null;
-        String publish_date = null;
+        Date publish_date = null;
         String lang = null;
         try{
             JSONObject json = readJsonFromUrl(api_request);
@@ -48,7 +52,9 @@ public class Book_handler {
             } catch(Exception e) {}
             // Fetch publish date from json
             try {
-                publish_date = volumeInfo.getString("publishedDate");
+                String dateString = volumeInfo.getString("publishedDate");
+                // Create Date object from publish_date string
+                publish_date = dateFormatter.parse(dateString);
             } catch(Exception e) {}
             // Fetch language from json
             try{
@@ -79,14 +85,14 @@ public class Book_handler {
         String isbn = "9780984358168";
         Book book = search_by_isbn(isbn);
         if (book != null) {
-            System.out.println("ISBN: " + book.get_isbn());
-            System.out.println("Title: " + book.get_title());
-            System.out.println("Subtitle: " + book.get_subtitle());
-            System.out.println("Page Count: " + book.get_page_count());
-            System.out.println("Thumbnail url: " + book.get_thumbnail_url());
-            System.out.println("Publisher: " + book.get_publisher());
-            System.out.println("Publish Date: " + book.get_publish_date());
-            System.out.println("Language: " + book.get_lang());
+            System.out.println("ISBN: " + book.getIsbn());
+            System.out.println("Title: " + book.getTitle());
+            System.out.println("Subtitle: " + book.getSubtitle());
+            System.out.println("Page Count: " + book.getPage_count());
+            System.out.println("Thumbnail url: " + book.getThumbnail_url());
+            System.out.println("Publisher: " + book.getPublisher());
+            System.out.println("Publish Date: " + book.getPublish_date());
+            System.out.println("Language: " + book.getLang());
             System.out.print("Authors name: ");
             for (int i = 0; i < authors.size(); i++) {
                 if (i == authors.size() - 1) {
