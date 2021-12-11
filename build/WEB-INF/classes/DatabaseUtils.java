@@ -54,6 +54,12 @@ public class DatabaseUtils {
         }
     }
 
+    /**
+     * Creates a connection to the database and gets the book with the corresponding ISBN
+     * @param isbn The unique ISBN of the specific book
+     * @return the book with it's details
+     * @throws SQLException when a connection to the database cannot be stablished
+     */
     public static Book getBookFromISBN(String isbn) throws SQLException {
         try(Connection connection = createDatabaseConnection()) {
             Statement statement = connection.createStatement();
