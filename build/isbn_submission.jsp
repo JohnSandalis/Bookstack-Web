@@ -27,9 +27,9 @@
       <div class="form-container">
         <p class="form-title">Search with ISBN</p>
         <div class="form-group">
-          <label for="isbn"
-            ><ion-icon class="form-icon" name="barcode"></ion-icon
-          ></label>
+          <label for="isbn">
+            <ion-icon class="form-icon" name="barcode"></ion-icon>
+          </label>
           <input type="text" name="isbn" id="isbn" placeholder="ISBN" />
         </div>
         <a class="form-btn" href="#">Search</a>
