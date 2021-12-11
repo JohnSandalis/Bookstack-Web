@@ -25,85 +25,65 @@
         <ion-icon class="icon-mobile-nav" name="close-outline"></ion-icon>
       </button>
     </header>
-<!--Jo-->
+
 <% String isbn = request.getParameter("isbn");
-if 
-List<BookSubmission> books = DatabaseUtils.getBookFromISBN(isbn);
-
-
-
-
-
-
-
-
-
-
-
-
-<!--Sotos-->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <!--Book found form-->
-    <section class="form-section">
+String title = null;
+BookSubmission book = null;
+if (isbn.length() > 0) {
+    book = DatabaseUtils.getBookFromISBN(isbn);
+}
+if (book == null) {
+    title = "Trade-in your book";
+} else {
+    title = "Book found";
+}%>
+      <!--Trade your books form-->
+      <section class="form-section">
         <form method="POST" class="form">
           <div class="form-container">
-            <p class="form-title">Book found</p>
+            <p class="form-title"><%=title%></p>
             <div class="form-group">
-              <label for="isbn"
-                ><ion-icon class="form-icon" name="barcode"></ion-icon
-              ></label>
-              <input
+              <label for="isbn">
+                  <ion-icon class="form-icon" name="barcode"></ion-icon>
+              </label>
+              <%if (book != null) {%>
+                <input
                 disabled
-                value="9780984358168"
+                value="<%=isbn%>"
                 type="text"
                 name="isbn"
                 id="isbn"
                 placeholder="ISBN"
               />
+              <%} else {%>
+                <input type="text" name="isbn" id="isbn" placeholder="ISBN" />
+              <%}%>
             </div>
 
             <div class="form-group">
               <label for="title"
                 ><ion-icon class="form-icon" name="text"></ion-icon
               ></label>
-              <input
+              <%if (book != null) {%>
+                <input
                 disabled
-                value="Unscripted"
+                value="<%=book.getBook().getTitle()%>"
                 type="text"
                 name="title"
                 id="title"
                 placeholder="Title"
               />
+              <%} else {%>
+                <input type="text" name="title" id="title" placeholder="Title" />
+                <%}%>
             </div>
 
             <div class="form-group">
               <label for="subtitle"
                 ><ion-icon class="form-icon" name="text-outline"></ion-icon
               ></label>
-              <input
+              <%if (book != null) {%>
+                <input
                 disabled
                 value="Life, Liberty, and the Pursuit of Entrepreneurship"
                 type="text"
@@ -111,164 +91,74 @@ List<BookSubmission> books = DatabaseUtils.getBookFromISBN(isbn);
                 id="subtitle"
                 placeholder="Subtitle"
               />
-            </div>
-
-            <div class="form-group">
-              <label for="author"
-                ><ion-icon class="form-icon" name="person"></ion-icon
-              ></label>
-              <input
-                type="text"
-                name="author"
-                id="author"
-                placeholder="Author"
-              />
-            </div>
-
-            <div class="form-group">
-              <label for="publisher"
-                ><ion-icon class="form-icon" name="person-circle"></ion-icon
-              ></label>
-              <input
-                disabled
-                value="Viperion Corporation"
-                type="text"
-                name="publisher"
-                id="publisher"
-                placeholder="Publisher"
-              />
-            </div>
-
-            <div class="form-group">
-              <label for="publish_date"
-                ><ion-icon class="form-icon" name="calendar"></ion-icon
-              ></label>
-              <input
-                disabled
-                value="2017-05-23"
-                type="text"
-                name="publish_date"
-                id="publish_date"
-                placeholder="Publish Date"
-                onfocus="(this.type='date')"
-                onblur="(this.type='text')"
-              />
-            </div>
-
-            <div class="form-group">
-              <label for="page_count"
-                ><ion-icon class="form-icon" name="documents"></ion-icon
-              ></label>
-              <input
-                disabled
-                value="428"
-                type="number"
-                name="page_count"
-                id="page_count"
-                placeholder="Number of pages"
-              />
-            </div>
-
-            <div class="form-group">
-              <label for="thumbnail_url"
-                ><ion-icon class="form-icon" name="code"></ion-icon
-              ></label>
-              <input
-                disabled
-                value="http://books.google.com/books/content?id=IIoaMQAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
-                type="text"
-                name="thumbnail_url"
-                id="thumbnail_url"
-                placeholder="Cover Image url"
-              />
-            </div>
-
-            <div class="custom-select form-group">
-              <label for="language"
-                ><ion-icon class="form-icon" name="earth"></ion-icon
-              ></label>
-              <select class="select" id="language" name="language" required>
-                <option value="">Select Language:</option>
-                <option value="en">English</option>
-                <option value="fr">French</option>
-                <option value="de">German</option>
-              </select>
-              <span class="remove-arrow"></span>
-            </div>
-            <div class="custom-select form-group">
-              <label for="subject"
-                ><ion-icon class="form-icon" name="menu"></ion-icon
-              ></label>
-              <select class="select disabled" id="subject" name="subject">
-                <option value="2">Business</option>
-              </select>
-              <span class="remove-arrow disabled"></span>
-            </div>
-            <a class="form-btn" href="#">Continue</a>
-          </div>
-        </form>
-      </section>
-      <!--Book found form-->
-      <!--Trade your books form-->
-      <section class="form-section">
-        <form method="POST" class="form">
-          <div class="form-container">
-            <p class="form-title">Trade-in your book</p>
-            <div class="form-group">
-              <label for="isbn"
-                ><ion-icon class="form-icon" name="barcode"></ion-icon
-              ></label>
-              <input type="text" name="isbn" id="isbn" placeholder="ISBN" />
-            </div>
-
-            <div class="form-group">
-              <label for="title"
-                ><ion-icon class="form-icon" name="text"></ion-icon
-              ></label>
-              <input type="text" name="title" id="title" placeholder="Title" />
-            </div>
-
-            <div class="form-group">
-              <label for="subtitle"
-                ><ion-icon class="form-icon" name="text-outline"></ion-icon
-              ></label>
-              <input
+              <%} else {%>
+                <input
                 type="text"
                 name="subtitle"
                 id="subtitle"
                 placeholder="Subtitle"
               />
+              <%}%>
             </div>
 
             <div class="form-group">
               <label for="author"
                 ><ion-icon class="form-icon" name="person"></ion-icon
               ></label>
-              <input
+              <%if (book != null) {
+                String authors = null;
+                for (String s: book.getBook().getAuthors()) {
+                    authors = s + ", ";
+                }%>
+                <input
+                disabled
+                value="<%=authors%>"
+                type="text"
+                name="subtitle"
+                id="subtitle"
+                placeholder="Subtitle"
+              />
+              <%} else {%>
+                <input
                 type="text"
                 name="author"
                 id="author"
-                placeholder="Author"
+                placeholder="Authors (ex Author1, Author2...)"
               />
+              <%}%>
             </div>
 
             <div class="form-group">
               <label for="publisher"
                 ><ion-icon class="form-icon" name="person-circle"></ion-icon
               ></label>
-              <input
+              <%if (book != null) {%>
+                <input
+                disabled
+                value="<%=book.getBook().getPublisher()%>"
                 type="text"
                 name="publisher"
                 id="publisher"
                 placeholder="Publisher"
               />
+              <%} else {%>
+                <input
+                type="text"
+                name="publisher"
+                id="publisher"
+                placeholder="Publisher"
+              />
+              <%}%>
             </div>
 
             <div class="form-group">
               <label for="publish_date"
                 ><ion-icon class="form-icon" name="calendar"></ion-icon
               ></label>
-              <input
+              <%if (book != null) {%>
+                <input
+                disabled
+                value="<%=book.getBook().getPublish_date()%>"
                 type="text"
                 name="publish_date"
                 id="publish_date"
@@ -276,55 +166,116 @@ List<BookSubmission> books = DatabaseUtils.getBookFromISBN(isbn);
                 onfocus="(this.type='date')"
                 onblur="(this.type='text')"
               />
+              <%} else {%>
+                <input
+                type="text"
+                name="publish_date"
+                id="publish_date"
+                placeholder="Publish Date"
+                onfocus="(this.type='date')"
+                onblur="(this.type='text')"
+              />
+              <%}%>
             </div>
 
             <div class="form-group">
               <label for="page_count"
                 ><ion-icon class="form-icon" name="documents"></ion-icon
               ></label>
-              <input
+              <%if (book != null) {%>
+                <input
+                disabled
+                value="<%=book.getBook().getPublish_date()%>"
                 type="number"
                 name="page_count"
                 id="page_count"
                 placeholder="Number of pages"
               />
+              <%} else {%>
+                <input
+                type="number"
+                name="page_count"
+                id="page_count"
+                placeholder="Number of pages"
+              />
+              <%}%>
             </div>
 
             <div class="form-group">
               <label for="thumbnail_url"
                 ><ion-icon class="form-icon" name="code"></ion-icon
               ></label>
-              <input
+              <%if (book != null) {%>
+                <input
+                disabled
+                value="<%=book.getBook().getThumbnail_url()%>"
                 type="text"
                 name="thumbnail_url"
                 id="thumbnail_url"
                 placeholder="Cover Image url"
               />
+              <%} else {%>
+                <input
+                type="text"
+                name="thumbnail_url"
+                id="thumbnail_url"
+                placeholder="Cover Image url"
+              />
+              <%}%>
             </div>
 
             <div class="custom-select form-group">
               <label for="language"
                 ><ion-icon class="form-icon" name="earth"></ion-icon
               ></label>
-              <select class="select" id="language" name="language" required>
-                <option value="">Select Language:</option>
-                <option value="en">English</option>
-                <option value="fr">French</option>
-                <option value="de">German</option>
-              </select>
+              <%if (book != null) {%>
+                <input
+                disabled
+                value="<%=book.getBook().getLang()%>"
+                type="text"
+                name="language"
+                id="Language"
+                placeholder="Language"
+              />
+              <%} else {%>
+                <select class="select" id="language" name="language" required>
+                    <option value="">Select Language:</option>
+                    <option value="en">English</option>
+                    <option value="fr">French</option>
+                    <option value="de">German</option>
+                  </select>
+              <%}%>
+              
               <span class="remove-arrow"></span>
             </div>
             <div class="custom-select form-group">
               <label for="subject"
                 ><ion-icon class="form-icon" name="menu"></ion-icon
               ></label>
-              <select class="select" id="subject" name="subject" required>
-                <option value="">Select Subject:</option>
-                <option value="1">Action and Adventure</option>
-                <option value="2">Business</option>
-                <option value="3">Comic</option>
-                <option value="4">Mystery</option>
-              </select>
+              <%if (book != null) {
+                String subjects = null;
+                for (String s: book.getBook().getSubjects()) {
+                    subjects = s + ", ";
+                }%>
+                <input
+                disabled
+                value="<%=subjects%>"
+                type="text"
+                name="subjects"
+                id="subjects"
+                placeholder="Subjects"
+              />
+              <%} else {%>
+                <select class="select" id="subject" name="subject" required>
+                    <option value="">Select Subject:</option>
+                    <%List<String> subjects = DatabaseUtils.getBookSubjects(isbn);
+                      int count = 0;
+                      for (String i:subjects) {
+                          count += 1;%>
+                          <option value="<%=count%>"><%=i%></option>
+                      <%}%>
+                  </select>
+              <%}%>
               <span class="remove-arrow"></span>
             </div>
             <a class="form-btn" href="#">Continue</a>
