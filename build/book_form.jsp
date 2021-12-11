@@ -8,7 +8,7 @@
     <title>Bookstack - Browse</title>
   </head>
   <body>
-    <header class="header"></header>
+    <header class="header">
     <a href="index.html" class="logo">Bookstack</a>
 
     <nav class="main-nav">
