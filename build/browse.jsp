@@ -1,13 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="bookstack.*, java.sql.*, java.util.ArrayList, java.util.Date, java.util.List" %>
 <%@ page errorPage="error.jsp" %>
 
-<% /*
+<%
 
--Hanle session attributes (including current_page)
--From DB get first X number of books, depending on the current page, and add the to a list of book objects (List<Book> books_list...)
--(if its the first time visiting this page) Also get the total available number of books in the DB (int available_books) and calculate how many pages are going to exist if 21 books are shown per page (int pages)
+if (session.getAttribute("current_page") == null) {
+  int page = 1;
+} else {
+  int page = session.getAttribute("current_page");
+}
 
-*/ %>
+DatabaseUtils db = new DatabaseUtils();
+
+try {
+  List<BookSubmission> bookSubmissions = db.getSubmittedBooks();
+} catch(Exception e) {
+  throw new Exception(e.getMessage());
+}
+
+
+
+%>
 
 <!DOCTYPE html>
 <html lang="en">
