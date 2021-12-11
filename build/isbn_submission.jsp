@@ -24,7 +24,7 @@
       </button>
     </header>
 <section class="form-section">
-    <form method="POST" class="form">
+    <form method="GET" class="form" action="book_form.jsp">
       <div class="form-container">
         <p class="form-title">Search with ISBN</p>
         <div class="form-group">
