@@ -33,6 +33,7 @@ public class DatabaseUtils {
     private static final String CREATE_NEW_AUTHOR = "INSERT INTO authors VALUES(DEFAULT, '%s', '%s')";
     private static final String CREATE_NEW_BOOK_SUBJECTS = "INSERT INTO book_subjects VALUES('%s', %d)";
     private static final String CREATE_NEW_BOOK_SUBMITTED = "INSERT INTO books_submitted VALUES(DEFAULT, '%s', %d, '%s'";
+    private static final String CREATE_NEW_SUBJECT = "INSERT INTO subjects VALUES(DEFAULT, '%s')";
 
     // Returns an active connection object to the project's database
     private static Connection createDatabaseConnection() throws SQLException {
@@ -297,5 +298,19 @@ public class DatabaseUtils {
             statement.executeUpdate(String.format(CREATE_NEW_BOOK_SUBMITTED, timeOf, userId, isbn));
         }
     }
+
+    /**
+     * Creates a connection to the database and adds a new subject to the subjects table
+     * @param name The name of the subject
+     * @throws SQLException when a connection to the database cannot be established
+     */
+    public static void addNewSubject(String name) throws SQLException {
+        try(Connection connection = createDatabaseConnection()) {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(String.format(CREATE_NEW_SUBJECT, name));
+        }
+    }
+
+
 
 }
