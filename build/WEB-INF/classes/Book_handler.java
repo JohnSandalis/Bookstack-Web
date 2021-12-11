@@ -1,5 +1,3 @@
-package bookstack;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,7 +30,7 @@ public class Book_handler {
         int price = 0;
         List<String> authors = new ArrayList<String>();
         List<String> subjects = new ArrayList<String>();
-        try {
+        try{
             JSONObject json = readJsonFromUrl(api_request);
             JSONArray items = json.getJSONArray("items");
             JSONObject root = items.getJSONObject(0);
@@ -40,54 +38,46 @@ public class Book_handler {
             // Fetch title from json
             try {
                 title = volumeInfo.getString("title");
-            } catch (Exception e) {
-            }
+            } catch(Exception e) {}
             // Fetch subtitle from json
             try {
                 subtitle = volumeInfo.getString("subtitle");
-            } catch (Exception e) {
-            }
+            } catch(Exception e) {}
             // Fetch page count from json
             try {
                 page_count = volumeInfo.getInt("pageCount");
-            } catch (Exception e) {
-            }
+            } catch(Exception e) {}
             // Fetch publisher from json
             try {
                 publisher = volumeInfo.getString("publisher");
-            } catch (Exception e) {
-            }
+            } catch(Exception e) {}
             // Fetch publish date from json
             try {
                 String dateString = volumeInfo.getString("publishedDate");
                 // Create Date object from publish_date string
                 publish_date = dateFormatter.parse(dateString);
-            } catch (Exception e) {
-            }
+            } catch(Exception e) {}
             // Fetch language from json
-            try {
+            try{
                 lang = volumeInfo.getString("language");
-            } catch (Exception e) {
-            }
+            } catch(Exception e) {}
             // Fetch thumbnail url from json
             try {
                 JSONObject image_links = volumeInfo.getJSONObject("imageLinks");
                 thumbnail_url = image_links.getString("thumbnail");
-            } catch (Exception e) {
-            }
+            } catch(Exception e) {}
             // Fetch authors name from json
             try {
                 JSONArray authors_arr = volumeInfo.getJSONArray("authors");
                 for (int i = 0; i < authors_arr.length(); i++) {
                     authors.add(authors_arr.getString(i));
                 }
-            } catch (Exception e) {
-            }
+            } catch(Exception e) {}
             // Return book object
             Book book = new Book(isbn, title, subtitle, page_count, thumbnail_url,
-                    publisher, publish_date, lang, price, authors, subjects);
+             publisher, publish_date, lang, price, authors, subjects);
             return book;
-        } catch (IOException | JSONException e) {
+        } catch(IOException | JSONException e) {
             return null;
         }
     }
@@ -113,7 +103,7 @@ public class Book_handler {
                     System.out.print(authors.get(i) + ", ");
                 }
             }
-
+            
         } else {
             System.out.println("Please make a new entry");
         }
@@ -123,7 +113,7 @@ public class Book_handler {
         StringBuilder sb = new StringBuilder();
         int cp;
         while ((cp = rd.read()) != -1) {
-            sb.append((char) cp);
+        sb.append((char) cp);
         }
         return sb.toString();
     }
