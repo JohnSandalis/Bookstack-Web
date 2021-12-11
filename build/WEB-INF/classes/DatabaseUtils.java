@@ -36,8 +36,9 @@ public class DatabaseUtils {
     private static final String CREATE_NEW_SUBJECT = "INSERT INTO subjects VALUES(DEFAULT, '%s')";
     private static final String CREATE_MODIFICATION_REQUEST = "INSERT INTO modification_requests VALUES(DEFAULT, %d, " +
             "'%s', '%s')";
-    private static final String UPDATE_USERS_INFO = "UPDATE users SET address = '%s', country = '%s', " +
+    private static final String UPDATE_USER_INFO = "UPDATE users SET address = '%s', country = '%s', " +
             "postal_code = '%s', at_floor = %d, region = '%s', city = '%s', lang = '%s' WHERE id = %d";
+    private static final String UPDATE_USER_CREDITS = "UPDATE users SET credits = %d WHERE id = %d";
 
     // Returns an active connection object to the project's database
     private static Connection createDatabaseConnection() throws SQLException {
@@ -340,14 +341,27 @@ public class DatabaseUtils {
      * @param city The new user's city
      * @param lang The new user's lang
      * @param id The user's id when a connection to the database cannot be established
-     * @throws SQLException
+     * @throws SQLException when a connection to the database cannot be established
      */
     public static void updateUserInfo(String address, String country, String postalCode, int atFloor,
                                       String region, String city, String lang, int id) throws SQLException {
         try(Connection connection = createDatabaseConnection()) {
             Statement statement = connection.createStatement();
-            statement.executeUpdate(String.format(UPDATE_USERS_INFO, address, country, postalCode,
+            statement.executeUpdate(String.format(UPDATE_USER_INFO, address, country, postalCode,
                     atFloor, region, city, lang, id));
+        }
+    }
+
+    /**
+     * Creasts a connection to the database and updates the user's - with the specific id - credits
+     * @param id The id of the user
+     * @param newCredits The new amount of credits
+     * @throws SQLException when a connection to the database cannot be established
+     */
+    public static void updateUserCredits(int id, int newCredits) throws SQLException {
+        try(Connection connection = createDatabaseConnection()) {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(String.format(UPDATE_USER_CREDITS, newCredits, id);
         }
     }
 
