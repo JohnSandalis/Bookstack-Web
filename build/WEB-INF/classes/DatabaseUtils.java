@@ -135,6 +135,7 @@ public class DatabaseUtils {
             if (rs.next()) {
                 return rs.getString("name");
             }
+            return null;
         }
     }
 }
