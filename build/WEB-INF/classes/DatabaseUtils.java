@@ -25,6 +25,8 @@ public class DatabaseUtils {
     private static final String SELECT_SUBJECT_FROM_ID = "SELECT * FROM subjects WHERE id = '%d'";
     private static final String SELECT_USER_FROM_EMAIL_AND_PASSWORD = "SELECT * FROM users WHERE" +
             "email = '%s' AND password = '%s'";
+    private static final String SIGN_UP_USER = "INSERT INTO users VALUES(DEFAULT, '%s', '%s', 0, 0," +
+            "'%s', '%s',  NULL, NULL, NULL, NULL, NULL, NULL, NULL";
 
     // Returns an active connection object to the project's database
     private static Connection createDatabaseConnection() throws SQLException {
@@ -172,6 +174,24 @@ public class DatabaseUtils {
                         country, postalCode, atFloor, region, city, lang);
             }
             return null;
+        }
+    }
+
+    /**
+     * Creates a connection to the database and inserts a new user record
+     * @param firstName The first name of the user who's signing up
+     * @param lastName The last name of the user who's signing up
+     * @param username The username of the user who's signing up
+     * @param email The email of the user who's signing up
+     * @param password The password of the user who's signing up
+     * @throws SQLException when a connection to the database cannot be established
+     */
+    public static void createNewUser(String firstName, String lastName, String username,
+                                     String email, String password) throws SQLException {
+        try(Connection connection = createDatabaseConnection()) {
+            Statement statement = connection.createStatement();
+            String fullName = firstName + " " + lastName;
+            statement.executeUpdate(String.format(SIGN_UP_USER, email, password, username, fullName));
         }
     }
 }
