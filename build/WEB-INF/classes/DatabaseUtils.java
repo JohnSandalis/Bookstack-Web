@@ -27,6 +27,9 @@ public class DatabaseUtils {
             "email = '%s' AND password = '%s'";
     private static final String SIGN_UP_USER = "INSERT INTO users VALUES(DEFAULT, '%s', '%s', 0, 0," +
             "'%s', '%s',  NULL, NULL, NULL, NULL, NULL, NULL, NULL";
+    private static final String CREATE_NEW_BOOK = "INSERT INTO books VALUES('%s', '%s', '%s', %d, '%s', '%s', '%s'," +
+            "'%s', %d)";
+    private static final String CREATE_NEW_AUTHOR = "INSERT INTO authors VALUES(DEFAULT, '%s', '%s')";
 
     // Returns an active connection object to the project's database
     private static Connection createDatabaseConnection() throws SQLException {
@@ -192,6 +195,49 @@ public class DatabaseUtils {
             Statement statement = connection.createStatement();
             String fullName = firstName + " " + lastName;
             statement.executeUpdate(String.format(SIGN_UP_USER, email, password, username, fullName));
+        }
+    }
+
+    /**
+     * Creates a connection to the database and inserts a new book
+     * @param isbn The isbn of the book
+     * @param title The title of the book
+     * @param subtitle The subtitle of the book
+     * @param pagesCount The pages count of the book
+     * @param thumbnailUrl A url of the cover of the book
+     * @param publisher The publisher of the book
+     * @param publishDate The publish date of the book
+     * @param lang The language that the book is written in
+     * @param price The price of the book as credits
+     * @param authors The authors of the book
+     * @param subjects The subjects of the book
+     * @throws SQLException when a connection to the database cannot be established
+     */
+    public static void createNewBook(String isbn, String title, String subtitle, int pagesCount,
+                                     String thumbnailUrl, String publisher, Date publishDate,
+                                     String lang, int price, List<String> authors,
+                                     List<String> subjects) throws SQLException {
+        try(Connection connection = createDatabaseConnection()) {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(String.format(CREATE_NEW_BOOK, isbn, title, subtitle, pagesCount, thumbnailUrl
+                    , publisher, publishDate, lang, price));
+            createNewAuthors(isbn, authors);
+
+        }
+    }
+
+    /**
+     * Creates a connection to the database and inserts the authors
+     * @param isbn The isbn of the books the authors have written
+     * @param names The names of the authors
+     * @throws SQLException when a connection to the database cannot be established
+     */
+    public static void createNewAuthors(String isbn, List<String> names) throws SQLException {
+        try(Connection connection = createDatabaseConnection()) {
+            Statement statement = connection.createStatement();
+            for (String name : names) {
+                statement.executeUpdate(String.format(CREATE_NEW_AUTHOR, isbn, name));
+            }
         }
     }
 }
