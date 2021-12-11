@@ -1,3 +1,8 @@
+/**
+ * POJO of users table
+ * @author Giorgos Lagoudakis
+ * @version 1.0
+ */
 public class User {
 
     private final int id;
@@ -6,6 +11,7 @@ public class User {
     private final int credits;
     private final int booksGiven;
     private final int booksTaken;
+    private final String username;
     private final String fullName;
     private final String address;
     private final String country;
@@ -15,14 +21,15 @@ public class User {
     private final String city;
     private final String lang;
 
-    public User(int id, String email, String password, int credits, int booksGiven, int booksTaken, String fullName,
-                String address, String country, String postalCode, int atFloor, String region, String city, String lang) {
+    public User(int id, String email, String password, int credits, int booksGiven, int booksTaken, String username,
+                String fullName, String address, String country, String postalCode, int atFloor, String region, String city, String lang) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.credits = credits;
         this.booksGiven = booksGiven;
         this.booksTaken = booksTaken;
+        this.username = username;
         this.fullName = fullName;
         this.address = address;
         this.country = country;
@@ -55,6 +62,10 @@ public class User {
 
     public int getBooksTaken() {
         return booksTaken;
+    }
+
+    public String getUsername() {
+        return username;
     }
 
     public String getFullName() {

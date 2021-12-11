@@ -168,7 +168,7 @@ public class DatabaseUtils {
                 String region = rs.getString("region");
                 String city = rs.getString("city");
                 String lang = rs.getString("lang");
-                return new User(id, email, password, credits, booksGiven, booksTaken, fullName, address,
+                return new User(id, email, password, credits, booksGiven, booksTaken, username, fullName, address,
                         country, postalCode, atFloor, region, city, lang);
             }
             return null;
