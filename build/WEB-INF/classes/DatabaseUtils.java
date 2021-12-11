@@ -75,10 +75,11 @@ public class DatabaseUtils {
                 String publisher = rs.getString("publisher");
                 Date publish_date = rs.getDate("publish_date");
                 String lang = rs.getString("lang");
+                int price = rs.getInt("price");
                 List<String> authors = getAuthorsOfBook(isbn);
                 List<String> subjects = getBookSubjects(isbn);
                 return new Book(isbn, title, subtitle, pages_count, thumbnail_url, publisher,
-                        publish_date, lang, authors, subjects);
+                        publish_date, lang, price, authors, subjects);
             }
             return null;
         }
