@@ -1,7 +1,10 @@
+package bookstack;
+
 import java.util.Date;
 
 /**
  * POJO of books_submitted table
+ * 
  * @author Giorgos Lagoudakis
  * @version 1.0
  */

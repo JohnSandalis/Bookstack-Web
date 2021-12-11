@@ -3,6 +3,8 @@
  * @author Giorgos Lagoudakis
  * @version 1.0
  */
+package bookstack;
+
 public class User {
 
     private final int id;
@@ -22,8 +24,8 @@ public class User {
     private final String lang;
 
     public User(int id, String email, String password, int credits, int booksGiven, int booksTaken, String username,
-                String fullName, String address, String country, String postalCode, int atFloor, String region,
-                String city, String lang) {
+            String fullName, String address, String country, String postalCode, int atFloor, String region,
+            String city, String lang) {
         this.id = id;
         this.email = email;
         this.password = password;

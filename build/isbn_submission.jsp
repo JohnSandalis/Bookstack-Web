@@ -33,7 +33,7 @@
           </label>
           <input type="text" name="isbn" id="isbn" placeholder="ISBN" />
         </div>
-        <a class="form-btn" href="#">Search</a>
+        <a class="form-btn" type="submit" href="book_form.jsp">Search</a>
       </div>
     </form>
   </section>

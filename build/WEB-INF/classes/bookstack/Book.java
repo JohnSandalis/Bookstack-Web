@@ -1,3 +1,5 @@
+package bookstack;
+
 import java.util.Date;
 import java.util.List;
 
@@ -22,7 +24,7 @@ public class Book {
     private final List<String> subjects;
 
     public Book(String isbn, String title, String subtitle, int page_count, String thumbnail_url, String publisher,
-                Date publish_date, String lang, int price, List<String> authors, List<String> subjects) {
+            Date publish_date, String lang, int price, List<String> authors, List<String> subjects) {
         this.isbn = isbn;
         this.title = title;
         this.subtitle = subtitle;
