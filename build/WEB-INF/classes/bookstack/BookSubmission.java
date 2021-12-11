@@ -1,7 +1,6 @@
 package bookstack;
 
 import java.util.Date;
-
 /**
  * POJO of books_submitted table
  * 
@@ -11,14 +10,14 @@ import java.util.Date;
 public class BookSubmission {
 
     private final String id;
-    private final Date time_of;
-    private final int user_id;
+    private final Date timeOf;
+    private final int userId;
     private final Book book;
 
-    public BookSubmission(String id, Date time_of, int user_id, Book book) {
+    public BookSubmission(String id, Date timeOf, int userId, Book book) {
         this.id = id;
-        this.time_of = time_of;
-        this.user_id = user_id;
+        this.timeOf = timeOf;
+        this.userId = userId;
         this.book = book;
     }
 
@@ -26,12 +25,12 @@ public class BookSubmission {
         return id;
     }
 
-    public Date getTime_of() {
-        return time_of;
+    public Date getTimeOf() {
+        return timeOf;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public int getUserId() {
+        return userId;
     }
 
     public Book getBook() {
