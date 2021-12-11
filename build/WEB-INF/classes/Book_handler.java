@@ -7,7 +7,6 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -28,7 +27,9 @@ public class Book_handler {
         String publisher = null;
         Date publish_date = null;
         String lang = null;
+        int price = 0;
         List<String> authors = new ArrayList<String>();
+        List<String> subjects = new ArrayList<String>();
         try{
             JSONObject json = readJsonFromUrl(api_request);
             JSONArray items = json.getJSONArray("items");
@@ -74,7 +75,7 @@ public class Book_handler {
             } catch(Exception e) {}
             // Return book object
             Book book = new Book(isbn, title, subtitle, page_count, thumbnail_url,
-             publisher, publish_date, lang, authors);
+             publisher, publish_date, lang, price, authors, subjects);
             return book;
         } catch(IOException | JSONException e) {
             return null;
