@@ -81,7 +81,13 @@ public class Book_handler {
                 for (int i = 0; i < authors_arr.length(); i++) {
                     authors.add(authors_arr.getString(i));
                 }
-            } catch (Exception e) {
+            } catch (Exception e) {}
+            // Fetch subjects from json
+            try {
+                JSONArray subjects_arr = volumeInfo.getJSONArray("categories");
+                for (int i = 0; i < subjects_arr.length(); i++) {
+                    subjects.add(subjects_arr.getString(i));
+                }
             }
             // Return book object
             Book book = new Book(isbn, title, subtitle, page_count, thumbnail_url,
