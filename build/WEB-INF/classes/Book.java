@@ -18,9 +18,10 @@ public class Book {
     private final Date publish_date;
     private final String lang;
     private final List<String> authors;
+    private final List<String> subjects;
 
-    public Book(String isbn, String title, String subtitle, int page_count, String thumbnail_url,
-                String publisher, Date publish_date, String lang, List<String> authors) {
+    public Book(String isbn, String title, String subtitle, int page_count, String thumbnail_url, String publisher,
+                Date publish_date, String lang, List<String> authors, List<String> subjects) {
         this.isbn = isbn;
         this.title = title;
         this.subtitle = subtitle;
@@ -30,6 +31,7 @@ public class Book {
         this.publish_date = publish_date;
         this.lang = lang;
         this.authors = authors;
+        this.subjects = subjects;
     }
 
     public String getIsbn() {
@@ -66,5 +68,9 @@ public class Book {
 
     public List<String> getAuthors() {
         return authors;
+    }
+
+    public List<String> getSubjects() {
+        return subjects;
     }
 }
