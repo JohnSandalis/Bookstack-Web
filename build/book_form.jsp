@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page errorPage="error.jsp" %>
+<%@ page import="java.util.List"%>
+<%@ page import="bookstack.*"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -24,6 +26,9 @@
       </button>
     </header>
 <!--Jo-->
+<% String isbn = request.getParameter("isbn");
+if 
+List<BookSubmission> books = DatabaseUtils.getBookFromISBN(isbn);
 
 
 
