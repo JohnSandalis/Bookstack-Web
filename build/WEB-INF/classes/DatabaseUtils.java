@@ -50,6 +50,7 @@ public class DatabaseUtils {
                 Book book = getBookFromISBN(book_isbn);
                 bookSubmissions.add(new BookSubmission(id, time_of, user_id, book));
             }
+            return bookSubmissions;
         }
     }
 
