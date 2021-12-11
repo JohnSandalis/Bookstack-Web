@@ -265,6 +265,12 @@ public class DatabaseUtils {
         }
     }
 
+    /**
+     * Creates a connection to the database and adds the ids to the books_subjects table
+     * @param isbn The isbn of the book that we're addng the subjects
+     * @param subjects The subjects of the book
+     * @throws SQLException when a connection to the database cannot be stablished
+     */
     public static void addBookSubjects(String isbn, List<String> subjects) throws SQLException {
         try(Connection connection = createDatabaseConnection()) {
             Statement statement = connection.createStatement();
