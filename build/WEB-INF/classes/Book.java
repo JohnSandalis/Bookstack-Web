@@ -1,4 +1,5 @@
 import java.util.Date;
+import java.util.List;
 
 /**
  * Public constructor Book
@@ -16,9 +17,10 @@ public class Book {
     private final String publisher;
     private final Date publish_date;
     private final String lang;
+    private final List<String> authors;
 
-    public Book(String isbn, String title, String subtitle, int page_count,
-                String thumbnail_url, String publisher, Date publish_date, String lang) {
+    public Book(String isbn, String title, String subtitle, int page_count, String thumbnail_url,
+                String publisher, Date publish_date, String lang, List<String> authors) {
         this.isbn = isbn;
         this.title = title;
         this.subtitle = subtitle;
@@ -27,6 +29,7 @@ public class Book {
         this.publisher = publisher;
         this.publish_date = publish_date;
         this.lang = lang;
+        this.authors = authors;
     }
 
     public String getIsbn() {
@@ -59,5 +62,9 @@ public class Book {
 
     public String getLang() {
         return lang;
+    }
+
+    public List<String> getAuthors() {
+        return authors;
     }
 }
