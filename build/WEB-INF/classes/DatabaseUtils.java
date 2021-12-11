@@ -23,6 +23,8 @@ public class DatabaseUtils {
     private static final String SELECT_AUTHORS_OF_BOOK = "SELECT * FROM authors WHERE isbn = '%s'";
     private static final String SELECT_BOOK_SUBJECTS = "SELECT * FROM books_subjects WHERE isbn = '%s'";
     private static final String SELECT_SUBJECT_FROM_ID = "SELECT * FROM subjects WHERE id = '%d'";
+    private static final String SELECT_USER_FROM_EMAIL_AND_PASSWORD = "SELECT * FROM users WHERE" +
+            "email = '%s' AND password = '%s'";
 
     // Returns an active connection object to the project's database
     private static Connection createDatabaseConnection() throws SQLException {
@@ -128,6 +130,7 @@ public class DatabaseUtils {
      * Creates a connection to the database and gets the subject with the corresponding id
      * @param id the id of the subjects table
      * @return the subject of the corresponding id
+     * @throws SQLException when a connection to the database cannot be established
      */
     public static String getSubjectFromId(int id) throws  SQLException {
         try(Connection connection = createDatabaseConnection()) {
@@ -135,6 +138,38 @@ public class DatabaseUtils {
             ResultSet rs = statement.executeQuery(String.format(SELECT_SUBJECT_FROM_ID, id));
             if (rs.next()) {
                 return rs.getString("name");
+            }
+            return null;
+        }
+    }
+
+    /**
+     * Creates a connection to the database and gets the user with the corresponding username and password
+     * @param email The email of the user
+     * @param password The password of the user
+     * @return a User object that contains all the user details
+     * @throws SQLException when a connection to the database cannot be established
+     */
+    public static User getUserFromUsernameAndPassword(String email, String password) throws SQLException {
+        try(Connection connection = createDatabaseConnection()) {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(String.format(SELECT_USER_FROM_EMAIL_AND_PASSWORD, email, password));
+            if (rs.next()) {
+                int id = rs.getInt("id");
+                int credits = rs.getInt("credits");
+                int booksGiven = rs.getInt("books_given");
+                int booksTaken = rs.getInt("booksTaken");
+                String username = rs.getString("username");
+                String fullName = rs.getString("full_name");
+                String address = rs.getString("address");
+                String country = rs.getString("country");
+                String postalCode = rs.getString("postal_code");
+                int atFloor = rs.getInt("at_floor");
+                String region = rs.getString("region");
+                String city = rs.getString("city");
+                String lang = rs.getString("lang");
+                return new User(id, email, password, credits, booksGiven, booksTaken, fullName, address,
+                        country, postalCode, atFloor, region, city, lang);
             }
             return null;
         }
