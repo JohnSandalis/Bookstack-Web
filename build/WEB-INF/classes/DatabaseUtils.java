@@ -20,6 +20,7 @@ public class DatabaseUtils {
     // Queries used in methods below
     private static final String SELECT_SUBMITTED_BOOKS = "SELECT * FROM books_submitted";
     private static final String SELECT_BOOK_WITH_ISBN = "SELECT * FROM books WHERE isbn = '%s'";
+    private static final String SELECT_AUTHORS_OF_BOOK = "SELECT * FROM authors WHERE isbn = '%s'";
 
     // Returns an active connection object to the project's database
     private static Connection createDatabaseConnection() throws SQLException {
@@ -38,8 +39,8 @@ public class DatabaseUtils {
      * @throws SQLException when a connection to the database cannot be established
      */
     public static List<BookSubmission> getSubmittedBooks() throws SQLException {
-        List<BookSubmission> bookSubmissions = new ArrayList<>();
         try(Connection connection = createDatabaseConnection()) {
+            List<BookSubmission> bookSubmissions = new ArrayList<>();
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(SELECT_SUBMITTED_BOOKS);
             while(rs.next()) {
@@ -58,7 +59,7 @@ public class DatabaseUtils {
      * Creates a connection to the database and gets the book with the corresponding ISBN
      * @param isbn The unique ISBN of the specific book
      * @return the book with it's details
-     * @throws SQLException when a connection to the database cannot be stablished
+     * @throws SQLException when a connection to the database cannot be established
      */
     public static Book getBookFromISBN(String isbn) throws SQLException {
         try(Connection connection = createDatabaseConnection()) {
@@ -72,9 +73,30 @@ public class DatabaseUtils {
                 String publisher = rs.getString("publisher");
                 Date publish_date = rs.getDate("publish_date");
                 String lang = rs.getString("lang");
-                return new Book(isbn, title, subtitle, pages_count, thumbnail_url, publisher, publish_date, lang);
+                List<String> authors = getAuthorsOfBook(isbn);
+                return new Book(isbn, title, subtitle, pages_count, thumbnail_url, publisher,
+                        publish_date, lang, authors);
             }
             return null;
+        }
+    }
+
+    /**
+     *
+     * @param isbn The unique ISBN of the book's authors that we're looking for
+     * @return the names of the authors
+     * @throws SQLException when a connection to the database cannot be established
+     */
+    public static List<String> getAuthorsOfBook(String isbn) throws SQLException {
+        try(Connection connection = createDatabaseConnection()) {
+            List<String> authorNames = new ArrayList<>();
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(String.format(SELECT_AUTHORS_OF_BOOK, isbn));
+            while (rs.next()) {
+                String name = rs.getString("name");
+                authorNames.add(name);
+            }
+            return authorNames;
         }
     }
 }
