@@ -8,7 +8,7 @@
     <title>Bookstack - Browse</title>
   </head>
   <body>
-    <header class="header"></header>
+    <header class="header">
     <a href="index.html" class="logo">Bookstack</a>
 
     <nav class="main-nav">
@@ -33,7 +33,7 @@
           </label>
           <input type="text" name="isbn" id="isbn" placeholder="ISBN" />
         </div>
-        <a class="form-btn" href="#">Search</a>
+        <button class="form-btn" type="submit">Search</button>
       </div>
     </form>
   </section>
