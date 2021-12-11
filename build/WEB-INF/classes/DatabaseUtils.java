@@ -25,11 +25,13 @@ public class DatabaseUtils {
     private static final String SELECT_SUBJECT_FROM_ID = "SELECT * FROM subjects WHERE id = '%d'";
     private static final String SELECT_USER_FROM_EMAIL_AND_PASSWORD = "SELECT * FROM users WHERE" +
             "email = '%s' AND password = '%s'";
+    private static final String SELECT_SUBJECT_ID_FROM_SUBJECT = "SELECT * FROM subjects WHERE name = '%s'";
     private static final String SIGN_UP_USER = "INSERT INTO users VALUES(DEFAULT, '%s', '%s', 0, 0," +
             "'%s', '%s',  NULL, NULL, NULL, NULL, NULL, NULL, NULL";
     private static final String CREATE_NEW_BOOK = "INSERT INTO books VALUES('%s', '%s', '%s', %d, '%s', '%s', '%s'," +
             "'%s', %d)";
     private static final String CREATE_NEW_AUTHOR = "INSERT INTO authors VALUES(DEFAULT, '%s', '%s')";
+    private static final String CREATE_NEW_BOOK_SUBJECTS = "INSERT INTO book_subjects VALUES('%s', %d)";
 
     // Returns an active connection object to the project's database
     private static Connection createDatabaseConnection() throws SQLException {
@@ -181,6 +183,28 @@ public class DatabaseUtils {
     }
 
     /**
+     * Creates a connection to the database and retrieves the ids of the subjects
+     * @param subjects The subjects of the book
+     * @return The ids of the subjects in the subjects table
+     * @throws SQLException when a connection to the database cannot be established
+     */
+    public static List<Integer> getSubjectsIdsFromSubjects(List<String> subjects) throws SQLException {
+        try(Connection connection = createDatabaseConnection()) {
+            List<Integer> ids = new ArrayList<>();
+            Statement statement = connection.createStatement();
+            for (String subject : subjects) {
+                ResultSet rs = statement.executeQuery(String.format(SELECT_SUBJECT_ID_FROM_SUBJECT, subject));
+                if (rs.next()) {
+                   int id = rs.getInt("id");
+                   ids.add(id);
+                }
+                return ids;
+            }
+            return  null;
+        }
+    }
+
+    /**
      * Creates a connection to the database and inserts a new user record
      * @param firstName The first name of the user who's signing up
      * @param lastName The last name of the user who's signing up
@@ -222,7 +246,7 @@ public class DatabaseUtils {
             statement.executeUpdate(String.format(CREATE_NEW_BOOK, isbn, title, subtitle, pagesCount, thumbnailUrl
                     , publisher, publishDate, lang, price));
             createNewAuthors(isbn, authors);
-
+            addBookSubjects(isbn, subjects);
         }
     }
 
@@ -240,4 +264,17 @@ public class DatabaseUtils {
             }
         }
     }
+
+    public static void addBookSubjects(String isbn, List<String> subjects) throws SQLException {
+        try(Connection connection = createDatabaseConnection()) {
+            Statement statement = connection.createStatement();
+            List<Integer> ids = getSubjectsIdsFromSubjects(subjects);
+            if (ids != null) {
+                for(Integer id : ids) {
+                    statement.executeUpdate(String.format(CREATE_NEW_BOOK_SUBJECTS, isbn, id));
+                }
+            }
+        }
+    }
+
 }
