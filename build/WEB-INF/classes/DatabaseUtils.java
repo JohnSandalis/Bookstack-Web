@@ -36,6 +36,8 @@ public class DatabaseUtils {
     private static final String CREATE_NEW_SUBJECT = "INSERT INTO subjects VALUES(DEFAULT, '%s')";
     private static final String CREATE_MODIFICATION_REQUEST = "INSERT INTO modification_requests VALUES(DEFAULT, %d, " +
             "'%s', '%s')";
+    private static final String UPDATE_USERS_INFO = "UPDATE users SET address = '%s', country = '%s', " +
+            "postal_code = '%s', at_floor = %d, region = '%s', city = '%s', lang = '%s' WHERE id = %d";
 
     // Returns an active connection object to the project's database
     private static Connection createDatabaseConnection() throws SQLException {
@@ -325,6 +327,27 @@ public class DatabaseUtils {
         try(Connection connection = createDatabaseConnection()) {
             Statement statement = connection.createStatement();
             statement.executeUpdate(String.format(CREATE_MODIFICATION_REQUEST, userId, bookIsbn, modifications));
+        }
+    }
+
+    /**
+     * Creates a connection to the database and updates the user's - with the specific id - details
+     * @param address The new user's address
+     * @param country The new user's country
+     * @param postalCode The new user's postal code
+     * @param atFloor The new user's floor
+     * @param region The new user's region
+     * @param city The new user's city
+     * @param lang The new user's lang
+     * @param id The user's id when a connection to the database cannot be established
+     * @throws SQLException
+     */
+    public static void updateUserInfo(String address, String country, String postalCode, int atFloor,
+                                      String region, String city, String lang, int id) throws SQLException {
+        try(Connection connection = createDatabaseConnection()) {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(String.format(UPDATE_USERS_INFO, address, country, postalCode,
+                    atFloor, region, city, lang, id));
         }
     }
 
