@@ -40,7 +40,7 @@
               where trading books comes into handy. <br />
               <br />
               Do you have books laying around? Through Bookstack you can
-              trade-in books, get rewarded with points and acquire new ones
+              trade-in books, get rewarded with credits and acquire new ones
               without having to find someone with mutual interests.
             </p>
           </div>
