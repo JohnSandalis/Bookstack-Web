@@ -66,7 +66,7 @@ pageEncoding="UTF-8"%>
             </p>
             <p class="itm-preview">Author Names: <%=sbAuthors.toString()%></p>
             <p class="itm-preview">Publisher: <%=selectedBook.getPublisher()%></p>
-            <p class="itm-preview">Publish Date: <%=selectedBook.getPublish_date()%></p>
+            <p class="itm-preview">Publish Date: <%=selectedBook.getPublishDate()%></p>
             <p class="itm-preview">Page Count: <%=selectedBook.getPageCount()%></p>
             <p class="itm-preview">Subjects: <%=sbSubjects.toString()%></p>
             <p class="itm-preview">Language: <%=selectedBook.getLang()%></p>
