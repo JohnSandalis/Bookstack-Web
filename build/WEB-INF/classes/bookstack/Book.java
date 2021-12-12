@@ -14,24 +14,24 @@ public class Book {
     private final String isbn;
     private final String title;
     private final String subtitle;
-    private final int page_count;
-    private final String thumbnail_url;
+    private final int pageCount;
+    private final String thumbnailUrl;
     private final String publisher;
-    private final Date publish_date;
+    private final Date publishDate;
     private final String lang;
     private final int price;
     private final List<String> authors;
     private final List<String> subjects;
 
-    public Book(String isbn, String title, String subtitle, int page_count, String thumbnail_url, String publisher,
-            Date publish_date, String lang, int price, List<String> authors, List<String> subjects) {
+    public Book(String isbn, String title, String subtitle, int pageCount, String thumbnailUrl, String publisher,
+                Date publishDate, String lang, int price, List<String> authors, List<String> subjects) {
         this.isbn = isbn;
         this.title = title;
         this.subtitle = subtitle;
-        this.page_count = page_count;
-        this.thumbnail_url = thumbnail_url;
+        this.pageCount = pageCount;
+        this.thumbnailUrl = thumbnailUrl;
         this.publisher = publisher;
-        this.publish_date = publish_date;
+        this.publishDate = publishDate;
         this.lang = lang;
         this.price = price;
         this.authors = authors;
@@ -50,20 +50,20 @@ public class Book {
         return subtitle;
     }
 
-    public int getPage_count() {
-        return page_count;
+    public int getPageCount() {
+        return pageCount;
     }
 
-    public String getThumbnail_url() {
-        return thumbnail_url;
+    public String getThumbnailUrl() {
+        return thumbnailUrl;
     }
 
     public String getPublisher() {
         return publisher;
     }
 
-    public Date getPublish_date() {
-        return publish_date;
+    public Date getPublishDate() {
+        return publishDate;
     }
 
     public String getLang() {
