@@ -44,8 +44,8 @@
     <nav class="nav-col">
       <p class="footer-heading">Account &#38; Resources</p>
       <ul class="footer-nav">
-        <li><a class="footer-link" href="#">Create account</a></li>
-        <li><a class="footer-link" href="#">Sign in</a></li>
+        <li><a class="footer-link" href="sign_up.jsp">Create account</a></li>
+        <li><a class="footer-link" href="sign_in.jsp">Sign in</a></li>
         <li><a class="footer-link" href="#">Privacy & Terms</a></li>
       </ul>
     </nav>
