@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="icon" type="image/x-icon" href="images/bookstack_favicon.ico" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/general.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/queries.css" />
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule=""
+      src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js"
+    ></script>
+
+    <script
+      defer
+      src="https://unpkg.com/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js"
+    ></script>
+    <script defer src="js/script.js"></script>
+
+    <title>Bookstack</title>
+  </head>
+  <body>
+    <header class="header bg-light">
+      <a href="index.html" class="logo">Bookstack</a>
+
+      <nav class="main-nav">
+        <ul class="main-nav-list">
+          <li><a class="main-nav-link" href="index.html">Home</a></li>
+          <li><a class="main-nav-link" href="browse.html">Browse</a></li>
+          <li><a class="main-nav-link" href="account.html">Account</a></li>
+        </ul>
+      </nav>
+
+      <button class="btn-mobile-nav">
+        <ion-icon class="icon-mobile-nav" name="menu-outline"></ion-icon>
+        <ion-icon class="icon-mobile-nav" name="close-outline"></ion-icon>
+      </button>
+    </header>
+
+    <main>
+      <section class="itm-preview-section">
+        <div class="itm-preview-container">
+          <div class="itm-img-col">
+            <div class="img-box-preview">
+              <img
+                class="itm-img-preview"
+                src="https://images-na.ssl-images-amazon.com/images/I/71iud2Nk92L.jpg"
+                alt="book cover"
+              />
+            </div>
+          </div>
+          <div class="itm-description-col">
+            <p class="itm-isbn">ISBN: 9780984358168</p>
+            <h1 class="itm-title-preview">Unscripted</h1>
+            <p class="itm-subtitle">
+              Life, Liberty, and the Pursuit of Entrepreneurship
+            </p>
+            <p class="itm-preview">Authors Name: M. J. Demarco</p>
+            <p class="itm-preview">Publisher: Viperion Corporation</p>
+            <p class="itm-preview">Publish Date: 2017-05-23</p>
+            <p class="itm-preview">Page Count: 428</p>
+            <p class="itm-preview">Subject: Business</p>
+            <p class="itm-preview">Language: en</p>
+            <div class="itm-credits-preview">
+              <ion-icon class="credits-icon" name="cash-outline"></ion-icon>
+              <span class="itm-credits">300</span>
+            </div>
+            <a class="btn btn-sm" href="#">Acquire</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="grid grid--footer">
+        <div class="brand-col">
+          <a href="index.html" class="footer-logo">Bookstack</a>
+
+          <ul class="social-links">
+            <li>
+              <a class="footer-link" href="#"
+                ><ion-icon class="social-icon" name="logo-instagram"></ion-icon
+              ></a>
+            </li>
+            <li>
+              <a class="footer-link" href="#"
+                ><ion-icon class="social-icon" name="logo-facebook"></ion-icon
+              ></a>
+            </li>
+            <li>
+              <a class="footer-link" href="#"
+                ><ion-icon class="social-icon" name="logo-twitter"></ion-icon
+              ></a>
+            </li>
+          </ul>
+
+          <p class="copyright">
+            Copyright &copy; <span class="year">2023</span> by Bookstack, Inc.
+            All rights reserved.
+          </p>
+        </div>
+
+        <div class="address-col">
+          <p class="footer-heading">Contact us</p>
+          <address class="contacts">
+            <a class="footer-link" href="tel:216-200-6490">216-200-6490</a>
+            <a class="footer-link" href="mailto:info@bookstack.com"
+              >info@bookstack.com</a
+            >
+            <p class="address">23 Austin Drive, Savannah, Georgia, 31405, US</p>
+          </address>
+        </div>
+
+        <nav class="nav-col">
+          <p class="footer-heading">Account &#38; Resources</p>
+          <ul class="footer-nav">
+            <li><a class="footer-link" href="#">Create account</a></li>
+            <li><a class="footer-link" href="#">Sign in</a></li>
+            <li><a class="footer-link" href="#">Privacy & Terms</a></li>
+          </ul>
+        </nav>
+
+        <div class="map-col">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3384.4516696569203!2d-81.13585100132882!3d31.97576928976012!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88fb74937c28cc75%3A0xecaea065efcb6a12!2s23%20Austin%20Dr%2C%20Savannah%2C%20GA%2031419%2C%20USA!5e0!3m2!1sen!2sgr!4v1638221563819!5m2!1sen!2sgr"
+            width="300"
+            height="200"
+            style="border: 0"
+            allowfullscreen=""
+            loading="lazy"
+          ></iframe>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
