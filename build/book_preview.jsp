@@ -53,7 +53,7 @@ pageEncoding="UTF-8"%>
             <div class="img-box-preview">
               <img
                 class="itm-img-preview"
-                src="https://images-na.ssl-images-amazon.com/images/I/71iud2Nk92L.jpg"
+                src="<%=selectedBook.getThumbnailUrl()%>"
                 alt="book cover"
               />
             </div>
