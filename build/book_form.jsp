@@ -28,8 +28,8 @@
 
 <% String isbn = request.getParameter("isbn");
 String title = null;
-BookSubmission book = null;
-if (isbn.length() > 0) {
+Book book = null;
+if (isbn != null && isbn.length() > 0) {
     book = DatabaseUtils.getBookFromISBN(isbn);
 }
 if (book == null) {
@@ -67,7 +67,7 @@ if (book == null) {
               <%if (book != null) {%>
                 <input
                 disabled
-                value="<%=book.getBook().getTitle()%>"
+                value="<%=book.getTitle()%>"
                 type="text"
                 name="title"
                 id="title"
@@ -82,14 +82,18 @@ if (book == null) {
               <label for="subtitle"
                 ><ion-icon class="form-icon" name="text-outline"></ion-icon
               ></label>
-              <%if (book != null) {%>
+              <%if (book != null) {
+                  String subtitle = "";
+                  if (book.getSubtitle() != null) {
+                    subtitle = book.getSubtitle();
+                  }
+              %>
                 <input
                 disabled
-                value="Life, Liberty, and the Pursuit of Entrepreneurship"
+                value="<%=subtitle%>"
                 type="text"
                 name="subtitle"
                 id="subtitle"
-                placeholder="Subtitle"
               />
               <%} else {%>
                 <input
@@ -107,16 +111,16 @@ if (book == null) {
               ></label>
               <%if (book != null) {
                 String authors = null;
-                for (String s: book.getBook().getAuthors()) {
+                for (String s: book.getAuthors()) {
                     authors = s + ", ";
                 }%>
                 <input
                 disabled
                 value="<%=authors%>"
                 type="text"
-                name="subtitle"
-                id="subtitle"
-                placeholder="Subtitle"
+                name="author"
+                id="author"
+                placeholder="Authors (ex Author1, Author2...)"
               />
               <%} else {%>
                 <input
@@ -135,7 +139,7 @@ if (book == null) {
               <%if (book != null) {%>
                 <input
                 disabled
-                value="<%=book.getBook().getPublisher()%>"
+                value="<%=book.getPublisher()%>"
                 type="text"
                 name="publisher"
                 id="publisher"
@@ -158,7 +162,7 @@ if (book == null) {
               <%if (book != null) {%>
                 <input
                 disabled
-                value="<%=book.getBook().getPublish_date()%>"
+                value="<%=book.getPublishDate()%>"
                 type="text"
                 name="publish_date"
                 id="publish_date"
@@ -185,7 +189,7 @@ if (book == null) {
               <%if (book != null) {%>
                 <input
                 disabled
-                value="<%=book.getBook().getPublish_date()%>"
+                value="<%=book.getPageCount()%>"
                 type="number"
                 name="page_count"
                 id="page_count"
@@ -208,7 +212,7 @@ if (book == null) {
               <%if (book != null) {%>
                 <input
                 disabled
-                value="<%=book.getBook().getThumbnail_url()%>"
+                value="<%=book.getThumbnailUrl()%>"
                 type="text"
                 name="thumbnail_url"
                 id="thumbnail_url"
@@ -231,7 +235,7 @@ if (book == null) {
               <%if (book != null) {%>
                 <input
                 disabled
-                value="<%=book.getBook().getLang()%>"
+                value="<%=book.getLang()%>"
                 type="text"
                 name="language"
                 id="Language"
@@ -254,7 +258,7 @@ if (book == null) {
               ></label>
               <%if (book != null) {
                 String subjects = null;
-                for (String s: book.getBook().getSubjects()) {
+                for (String s: book.getSubjects()) {
                     subjects = s + ", ";
                 }%>
                 <input
