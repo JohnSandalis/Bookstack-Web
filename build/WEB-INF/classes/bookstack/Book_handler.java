@@ -88,7 +88,7 @@ public class Book_handler {
                 for (int i = 0; i < subjects_arr.length(); i++) {
                     subjects.add(subjects_arr.getString(i));
                 }
-            }
+            } catch (Exception e) {}
             // Return book object
             Book book = new Book(isbn, title, subtitle, page_count, thumbnail_url,
                     publisher, publish_date, lang, price, authors, subjects);
@@ -105,10 +105,10 @@ public class Book_handler {
             System.out.println("ISBN: " + book.getIsbn());
             System.out.println("Title: " + book.getTitle());
             System.out.println("Subtitle: " + book.getSubtitle());
-            System.out.println("Page Count: " + book.getPage_count());
-            System.out.println("Thumbnail url: " + book.getThumbnail_url());
+            System.out.println("Page Count: " + book.getPageCount());
+            System.out.println("Thumbnail url: " + book.getThumbnailUrl());
             System.out.println("Publisher: " + book.getPublisher());
-            System.out.println("Publish Date: " + book.getPublish_date());
+            System.out.println("Publish Date: " + book.getPublishDate());
             System.out.println("Language: " + book.getLang());
             System.out.print("Authors name: ");
             List<String> authors = book.getAuthors();
