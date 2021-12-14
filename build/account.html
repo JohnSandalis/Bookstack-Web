@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <link rel="icon" type="image/x-icon" href="images/bookstack_favicon.ico" />
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -54,129 +54,93 @@
     </header>
 
     <main>
-      <section class="profile-section">
-        <div class="profile-heading-container">
-          <h2 class="heading-profile">Profile</h2>
-          <a class="btn btn-md btn-edit-profile" href="#">Edit</a>
-        </div>
+      <div class="profile-heading-container mb-sm">
+        <h1 class="heading-profile">Profile</h1>
+        <a class="btn btn-md" href="#">Trade-in</a>
+      </div>
 
-        <div class="profile">
-          <div class="container profile-grid">
-            <div class="profile-element">
-              <p class="label">Fullname</p>
-              <p class="value">John Doe</p>
-            </div>
-            <div class="profile-element">
-              <p class="label">Username</p>
-              <p class="value">johndoe01</p>
-            </div>
-            <div class="profile-element">
-              <p class="label">Email</p>
-              <p class="value">johndoe01@somewhere.com</p>
-            </div>
-            <div class="profile-element">
-              <p class="label">Language</p>
-              <p class="value">English</p>
-            </div>
-          </div>
-
-          <div class="container profile-stats-grid">
-            <div class="profile-credits">
-              <ion-icon class="credits-icon" name="cash-outline"></ion-icon>
-              <span class="credits">1.100</span>
-            </div>
-            <p class="books-traded-in">
-              Books Traded: &nbsp;<strong>4</strong>
-            </p>
-            <p class="books-acquired">
-              Books Acquired: &nbsp;<strong>2</strong>
-            </p>
-          </div>
-
-          <div class="container profile-grid">
-            <div class="profile-element">
-              <p class="label">Address</p>
-              <p class="value">4316 Walnut Street</p>
-            </div>
-            <div class="profile-element">
-              <p class="label">City</p>
-              <p class="value">Philadelphia</p>
-            </div>
-            <div class="profile-element">
-              <p class="label">Region</p>
-              <p class="value">Pennsylvania</p>
-            </div>
-            <div class="profile-element">
-              <p class="label">Postal Code</p>
-              <p class="value">19104</p>
-            </div>
-            <div class="profile-element">
-              <p class="label">Phone Number</p>
-              <p class="value">(555) 555-1234</p>
-            </div>
-            <div class="profile-element">
-              <p class="label">Country</p>
-              <p class="value">United States</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="browse-section">
-        <div class="profile-heading-container mb-sm">
-          <h2 class="heading-profile">Your Entries</h2>
-          <a class="btn btn-md" href="#">Trade-in</a>
-        </div>
-
-        
-        <div class="browse-container grid-browse">
-          <div class="item-container flex-item">
-            <div class="itm-img-box">
-              <img
-                class="itm-img"
-                src="https://images-na.ssl-images-amazon.com/images/I/71iud2Nk92L.jpg"
-                alt="book cover"
-              />
-            </div>
-            <div class="itm-description-box">
-              <p class="itm-title">Unscripted</p>
-              <p class="itm-author">M. J. Demarco</p>
-              <a class="btn btn-sm btn-itm" href="#">Edit Entry</a>
-            </div>
-          </div>
-
-          <div class="item-container flex-item">
-            <div class="itm-img-box">
-              <img
-                class="itm-img"
-                src="http://books.google.com/books/content?id=eifwjwEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
-                alt="book cover"
-              />
-            </div>
-            <div class="itm-description-box">
-              <p class="itm-title">The Subtle Art of Not Giving a F*ck</p>
-              <p class="itm-author">Mark Manson</p>
-              <a class="btn btn-sm btn-itm" href="#">Edit Entry</a>
-            </div>
-          </div>
-
-          <div class="item-container flex-item">
-            <div class="itm-img-box">
-              <img
-                class="itm-img"
-                src="https://m.media-amazon.com/images/I/61qSRYof0-L.jpg"
-                alt="book cover"
-              />
-            </div>
-            <div class="itm-description-box">
-              <p class="itm-title">
-                Magnus Chase and the Gods of Asgard, Book 1
+      <div class="profile-page">
+        <section class="profile-section">
+          <div class="profile">
+            <div class="account-container">
+              <h3 class="information-heading">John Doe</h3>
+              <p class="information">johndoe01</p>
+              <p class="information">
+                johndoe01johndoe01johndoe01@somewhere.com
               </p>
-              <p class="itm-author">Rick Riordan</p>
-              <a class="btn btn-sm btn-itm" href="#">Edit Entry</a>
+              <p class="information">English</p>
+
+              <h3 class="information-heading">Address</h3>
+              <p class="information">4316 Walnut Street</p>
+              <p class="information">Philadelphia</p>
+              <p class="information">Pennsylvania</p>
+              <p class="information">19104</p>
+              <p class="information">(555) 555-1234</p>
+              <p class="information">United States</p>
             </div>
           </div>
-      </section>
+        </section>
+
+        <div class="stats">
+          <div class="profile-credits">
+            <ion-icon class="credits-icon" name="cash-outline"></ion-icon>
+            <span class="credits">1.100</span>
+          </div>
+          <p class="books-traded-in">Books Traded: &nbsp;<strong>4</strong></p>
+          <p class="books-acquired">Books Acquired: &nbsp;<strong>2</strong></p>
+        </div>
+
+        <section class="browse-section">
+          <div class="browse-container grid-browse">
+            <div class="item-container flex-item">
+              <div class="itm-img-box">
+                <img
+                  class="itm-img"
+                  src="https://images-na.ssl-images-amazon.com/images/I/71iud2Nk92L.jpg"
+                  alt="book cover"
+                />
+              </div>
+              <div class="itm-description-box">
+                <p class="itm-title">Unscripted</p>
+                <p class="itm-author">M. J. Demarco</p>
+                <a class="btn btn-sm btn-itm" href="#">Edit Entry</a>
+              </div>
+            </div>
+
+            <div class="item-container flex-item">
+              <div class="itm-img-box">
+                <img
+                  class="itm-img"
+                  src="http://books.google.com/books/content?id=eifwjwEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+                  alt="book cover"
+                />
+              </div>
+              <div class="itm-description-box">
+                <p class="itm-title">The Subtle Art of Not Giving a F*ck</p>
+                <p class="itm-author">Mark Manson</p>
+                <a class="btn btn-sm btn-itm" href="#">Edit Entry</a>
+              </div>
+            </div>
+
+            <div class="item-container flex-item">
+              <div class="itm-img-box">
+                <img
+                  class="itm-img"
+                  src="https://m.media-amazon.com/images/I/61qSRYof0-L.jpg"
+                  alt="book cover"
+                />
+              </div>
+              <div class="itm-description-box">
+                <p class="itm-title">
+                  Magnus Chase and the Gods of Asgard, Book 1
+                </p>
+                <p class="itm-author">Rick Riordan</p>
+                <a class="btn btn-sm btn-itm" href="#">Edit Entry</a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
     </main>
 
     <footer class="footer">
