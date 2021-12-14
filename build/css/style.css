@@ -467,7 +467,7 @@
   padding: 3.6rem;
   max-width: 30rem;
   border-radius: 5px;
-  box-shadow: 1.2rem 1.2rem 1.2rem rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1.2rem 2.4rem rgba(0, 0, 0, 0.075);
 }
 
 .information-heading {
@@ -519,17 +519,6 @@
 .profile-credits .credits {
   color: #f2f5f6;
 }
-
-/* .profile-credits:hover {
-  background-color: #f2f5f6;
-  color: #3f4e55;
-  box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.075);
-} */
-
-/* .profile-credits:hover .credits-icon,
-.profile-credits:hover .credits {
-  color: #3f4e55;
-} */
 
 .books-traded-in,
 .books-acquired {
