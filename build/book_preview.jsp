@@ -74,7 +74,7 @@ pageEncoding="UTF-8"%>
               <ion-icon class="credits-icon" name="cash-outline"></ion-icon>
               <span class="itm-credits"><%=selectedBook.getPrice()%></span>
             </div>
-            <a class="btn btn-sm" href="#">Acquire</a>
+            <a class="btn btn-md" href="#">Acquire</a>
           </div>
         </div>
       </section>
