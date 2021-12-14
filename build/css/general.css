@@ -158,8 +158,25 @@ strong {
 .form-title {
   font-size: 3.2rem;
   font-weight: 600;
-  margin-bottom: 1.2rem;
   letter-spacing: -0.5px;
+}
+
+.alert-success,
+.alert-danger {
+  padding: 1rem 2rem;
+  border-radius: 5px;
+  font-size: 1.4rem;
+  /* margin-bottom: 1.2rem; */
+}
+
+.alert-success {
+  background-color: #d3f9d8;
+  color: #2b8a3e;
+}
+
+.alert-danger {
+  background-color: #f2dede;
+  color: #a94442;
 }
 
 .form-description {
@@ -269,15 +286,20 @@ select {
   box-shadow: 0 0 3.2rem rgba(0, 0, 0, 0.05);
 }
 
+select:disabled {
+  opacity: 1;
+  background-color: #e5ebee;
+}
+
 select:focus {
   outline: none;
-  box-shadow: 0 0 0 0.8rem rgba(63, 78, 85, 0.5);
+  box-shadow: 0 0 0 0.3rem rgba(63, 78, 85, 0.5);
 }
 
 .remove-arrow {
   position: absolute;
   display: block;
-  background-color: #fff;
+  background-color: inherit;
   top: 0;
   right: 0;
   height: 100%;
@@ -286,6 +308,32 @@ select:focus {
   border: 1px solid #3f4e55;
   border-left: none;
   pointer-events: none;
+}
+
+.remove-arrow::before,
+.remove-arrow::after {
+  --size: 0.6rem;
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.remove-arrow::before {
+  border-left: var(--size) solid transparent;
+  border-right: var(--size) solid transparent;
+  border-bottom: var(--size) solid rgba(63, 78, 85, 0.85);
+  top: 38%;
+}
+
+.remove-arrow::after {
+  border-left: var(--size) solid transparent;
+  border-right: var(--size) solid transparent;
+  border-top: var(--size) solid rgba(63, 78, 85, 0.85);
+  top: 62%;
 }
 
 select:required:invalid {
@@ -298,8 +346,4 @@ option[value=""] {
 
 option {
   color: #191f22;
-}
-
-.disabled {
-  background-color: #e5ebee;
 }

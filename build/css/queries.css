@@ -422,7 +422,9 @@
     padding: 5.6rem 3.2rem;
   }
 
-  .form-title {
+  .form-title,
+  .alert-success,
+  .alert-danger {
     text-align: center;
   }
 

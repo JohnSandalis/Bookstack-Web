@@ -171,7 +171,8 @@
       <section class="form-section">
         <form method="POST" class="form">
           <div class="form-container">
-            <p class="form-title">Book found</p>
+            <p class="form-title">Trade-in your book</p>
+            <p class="alert-success">Book information found</p>
             <div class="form-group">
               <label for="isbn"
                 ><ion-icon class="form-icon" name="barcode"></ion-icon
@@ -300,10 +301,14 @@
               <label for="subject"
                 ><ion-icon class="form-icon" name="menu"></ion-icon
               ></label>
-              <select class="select disabled" id="subject" name="subject">
-                <option value="2">Business</option>
+              <select disabled class="select" id="subject" name="subject" required>
+                <option value="">Select Subject:</option>
+                <option value="1">Action and Adventure</option>
+                <option selected value="2">Business</option>
+                <option value="3">Comic</option>
+                <option value="4">Mystery</option>
               </select>
-              <span class="remove-arrow disabled"></span>
+              <span class="remove-arrow"></span>
             </div>
             <button class="form-btn" type="submit">Continue</button>
           </div>
@@ -314,6 +319,7 @@
         <form method="POST" class="form">
           <div class="form-container">
             <p class="form-title">Trade-in your book</p>
+            <p class="alert-danger">No book info, please fill in the form manually</p>
             <div class="form-group">
               <label for="isbn"
                 ><ion-icon class="form-icon" name="barcode"></ion-icon
