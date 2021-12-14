@@ -31,14 +31,13 @@ body {
 /************************/
 
 .container {
-  /* 1140px */
   max-width: 120rem;
   padding: 0 3.2rem;
   margin: 0 auto;
 }
 
 .bg-light {
-  background-color: #f2f5f6;
+  background-color: #f2f5f6 !important;
 }
 
 .grid {
