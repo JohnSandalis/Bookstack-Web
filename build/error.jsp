@@ -10,20 +10,7 @@
   </head>
   <body>
     <header class="header bg-light">
-      <a href="index.jsp" class="logo">Bookstack</a>
-
-      <nav class="main-nav">
-        <ul class="main-nav-list">
-          <li><a class="main-nav-link" href="index.jsp">Home</a></li>
-          <li><a class="main-nav-link" href="browse.jsp">Browse</a></li>
-          <li><a class="main-nav-link" href="account.jsp">Account</a></li>
-        </ul>
-      </nav>
-
-      <button class="btn-mobile-nav">
-        <ion-icon class="icon-mobile-nav" name="menu-outline"></ion-icon>
-        <ion-icon class="icon-mobile-nav" name="close-outline"></ion-icon>
-      </button>
+      <%@ include file="nav-menu.jsp" %>
     </header>
 
     <main>

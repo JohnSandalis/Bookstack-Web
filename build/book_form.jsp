@@ -11,19 +11,7 @@
   </head>
   <body>
     <header class="header">
-    <a href="index.html" class="logo">Bookstack</a>
-
-    <nav class="main-nav">
-      <ul class="main-nav-list">
-        <li><a class="main-nav-link" href="index.html">Home</a></li>
-        <li><a class="main-nav-link" href="browse.html">Browse</a></li>
-        <li><a class="main-nav-link" href="account.html">Account</a></li>
-      </ul>
-    </nav>
-    <button class="btn-mobile-nav">
-        <ion-icon class="icon-mobile-nav" name="menu-outline"></ion-icon>
-        <ion-icon class="icon-mobile-nav" name="close-outline"></ion-icon>
-      </button>
+      <%@ include file="nav-menu.jsp" %>
     </header>
 
 <% 
@@ -85,7 +73,7 @@ if (StringUtils.isNotBlank(isbn) && StringUtils.isNumeric(isbn) &&
               <ion-icon class="chevron-back-icon" name="chevron-back"></ion-icon>
               <button class="back-btn" onclick="history.back()">Back</button>
             </div>
-            
+
             <p class="form-title">Trade-in your book</p>
             <p class="alert-<%=alertClass%>"><%=alertText%></p>
 
