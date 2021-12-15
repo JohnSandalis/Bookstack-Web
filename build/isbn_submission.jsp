@@ -5,7 +5,7 @@
   <head>
 <%@ include file="header.jsp" %>
     <meta name="description" content="Search book by ISBNs">
-    <title>Bookstack - Browse</title>
+    <title>ISBN</title>
   </head>
   <body>
     <header class="header">

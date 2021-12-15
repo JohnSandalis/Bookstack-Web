@@ -7,7 +7,7 @@
   <head>
 <%@ include file="header.jsp" %>
     <meta name="description" content="Search book by ISBNs">
-    <title>Bookstack - Browse</title>
+    <title>Enter Your Book</title>
   </head>
   <body>
     <header class="header">
@@ -45,7 +45,7 @@ if (StringUtils.isNotBlank(isbn) && StringUtils.isNumeric(isbn) &&
     } catch (Exception e) {
       e.printStackTrace(); // TODO Handle exception
     }
-    
+
   }
 
   if (book != null ) {

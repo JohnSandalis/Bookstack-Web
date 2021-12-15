@@ -27,7 +27,7 @@ public class DatabaseUtils {
     private static final String SELECT_BOOK_SUBJECTS = "SELECT * FROM books_subjects WHERE isbn = ?";
     private static final String SELECT_SUBJECT_FROM_ID = "SELECT * FROM subjects WHERE id = ?";
     private static final String SELECT_USER_FROM_EMAIL_AND_PASSWORD = "SELECT * FROM users " +
-            "WHERE email = ? AND password = ?";
+            "WHERE email = ? AND pass = ?";
     private static final String SELECT_SUBJECT_ID_FROM_SUBJECT = "SELECT id FROM subjects WHERE name = ?";
     private static final String SIGN_UP_USER = "INSERT INTO users VALUES(DEFAULT, ?, ?, 0, 0," +
             "?, ?,  NULL, NULL, NULL, NULL, NULL, NULL, NULL)";
@@ -234,6 +234,7 @@ public class DatabaseUtils {
 
     /**
      * Returns true if the subject already exists in the subjects table
+     * 
      * @param name The name of the subject
      * @return true if the subject already exists, false otherwise
      * @throws SQLException when a connection to the database cannot be established
@@ -287,8 +288,8 @@ public class DatabaseUtils {
      * @throws SQLException when a connection to the database cannot be established
      */
     public static void createNewBook(String isbn, String title, String subtitle, int pagesCount, String thumbnailUrl,
-                                     String publisher, Date publishDate, String lang, int price, List<String> authors,
-                                     List<String> subjects) throws SQLException {
+            String publisher, Date publishDate, String lang, int price, List<String> authors,
+            List<String> subjects) throws SQLException {
         try (Connection connection = createDatabaseConnection()) {
             PreparedStatement ps = connection.prepareStatement(CREATE_NEW_BOOK);
             ps.setString(1, isbn);
@@ -390,7 +391,7 @@ public class DatabaseUtils {
      * @throws SQLException when a connection to the database cannot be established
      */
     public static void addNewModificationRequest(int userId, String bookIsbn,
-                                                 String modifications) throws SQLException {
+            String modifications) throws SQLException {
         try (Connection connection = createDatabaseConnection()) {
             PreparedStatement ps = connection.prepareStatement(CREATE_MODIFICATION_REQUEST);
             ps.setInt(1, userId);
@@ -432,13 +433,15 @@ public class DatabaseUtils {
     }
 
     /**
-     * Creasts a connection to the database and updates the user's - with the specific id - credits
-     * @param id The id of the user
+     * Creasts a connection to the database and updates the user's - with the
+     * specific id - credits
+     * 
+     * @param id         The id of the user
      * @param newCredits The new amount of credits
      * @throws SQLException when a connection to the database cannot be established
      */
     public static void updateUserCredits(int id, int newCredits) throws SQLException {
-        try(Connection connection = createDatabaseConnection()) {
+        try (Connection connection = createDatabaseConnection()) {
             PreparedStatement ps = connection.prepareStatement(UPDATE_USER_CREDITS);
             ps.setInt(1, id);
             ps.setInt(2, newCredits);
