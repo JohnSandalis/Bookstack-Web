@@ -23,10 +23,11 @@ public class User {
     private final String region;
     private final String city;
     private final String lang;
+    private final String phoneNumber;
 
     public User(int id, String email, String password, int credits, int booksGiven, int booksTaken, String username,
             String fullName, String address, String country, String postalCode, int atFloor, String region,
-            String city, String lang) {
+            String city, String lang, String phoneNumber) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -42,6 +43,7 @@ public class User {
         this.region = region;
         this.city = city;
         this.lang = lang;
+        this.phoneNumber = phoneNumber;
     }
 
     public int getId() {
@@ -102,5 +104,9 @@ public class User {
 
     public String getLang() {
         return lang;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 }
