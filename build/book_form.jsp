@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page errorPage="error.jsp" %>
-<%@ page import="java.util.List"%>
+<%@ page import="java.util.List, org.apache.commons.lang3.StringUtils, java.util.HashMap"%>
 <%@ page import="bookstack.*"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,143 +26,161 @@
       </button>
     </header>
 
-<% String isbn = request.getParameter("isbn");
-String title = null;
-Book book = null;
-if (isbn != null && isbn.length() > 0) {
+<% 
+String isbn = request.getParameter("isbn");
+
+String pageTitle = "Trade-in your book";
+HashMap<String, String> inputValues = new HashMap<String, String>();
+if (StringUtils.isNotBlank(isbn)) {
+
+  Book book = null;
+
+  // Search isbn in DB
+  try {
     book = DatabaseUtils.getBookFromISBN(isbn);
+  } catch (Exception e) {
+    e.printStackTrace(); // TODO Handle exception
+  }
+
+  // Seatch isbn through API
+  if (book == null) {
+    try {
+      book = Book_handler.search_by_isbn(isbn);
+    } catch (Exception e) {
+      e.printStackTrace(); // TODO Handle exception
+    }
+    
+  }
+
+  if (book != null ) {
+    pageTitle = "Book found";
+    inputValues.put("isbn", book.getIsbn());
+    inputValues.put("title", book.getTitle());
+    inputValues.put("subtitle", book.getSubtitle());
+    inputValues.put("authors", StringUtils.join(book.getAuthors(), ", "));
+    inputValues.put("publisher", book.getPublisher());
+    inputValues.put("publishDate", book.getPublishDate().toString());
+    inputValues.put("pageCount", String.valueOf(book.getPageCount()));
+    inputValues.put("thumbnailUrl", book.getThumbnailUrl());
+    inputValues.put("lang", book.getLang());
+    inputValues.put("subjects", StringUtils.join(book.getSubjects(), ", "));
+  }
+
 }
-if (book == null) {
-    title = "Trade-in your book";
-} else {
-    title = "Book found";
-}%>
-      <!--Trade your books form-->
+%>
+      <!-- Form -->
       <section class="form-section">
         <form method="POST" class="form">
           <div class="form-container">
-            <p class="form-title"><%=title%></p>
+            <p class="form-title"><%=pageTitle%></p>
+
+            <!-- ISBN -->
             <div class="form-group">
               <label for="isbn">
                   <ion-icon class="form-icon" name="barcode"></ion-icon>
               </label>
-              <%if (book != null) {%>
                 <input
+                <%
+                  if (StringUtils.isNotBlank(inputValues.get("isbn"))) {
+                %>
                 disabled
-                value="<%=isbn%>"
+                <%}%>
+                value="<%=StringUtils.defaultString(inputValues.get("isbn"))%>"
                 type="text"
                 name="isbn"
                 id="isbn"
                 placeholder="ISBN"
               />
-              <%} else {%>
-                <input type="text" name="isbn" id="isbn" placeholder="ISBN" />
-              <%}%>
             </div>
 
+            <!-- Title -->
             <div class="form-group">
               <label for="title"
                 ><ion-icon class="form-icon" name="text"></ion-icon
               ></label>
-              <%if (book != null) {%>
                 <input
+                <%
+                  if (StringUtils.isNotBlank(inputValues.get("title"))) {
+                %>
                 disabled
-                value="<%=book.getTitle()%>"
+                <%}%>
+                value="<%=StringUtils.defaultString(inputValues.get("title"))%>"
                 type="text"
                 name="title"
                 id="title"
                 placeholder="Title"
               />
-              <%} else {%>
-                <input type="text" name="title" id="title" placeholder="Title" />
-                <%}%>
             </div>
 
+            <!-- Subtitle -->
             <div class="form-group">
               <label for="subtitle"
                 ><ion-icon class="form-icon" name="text-outline"></ion-icon
               ></label>
-              <%if (book != null) {
-                  String subtitle = "";
-                  if (book.getSubtitle() != null) {
-                    subtitle = book.getSubtitle();
-                  }
+              <input
+              <%
+                  if (StringUtils.isNotBlank(inputValues.get("subtitle"))) {
               %>
-                <input
-                disabled
-                value="<%=subtitle%>"
-                type="text"
-                name="subtitle"
-                id="subtitle"
-              />
-              <%} else {%>
-                <input
+              disabled
+              <%}%>
+                value="<%=StringUtils.defaultString(inputValues.get("subtitle"))%>"
                 type="text"
                 name="subtitle"
                 id="subtitle"
                 placeholder="Subtitle"
               />
-              <%}%>
             </div>
 
+            <!-- Author -->
             <div class="form-group">
               <label for="author"
                 ><ion-icon class="form-icon" name="person"></ion-icon
               ></label>
-              <%if (book != null) {
-                String authors = null;
-                for (String s: book.getAuthors()) {
-                    authors = s + ", ";
-                }%>
                 <input
+                <%
+                  if (StringUtils.isNotBlank(inputValues.get("authors"))) {
+                %>
                 disabled
-                value="<%=authors%>"
+                <%}%>
+                value="<%=StringUtils.defaultString(inputValues.get("authors"))%>"
                 type="text"
                 name="author"
                 id="author"
                 placeholder="Authors (ex Author1, Author2...)"
               />
-              <%} else {%>
-                <input
-                type="text"
-                name="author"
-                id="author"
-                placeholder="Authors (ex Author1, Author2...)"
-              />
-              <%}%>
             </div>
 
+            <!-- Publisher -->
             <div class="form-group">
               <label for="publisher"
                 ><ion-icon class="form-icon" name="person-circle"></ion-icon
               ></label>
-              <%if (book != null) {%>
                 <input
+                <%
+                  if (StringUtils.isNotBlank(inputValues.get("publisher"))) {
+                %>
                 disabled
-                value="<%=book.getPublisher()%>"
+                <%}%>
+                value="<%=StringUtils.defaultString(inputValues.get("publisher"))%>"
                 type="text"
                 name="publisher"
                 id="publisher"
                 placeholder="Publisher"
               />
-              <%} else {%>
-                <input
-                type="text"
-                name="publisher"
-                id="publisher"
-                placeholder="Publisher"
-              />
-              <%}%>
             </div>
 
+            <!-- Publish Date -->
             <div class="form-group">
               <label for="publish_date"
                 ><ion-icon class="form-icon" name="calendar"></ion-icon
               ></label>
-              <%if (book != null) {%>
                 <input
+                <%
+                  if (StringUtils.isNotBlank(inputValues.get("publishDate"))) {
+                %>
                 disabled
-                value="<%=book.getPublishDate()%>"
+                <%}%>
+                value="<%=StringUtils.defaultString(inputValues.get("publishDate"))%>"
                 type="text"
                 name="publish_date"
                 id="publish_date"
@@ -170,123 +188,91 @@ if (book == null) {
                 onfocus="(this.type='date')"
                 onblur="(this.type='text')"
               />
-              <%} else {%>
-                <input
-                type="text"
-                name="publish_date"
-                id="publish_date"
-                placeholder="Publish Date"
-                onfocus="(this.type='date')"
-                onblur="(this.type='text')"
-              />
-              <%}%>
             </div>
 
+            <!-- Number of pages -->
             <div class="form-group">
               <label for="page_count"
                 ><ion-icon class="form-icon" name="documents"></ion-icon
               ></label>
-              <%if (book != null) {%>
                 <input
+                <%
+                  if (StringUtils.isNotBlank(inputValues.get("pageCount"))) {
+                %>
                 disabled
-                value="<%=book.getPageCount()%>"
+                <%}%>
+                value="<%=StringUtils.defaultString(inputValues.get("pageCount"))%>"
                 type="number"
                 name="page_count"
                 id="page_count"
                 placeholder="Number of pages"
               />
-              <%} else {%>
-                <input
-                type="number"
-                name="page_count"
-                id="page_count"
-                placeholder="Number of pages"
-              />
-              <%}%>
             </div>
 
+            <!-- Thumbnail URL -->
             <div class="form-group">
               <label for="thumbnail_url"
                 ><ion-icon class="form-icon" name="code"></ion-icon
               ></label>
-              <%if (book != null) {%>
                 <input
+                <%
+                  if (StringUtils.isNotBlank(inputValues.get("thumbnailUrl"))) {
+                %>
                 disabled
-                value="<%=book.getThumbnailUrl()%>"
+                <%}%>
+                value="<%=StringUtils.defaultString(inputValues.get("thumbnailUrl"))%>"
                 type="text"
                 name="thumbnail_url"
                 id="thumbnail_url"
                 placeholder="Cover Image url"
               />
-              <%} else {%>
-                <input
-                type="text"
-                name="thumbnail_url"
-                id="thumbnail_url"
-                placeholder="Cover Image url"
-              />
-              <%}%>
             </div>
 
+            <!-- Language -->
             <div class="custom-select form-group">
               <label for="language"
                 ><ion-icon class="form-icon" name="earth"></ion-icon
               ></label>
-              <%if (book != null) {%>
                 <input
+                <%
+                  if (StringUtils.isNotBlank(inputValues.get("lang"))) {
+                %>
                 disabled
-                value="<%=book.getLang()%>"
+                <%}%>
+                value="<%=StringUtils.defaultString(inputValues.get("lang"))%>"
                 type="text"
                 name="language"
                 id="Language"
                 placeholder="Language"
               />
-              <%} else {%>
-                <select class="select" id="language" name="language" required>
-                    <option value="">Select Language:</option>
-                    <option value="en">English</option>
-                    <option value="fr">French</option>
-                    <option value="de">German</option>
-                  </select>
-              <%}%>
-              
               <span class="remove-arrow"></span>
             </div>
+            
+            <!-- Subjects -->
             <div class="custom-select form-group">
-              <label for="subject"
+              <label for="subjects"
                 ><ion-icon class="form-icon" name="menu"></ion-icon
               ></label>
-              <%if (book != null) {
-                String subjects = null;
-                for (String s: book.getSubjects()) {
-                    subjects = s + ", ";
-                }%>
                 <input
+                <%
+                  if (StringUtils.isNotBlank(inputValues.get("subjects"))) {
+                %>
                 disabled
-                value="<%=subjects%>"
+                <%}%>
+                value="<%=StringUtils.defaultString(inputValues.get("subjects"))%>"
                 type="text"
                 name="subjects"
                 id="subjects"
                 placeholder="Subjects"
               />
-              <%} else {%>
-                <select class="select" id="subject" name="subject" required>
-                    <option value="">Select Subject:</option>
-                    <%List<String> subjects = DatabaseUtils.getBookSubjects(isbn);
-                      int count = 0;
-                      for (String i:subjects) {
-                          count += 1;%>
-                          <option value="<%=count%>"><%=i%></option>
-                      <%}%>
-                  </select>
-              <%}%>
               <span class="remove-arrow"></span>
             </div>
+
             <a class="form-btn" href="#">Continue</a>
           </div>
         </form>
       </section>
-      <!--Trade your books form-->
+
       <%@ include file="footer.jsp" %>
   </body>
 </html>
