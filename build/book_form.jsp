@@ -31,11 +31,16 @@ String isbn = request.getParameter("isbn");
 
 
 String alertClass = "danger";
-String alertText = "No book info, please fill in the form manually";
+String alertText = "Invalid ISBN, please fill in the form manually";
+
 HashMap<String, String> inputValues = new HashMap<String, String>();
 
-if (StringUtils.isNotBlank(isbn)) {
 
+if (StringUtils.isNotBlank(isbn) && StringUtils.isNumeric(isbn) && 
+                    ((isbn.length() == 10) || (isbn.length() == 13))) {
+                      
+  inputValues.put("isbn", isbn);
+  alertText = "No book info, please fill in the form manually";
   Book book = null;
 
   // Search isbn in DB
