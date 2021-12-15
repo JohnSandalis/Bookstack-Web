@@ -39,7 +39,7 @@ public class DatabaseUtils {
     private static final String CREATE_MODIFICATION_REQUEST = "INSERT INTO modification_requests VALUES(DEFAULT, ?, " +
             "?, ?)";
     private static final String UPDATE_USER_INFO = "UPDATE users SET address = ?, country = ?, " +
-            "postal_code = ?, at_floor = ?, region = ?, city = ?, lang = ? WHERE id = ?";
+            "postal_code = ?, at_floor = ?, region = ?, city = ?, lang = ?, phone_number = ? WHERE id = ?";
     private static final String UPDATE_USER_BOOKS_GIVEN = "UPDATE users SET books_given = ? WHERE id = ?";
     private static final String UPDATE_USER_CREDITS = "UPDATE users SET credits = ? WHERE id = ?";
 
