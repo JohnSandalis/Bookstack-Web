@@ -29,7 +29,7 @@ public class DatabaseUtils {
     private static final String SELECT_USER_FROM_EMAIL_AND_PASSWORD = "SELECT * FROM users " +
             "WHERE email = ? AND pass = ?";
     private static final String SELECT_SUBJECT_ID_FROM_SUBJECT = "SELECT id FROM subjects WHERE name = ?";
-    private static final String SIGN_UP_USER = "INSERT INTO users VALUES(DEFAULT, ?, ?, 0, 0," +
+    private static final String SIGN_UP_USER = "INSERT INTO users VALUES(DEFAULT, ?, ?, 0, 0, 0," +
             "?, ?,  NULL, NULL, NULL, NULL, NULL, NULL, NULL)";
     private static final String CREATE_NEW_BOOK = "INSERT INTO books VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String CREATE_NEW_AUTHOR = "INSERT INTO authors VALUES(DEFAULT, ?, ?)";
