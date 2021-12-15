@@ -40,6 +40,7 @@ public class DatabaseUtils {
             "?, ?)";
     private static final String UPDATE_USER_INFO = "UPDATE users SET address = ?, country = ?, " +
             "postal_code = ?, at_floor = ?, region = ?, city = ?, lang = ? WHERE id = ?";
+    private static final String UPDATE_USER_BOOKS_GIVEN = "UPDATE users SET books_given = ? WHERE id = ?";
     private static final String UPDATE_USER_CREDITS = "UPDATE users SET credits = ? WHERE id = ?";
 
     // Returns an active connection object to the project's database
@@ -429,6 +430,22 @@ public class DatabaseUtils {
             ps.setString(7, lang);
             ps.setInt(8, id);
             ps.executeUpdate();
+        }
+    }
+
+    /**
+     * Creasts a connection to the database and updates the user's - with the
+     * specific id - books_given
+     * 
+     * @param id         The id of the user
+     * @param booksGiven The new number of books given by the user
+     * @throws SQLException when a connection to the database cannot be established
+     */
+    public static void updateUserBooksGiven(int booksGiven, int id) throws SQLException {
+        try (Connection connection = createDatabaseConnection()) {
+            PreparedStatement ps = connection.prepareStatement(UPDATE_USER_BOOKS_GIVEN);
+            ps.setInt(1, booksGiven);
+            ps.setInt(2, id);
         }
     }
 
