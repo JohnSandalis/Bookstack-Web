@@ -39,7 +39,7 @@ public class DatabaseUtils {
     private static final String CREATE_MODIFICATION_REQUEST = "INSERT INTO modification_requests VALUES(DEFAULT, ?, " +
             "?, ?)";
     private static final String UPDATE_USER_INFO = "UPDATE users SET address = ?, country = ?, " +
-            "postal_code = ?, at_floor = ?, region = ?, city = ?, lang = ? WHERE id = ?";
+            "postal_code = ?, at_floor = ?, region = ?, city = ?, lang = ?, phone_number = ? WHERE id = ?";
     private static final String UPDATE_USER_CREDITS = "UPDATE users SET credits = ? WHERE id = ?";
 
     // Returns an active connection object to the project's database
@@ -201,8 +201,9 @@ public class DatabaseUtils {
                 String region = rs.getString("region");
                 String city = rs.getString("city");
                 String lang = rs.getString("lang");
+                String phoneNumber = rs.getString("phone_number");
                 return new User(id, email, password, credits, booksGiven, booksTaken, username, fullName, address,
-                        country, postalCode, atFloor, region, city, lang);
+                        country, postalCode, atFloor, region, city, lang, phoneNumber);
             }
             return null;
         }
@@ -417,7 +418,7 @@ public class DatabaseUtils {
      * @throws SQLException when a connection to the database cannot be established
      */
     public static void updateUserInfo(String address, String country, String postalCode, int atFloor,
-            String region, String city, String lang, int id) throws SQLException {
+            String region, String city, String lang, String phoneNumber, int id) throws SQLException {
         try (Connection connection = createDatabaseConnection()) {
             PreparedStatement ps = connection.prepareStatement(UPDATE_USER_INFO);
             ps.setString(1, address);
@@ -427,7 +428,8 @@ public class DatabaseUtils {
             ps.setString(5, region);
             ps.setString(6, city);
             ps.setString(7, lang);
-            ps.setInt(8, id);
+            ps.setString(8, phoneNumber);
+            ps.setInt(9, id);
             ps.executeUpdate();
         }
     }
