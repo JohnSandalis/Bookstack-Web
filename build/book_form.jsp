@@ -71,7 +71,7 @@ if (StringUtils.isNotBlank(isbn) && StringUtils.isNumeric(isbn) &&
           <div class="form-container">
           <div class="back-btn-container">
               <ion-icon class="chevron-back-icon" name="chevron-back"></ion-icon>
-              <button class="back-btn" onclick="history.back()">Back</button>
+              <button type="button" class="back-btn" onclick="history.back()">Back</button>
             </div>
 
             <p class="form-title">Trade-in your book</p>
