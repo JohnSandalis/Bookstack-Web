@@ -422,6 +422,11 @@
     padding: 5.6rem 3.2rem;
   }
 
+  .chevron-back-icon {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+
   .form-title,
   .alert-success,
   .alert-danger {

@@ -151,6 +151,57 @@ strong {
   gap: 1.8rem;
 }
 
+.back-btn-container {
+  position: relative;
+  align-self: start;
+  margin-bottom: 1.2rem;
+}
+
+.chevron-back-icon {
+  width: 2.4rem;
+  height: 2.4rem;
+  color: #3f4e55;
+  transition: all 0.3s;
+
+  position: absolute;
+  top: 50%;
+  left: 2rem;
+  transform: translate(-50%, -50%);
+}
+
+.back-btn {
+  border: 1.5px solid #3f4e55;
+  font-size: 1.6rem;
+  line-height: 1;
+  padding: 0.8rem 1.4rem 0.8rem 3.4rem;
+  color: #3f4e55;
+  background-color: #f2f5f6;
+  border-radius: 5px;
+  transition: all 0.3s;
+}
+
+.back-btn-container:hover .back-btn,
+.back-btn-container:active .back-btn {
+  background-color: #3f4e55;
+  color: #f2f5f6;
+  cursor: pointer;
+}
+
+.back-btn-container:hover .chevron-back-icon,
+.back-btn-container:active .chevron-back-icon {
+  color: #f2f5f6;
+  cursor: pointer;
+}
+
+.back-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.3rem rgba(63, 78, 85, 0.5);
+}
+/* 
+.chevron-back-icon {
+  color: #f2f5f6;
+} */
+
 .form-group {
   position: relative;
 }
