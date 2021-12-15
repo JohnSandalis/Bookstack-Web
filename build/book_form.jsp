@@ -29,8 +29,11 @@
 <% 
 String isbn = request.getParameter("isbn");
 
-String pageTitle = "Trade-in your book";
+
+String alertClass = "danger";
+String alertText = "No book info, please fill in the form manually";
 HashMap<String, String> inputValues = new HashMap<String, String>();
+
 if (StringUtils.isNotBlank(isbn)) {
 
   Book book = null;
@@ -53,7 +56,8 @@ if (StringUtils.isNotBlank(isbn)) {
   }
 
   if (book != null ) {
-    pageTitle = "Book found";
+    alertClass = "success";
+    alertText = "Book information found";
     inputValues.put("isbn", book.getIsbn());
     inputValues.put("title", book.getTitle());
     inputValues.put("subtitle", book.getSubtitle());
@@ -72,7 +76,8 @@ if (StringUtils.isNotBlank(isbn)) {
       <section class="form-section">
         <form method="POST" class="form">
           <div class="form-container">
-            <p class="form-title"><%=pageTitle%></p>
+            <p class="form-title">Trade-in your book</p>
+            <p class="alert-<%=alertClass%>"><%=alertText%></p>
 
             <!-- ISBN -->
             <div class="form-group">
@@ -244,6 +249,7 @@ if (StringUtils.isNotBlank(isbn)) {
                 name="language"
                 id="Language"
                 placeholder="Language"
+                required
               />
               <span class="remove-arrow"></span>
             </div>
@@ -264,11 +270,12 @@ if (StringUtils.isNotBlank(isbn)) {
                 name="subjects"
                 id="subjects"
                 placeholder="Subjects"
+                required
               />
               <span class="remove-arrow"></span>
             </div>
 
-            <a class="form-btn" href="#">Continue</a>
+            <button class="form-btn" type="submit">Continue</a>
           </div>
         </form>
       </section>
