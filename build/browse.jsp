@@ -26,7 +26,7 @@ try {
 <html lang="en">
   <head>
 ]   <%@ include file="header.jsp" %>
-    <meta name="description" content="Bookstack browse page where you can find all the available books to be acquired with credits"
+    <meta name="description" content="Bookstack browse page where you can find all the available books to be acquired with credits">
     <title>Bookstack - Browse</title>
   </head>
   <body>
