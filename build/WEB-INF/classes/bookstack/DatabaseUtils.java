@@ -22,6 +22,7 @@ public class DatabaseUtils {
 
     // Queries used in methods below
     private static final String SELECT_SUBMITTED_BOOKS = "SELECT * FROM books_submitted";
+    private static final String SELECT_USER_SUBMITTED_BOOKS = "SELECT * FROM books_submitted WHERE user_id = ?";
     private static final String SELECT_BOOK_WITH_ISBN = "SELECT * FROM books WHERE isbn = ?";
     private static final String SELECT_AUTHORS_OF_BOOK = "SELECT * FROM authors WHERE isbn = ?";
     private static final String SELECT_BOOK_SUBJECTS = "SELECT * FROM books_subjects WHERE isbn = ?";
@@ -74,6 +75,30 @@ public class DatabaseUtils {
                 bookSubmissions.add(new BookSubmission(id, time_of, user_id, book));
             }
             return bookSubmissions;
+        }
+    }
+
+        /**
+     * Creates a connection to the database and gets the user's submitted books
+     * 
+     * @param user_id The unique ID of the specific user
+     * @return books that a specific user has submitted for trading
+     * @throws SQLException when a connection to the database cannot be established
+     */
+    public static List<BookSubmission> getUserSubmittedBooks(int user_id) throws SQLException {
+        try (Connection connection = createDatabaseConnection()) {
+            List<BookSubmission> userBookSubmissions = new ArrayList<>();
+            PreparedStatement ps = connection.prepareStatement(SELECT_USER_SUBMITTED_BOOKS);
+            ps.setInt(1, user_id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String id = rs.getString("id");
+                Date time_of = rs.getDate("time_of");
+                String book_isbn = rs.getString("book_isbn");
+                Book book = getBookFromISBN(book_isbn);
+                userBookSubmissions.add(new BookSubmission(id, time_of, user_id, book));
+            }
+            return userBookSubmissions;
         }
     }
 
