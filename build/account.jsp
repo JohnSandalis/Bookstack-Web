@@ -7,6 +7,15 @@
 <%
 User user = (User) session.getAttribute("user");
 
+List<BookSubmission> userBooks = new ArrayList<BookSubmission>();
+List<Book> books = new ArrayList<Book>();
+DatabaseUtils db = new DatabaseUtils();
+try {
+  userBooks = db.getUserSubmittedBooks(user.getId());
+  for (int i = 0; i < userBooks.size(); i++) {
+    books.add(userBooks.get(i).getBook());
+  }
+} catch (Exception e) {}
 %>
 
 <!DOCTYPE html>
@@ -59,71 +68,33 @@ User user = (User) session.getAttribute("user");
 
         <section class="browse-section">
           <div class="browse-container grid-browse">
+<%
+            for (Book book: books) {
+                List<String> authors = book.getAuthors();
+                StringBuilder sbAuthors = new StringBuilder();
+                sbAuthors.append(authors.get(0));
+                for (int i = 1; i < authors.size(); i++) {
+                  sbAuthors.append(",");
+                  sbAuthors.append(authors.get(i));
+                }
+%>
             <div class="item-container flex-item">
               <div class="itm-img-box">
                 <img
                   class="itm-img"
-                  src="https://images-na.ssl-images-amazon.com/images/I/71iud2Nk92L.jpg"
+                  src="<%=book.getThumbnailUrl() %>"
                   alt="book cover"
                 />
               </div>
               <div class="itm-description-box">
-                <p class="itm-title">Unscripted</p>
-                <p class="itm-author">M. J. Demarco</p>
+                <p class="itm-title"><%=book.getTitle() %></p>
+                <p class="itm-author"><%=sbAuthors.toString() %></p>
                 <a class="btn btn-sm btn-itm" href="#">Edit Entry</a>
               </div>
             </div>
-
-            <div class="item-container flex-item">
-              <div class="itm-img-box">
-                <img
-                  class="itm-img"
-                  src="http://books.google.com/books/content?id=eifwjwEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
-                  alt="book cover"
-                />
-              </div>
-              <div class="itm-description-box">
-                <p class="itm-title">The Subtle Art of Not Giving a F*ck</p>
-                <p class="itm-author">Mark Manson</p>
-                <a class="btn btn-sm btn-itm" href="#">Edit Entry</a>
-              </div>
-            </div>
-
-            <div class="item-container flex-item">
-              <div class="itm-img-box">
-                <img
-                  class="itm-img"
-                  src="https://m.media-amazon.com/images/I/61qSRYof0-L.jpg"
-                  alt="book cover"
-                />
-              </div>
-              <div class="itm-description-box">
-                <p class="itm-title">
-                  Magnus Chase and the Gods of Asgard, Book 1
-                </p>
-                <p class="itm-author">Rick Riordan</p>
-                <a class="btn btn-sm btn-itm" href="#">Edit Entry</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="pagination">
-            <button class="btn-page">
-              <ion-icon class="btn-icon" name="chevron-back-outline"></ion-icon>
-            </button>
-
-            <a href="#" class="page-link">1</a>
-            <a href="#" class="page-link">2</a>
-            <a href="#" class="page-link page-link--current">3</a>
-            <a href="#" class="page-link">4</a>
-
-            <button class="btn-page">
-              <ion-icon
-                class="btn-icon"
-                name="chevron-forward-outline"
-              ></ion-icon>
-            </button>
-          </div>
+<%
+            }
+%>
         </section>
       </div>
     </main>
