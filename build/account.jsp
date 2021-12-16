@@ -46,13 +46,25 @@ try {
               </p>
               <p class="information"><%=user.getLang() %></p>
 
+
               <h3 class="information-heading">Address</h3>
-              <p class="information"><%=user.getAddress() %></p>
-              <p class="information"><%=user.getCity() %></p>
-              <p class="information"><%=user.getRegion() %></p>
-              <p class="information"><%=user.getPostalCode() %></p>
-              <p class="information"><%=user.getPhoneNumber() %></p>
-              <p class="information"><%=user.getCountry() %></p>
+<%
+              if(user.getAddress() == null && user.getCity() == null && user.getRegion() == null && user.getPostalCode() == null && user.getPhoneNumber() == null && user.getCountry() == null) {
+%>
+              <a class="btn btn-md address-form-btn" href="address_form.jsp">Address form</a>
+<%
+              } else {
+%>
+
+<%
+              }
+%>
+              <p class="information"><%=(user.getAddress() != null) ? user.getAddress() : ""%></p>
+              <p class="information"><%=(user.getCity() != null) ? user.getCity() : ""%></p>
+              <p class="information"><%=(user.getRegion() != null) ? user.getRegion() : ""%></p>
+              <p class="information"><%=(user.getPostalCode() != null) ? user.getPostalCode() : ""%></p>
+              <p class="information"><%=(user.getPhoneNumber() != null) ? user.getPhoneNumber() : ""%></p>
+              <p class="information"><%=(user.getCountry() != null) ? user.getCountry() : ""%></p>
             </div>
           </div>
         </section>
