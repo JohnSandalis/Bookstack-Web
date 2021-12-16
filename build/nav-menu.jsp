@@ -7,7 +7,17 @@
   <ul class="main-nav-list">
     <li><a class="main-nav-link" href="index.jsp">Home</a></li>
     <li><a class="main-nav-link" href="browse.jsp">Browse</a></li>
+<%
+if ( session.getAttribute("user") != null ) {
+%>
     <li><a class="main-nav-link" href="account.jsp">Account</a></li>
+<%
+} else {
+%>
+    <li><a class="main-nav-link cta-link" href="signin.jsp">Sign in</a></li>
+<%
+}
+%>
   </ul>
 </nav>
 
