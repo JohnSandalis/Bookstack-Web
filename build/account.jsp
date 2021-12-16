@@ -23,7 +23,7 @@ User user = (User) session.getAttribute("user");
     <main>
       <div class="profile-heading-container mb-sm">
         <h1 class="heading-profile">Profile</h1>
-        <a class="btn btn-md" href="#">Trade-in</a>
+        <a class="btn btn-md" href="isbn_submission.jsp">Trade-in</a>
       </div>
 
       <div class="profile-page">
