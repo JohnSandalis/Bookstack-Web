@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page errorPage="error.jsp" %>
-<%@ page import="java.util.List, org.apache.commons.lang3.StringUtils, java.util.HashMap"%>
+<%@ page import="java.util.List, org.apache.commons.lang3.StringUtils, java.util.HashMap, java.text.SimpleDateFormat"%>
 <%@ page import="bookstack.*"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,7 +22,7 @@ String alertClass = "danger";
 String alertText = "Invalid ISBN, please fill in the form manually";
 
 HashMap<String, String> inputValues = new HashMap<String, String>();
-
+SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
 
 if (StringUtils.isNotBlank(isbn) && StringUtils.isNumeric(isbn) && 
                     ((isbn.length() == 10) || (isbn.length() == 13))) {
@@ -35,15 +35,15 @@ if (StringUtils.isNotBlank(isbn) && StringUtils.isNumeric(isbn) &&
   try {
     book = DatabaseUtils.getBookFromISBN(isbn);
   } catch (Exception e) {
-    e.printStackTrace(); // TODO Handle exception
+    throw new Exception("DB exception: " + e.getMessage()); // TODO Handle exception
   }
 
-  // Seatch isbn through API
+  // Search isbn through API
   if (book == null) {
     try {
-      book = Book_handler.search_by_isbn(isbn);
+      book = BooksApiHandler.searchByIsbn(isbn);
     } catch (Exception e) {
-      e.printStackTrace(); // TODO Handle exception
+      throw new Exception("API exception: " + e.getMessage()); // TODO Handle exception
     }
 
   }
@@ -56,8 +56,12 @@ if (StringUtils.isNotBlank(isbn) && StringUtils.isNumeric(isbn) &&
     inputValues.put("subtitle", book.getSubtitle());
     inputValues.put("authors", StringUtils.join(book.getAuthors(), ", "));
     inputValues.put("publisher", book.getPublisher());
-    inputValues.put("publishDate", book.getPublishDate().toString());
-    inputValues.put("pageCount", String.valueOf(book.getPageCount()));
+    if (book.getPublishDate() != null) {
+      inputValues.put("publishDate", dateFormatter.format(book.getPublishDate()));
+    }
+    if (book.getPageCount() != null) {
+      inputValues.put("pageCount", String.valueOf(book.getPageCount()));
+    }
     inputValues.put("thumbnailUrl", book.getThumbnailUrl());
     inputValues.put("lang", book.getLang());
     inputValues.put("subjects", StringUtils.join(book.getSubjects(), ", "));
