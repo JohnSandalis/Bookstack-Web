@@ -476,7 +476,7 @@
   background-color: #f2f5f6;
   padding: 3.6rem;
   max-width: 30rem;
-  border-radius: 5px;
+  border-radius: 9px;
   box-shadow: 0 1.2rem 2.4rem rgba(0, 0, 0, 0.075);
 }
 
@@ -496,10 +496,19 @@
 }
 
 .stats {
+  /* justify-self: center; */
   grid-row: 1 / 2;
   grid-column: 2;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  background-color: #f2f5f6;
+  border-radius: 9px;
+  box-shadow: 0 1.2rem 2.4rem rgba(0, 0, 0, 0.075);
+  padding: 1.2rem 0;
+}
+
+.stats-item:not(:last-child) {
+  border-right: 2px solid #3f4e55;
 }
 
 .profile-page .browse-section {
@@ -517,17 +526,14 @@
   justify-content: center;
   gap: 1.2rem;
   padding: 1.2rem 2.4rem;
-  border: 1.5px solid #3f4e55;
-  border-radius: 5px;
-  background-color: #3f4e55;
-  color: #f2f5f6;
-  box-shadow: 0 1.2rem 2.4rem rgba(0, 0, 0, 0.05);
+  font-weight: 600;
+  color: #3f4e55;
   transition: all 0.3s;
 }
 
 .profile-credits .credits-icon,
 .profile-credits .credits {
-  color: #f2f5f6;
+  color: #3f4e55;
 }
 
 .books-traded-in,
@@ -536,22 +542,11 @@
   align-items: center;
   justify-content: center;
   font-size: 1.8rem;
-  font-weight: 400;
-  background-color: #3f4e55;
-  color: #f2f5f6;
+  font-weight: 600;
+  color: #3f4e55;
   padding: 1.2rem 2.4rem;
-  border: 1.5px solid #3f4e55;
-  border-radius: 5px;
-  box-shadow: 0 1.2rem 2.4rem rgba(0, 0, 0, 0.05);
   transition: all 0.3s;
 }
-
-/* .books-traded-in:hover,
-.books-acquired:hover {
-  background-color: #f2f5f6;
-  color: #3f4e55;
-  box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.075);
-} */
 
 /************************/
 /* ERROR PAGE */

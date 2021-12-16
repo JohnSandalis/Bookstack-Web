@@ -147,6 +147,10 @@
     margin-top: 2.4rem;
   }
 
+  .stats-item:not(:last-child) {
+    border-right: none;
+  }
+
   .profile-page .browse-section {
     grid-row: 1 / 5;
     margin: 0 3.2rem;

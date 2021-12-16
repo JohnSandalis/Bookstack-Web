@@ -49,12 +49,12 @@ User user = (User) session.getAttribute("user");
         </section>
 
         <div class="stats">
-          <div class="profile-credits">
+          <div class="stats-item profile-credits">
             <ion-icon class="credits-icon" name="cash-outline"></ion-icon>
             <span class="credits"><%=user.getCredits() %></span>
           </div>
-          <p class="books-traded-in">Books Traded: &nbsp;<strong><%=user.getBooksGiven() %></strong></p>
-          <p class="books-acquired">Books Acquired: &nbsp;<strong><%=user.getBooksTaken() %></strong></p>
+          <p class="stats-item books-traded-in">Books Traded: &nbsp;<strong><%=user.getBooksGiven() %></strong></p>
+          <p class="stats-item books-acquired">Books Acquired: &nbsp;<strong><%=user.getBooksTaken() %></strong></p>
         </div>
 
         <section class="browse-section">
