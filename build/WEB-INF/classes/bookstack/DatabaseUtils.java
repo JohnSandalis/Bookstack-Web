@@ -192,7 +192,7 @@ public class DatabaseUtils {
                 int id = rs.getInt("id");
                 int credits = rs.getInt("credits");
                 int booksGiven = rs.getInt("books_given");
-                int booksTaken = rs.getInt("booksTaken");
+                int booksTaken = rs.getInt("books_taken");
                 String username = rs.getString("username");
                 String fullName = rs.getString("full_name");
                 String address = rs.getString("address");
