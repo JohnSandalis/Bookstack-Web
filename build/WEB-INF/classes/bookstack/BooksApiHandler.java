@@ -65,7 +65,10 @@ public class BooksApiHandler {
             String lang = volumeInfo.optString("language");
             // Fetch thumbnail url from json
             JSONObject image_links = volumeInfo.optJSONObject("imageLinks");
-            String thumbnailUrl = image_links.optString("thumbnail");
+            String thumbnailUrl = null;
+            if (image_links != null) {
+                thumbnailUrl = image_links.optString("thumbnail");
+            }
             // Fetch authors name from json
             JSONArray authors_arr = volumeInfo.optJSONArray("authors");
             List<String> authors = new ArrayList<String>();

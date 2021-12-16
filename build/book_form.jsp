@@ -59,9 +59,7 @@ if (StringUtils.isNotBlank(isbn) && StringUtils.isNumeric(isbn) &&
     if (book.getPublishDate() != null) {
       inputValues.put("publishDate", dateFormatter.format(book.getPublishDate()));
     }
-    if (book.getPageCount() != null) {
-      inputValues.put("pageCount", String.valueOf(book.getPageCount()));
-    }
+    inputValues.put("pageCount", String.valueOf(book.getPageCount()));
     inputValues.put("thumbnailUrl", book.getThumbnailUrl());
     inputValues.put("lang", book.getLang());
     inputValues.put("subjects", StringUtils.join(book.getSubjects(), ", "));
