@@ -15,7 +15,7 @@ try{
         session.setAttribute("user", user);
       }
 } catch(Exception e) {
-    e.printStackTrace();
+    throw new Exception(e.getMessage());
 }
 if (destination == null) {
     destination = "index.jsp";
