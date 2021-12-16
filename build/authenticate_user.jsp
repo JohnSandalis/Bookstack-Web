@@ -4,10 +4,10 @@
 <%
 if ( session.getAttribute("user") == null ) {
 
-	request.setAttribute("error_message", "You are not authorized to access this page!");
+	request.setAttribute("alertText", "You are not authorized to access this page, please sign in");
 %>
 
-	<jsp:forward page="login.jsp" />  
+	<jsp:forward page="signin.jsp" />  
 
 <%
     return;
