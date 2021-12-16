@@ -42,7 +42,7 @@ User user = (User) session.getAttribute("user");
               <p class="information"><%=user.getCity() %></p>
               <p class="information"><%=user.getRegion() %></p>
               <p class="information"><%=user.getPostalCode() %></p>
-              <p class="information"><%=user.getPhoneNum() %></p>
+              <p class="information"><%=user.getPhoneNumber() %></p>
               <p class="information"><%=user.getCountry() %></p>
             </div>
           </div>
