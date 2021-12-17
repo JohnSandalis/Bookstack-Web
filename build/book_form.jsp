@@ -95,8 +95,8 @@ if (StringUtils.isNotBlank(isbn) && StringUtils.isNumeric(isbn) &&
                   if (StringUtils.isNotBlank(inputValues.get("isbn"))) {
                 %>
                 readonly
-                <%}%>
                 value="<%=StringUtils.defaultString(inputValues.get("isbn"))%>"
+                <%}%>
                 type="text"
                 name="isbn"
                 id="isbn"
@@ -115,8 +115,8 @@ if (StringUtils.isNotBlank(isbn) && StringUtils.isNumeric(isbn) &&
                   if (StringUtils.isNotBlank(inputValues.get("title"))) {
                 %>
                 readonly
-                <%}%>
                 value="<%=StringUtils.defaultString(inputValues.get("title"))%>"
+                <%}%>
                 type="text"
                 name="title"
                 id="title"
@@ -135,8 +135,8 @@ if (StringUtils.isNotBlank(isbn) && StringUtils.isNumeric(isbn) &&
                   if (StringUtils.isNotBlank(inputValues.get("subtitle"))) {
               %>
               readonly
+              value="<%=StringUtils.defaultString(inputValues.get("subtitle"))%>"
               <%}%>
-                value="<%=StringUtils.defaultString(inputValues.get("subtitle"))%>"
                 type="text"
                 name="subtitle"
                 id="subtitle"
@@ -155,8 +155,8 @@ if (StringUtils.isNotBlank(isbn) && StringUtils.isNumeric(isbn) &&
                   if (StringUtils.isNotBlank(inputValues.get("authors"))) {
                 %>
                 readonly
-                <%}%>
                 value="<%=StringUtils.defaultString(inputValues.get("authors"))%>"
+                <%}%>
                 type="text"
                 name="author"
                 required
@@ -175,8 +175,8 @@ if (StringUtils.isNotBlank(isbn) && StringUtils.isNumeric(isbn) &&
                   if (StringUtils.isNotBlank(inputValues.get("publisher"))) {
                 %>
                 readonly
-                <%}%>
                 value="<%=StringUtils.defaultString(inputValues.get("publisher"))%>"
+                <%}%>
                 type="text"
                 name="publisher"
                 id="publisher"
@@ -195,8 +195,8 @@ if (StringUtils.isNotBlank(isbn) && StringUtils.isNumeric(isbn) &&
                   if (StringUtils.isNotBlank(inputValues.get("publishDate"))) {
                 %>
                 readonly
-                <%}%>
                 value="<%=StringUtils.defaultString(inputValues.get("publishDate"))%>"
+                <%}%>
                 type="text"
                 name="publish_date"
                 id="publish_date"
@@ -216,8 +216,8 @@ if (StringUtils.isNotBlank(isbn) && StringUtils.isNumeric(isbn) &&
                   if (StringUtils.isNotBlank(inputValues.get("pageCount"))) {
                 %>
                 readonly
-                <%}%>
                 value="<%=StringUtils.defaultString(inputValues.get("pageCount"))%>"
+                <%}%>
                 type="number"
                 name="page_count"
                 id="page_count"
@@ -236,8 +236,8 @@ if (StringUtils.isNotBlank(isbn) && StringUtils.isNumeric(isbn) &&
                   if (StringUtils.isNotBlank(inputValues.get("thumbnailUrl"))) {
                 %>
                 readonly
-                <%}%>
                 value="<%=StringUtils.defaultString(inputValues.get("thumbnailUrl"))%>"
+                <%}%>
                 type="text"
                 name="thumbnail_url"
                 id="thumbnail_url"
@@ -255,8 +255,8 @@ if (StringUtils.isNotBlank(isbn) && StringUtils.isNumeric(isbn) &&
                   if (StringUtils.isNotBlank(inputValues.get("lang"))) {
                 %>
                 readonly
-                <%}%>
                 value="<%=StringUtils.defaultString(inputValues.get("lang"))%>"
+                <%}%>
                 type="text"
                 name="language"
                 required
