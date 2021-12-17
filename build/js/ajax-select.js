@@ -15,3 +15,9 @@ $(document).ready( () => {
         closeOnSelect: false
     })
 })
+
+jQuery(function ($) {        
+    $('bookForm').bind('submit', function () {
+      $(this).find('#subjects').prop('disabled', false);
+    });
+  });

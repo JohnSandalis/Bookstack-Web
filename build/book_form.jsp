@@ -276,7 +276,22 @@ if (StringUtils.isNotBlank(isbn) && StringUtils.isNumeric(isbn) &&
                 id="subjects"
                 form="bookForm"
                 multiple="multiple"
-                required>
+                required
+                <%
+                if (StringUtils.isNotBlank(inputValues.get("subjects"))) {
+                %>
+                disabled
+                <%}%>
+                >
+                <%  
+                  if (StringUtils.isNotBlank(inputValues.get("subjects"))) {
+                    String[] allSubjects = inputValues.get("subjects").split(", ");
+                    for (String subject : allSubjects) {%>
+                      <option selected="selected" value="<%=subject%>"><%=subject%></option>
+                  <%
+                    }
+                  }
+                %>
               </select>
             </div>
             
