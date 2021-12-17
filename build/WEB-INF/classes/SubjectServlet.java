@@ -31,7 +31,7 @@ public class SubjectServlet extends HttpServlet {
         JSONArray jsonArray = new JSONArray();
         for (int count = 0; count < subjects.size(); count++) {
             JSONObject item = new JSONObject();
-            item.put("id", count + 1);
+            item.put("id", subjects.get(count));
             item.put("text", subjects.get(count));
             jsonArray.put(item);
             
