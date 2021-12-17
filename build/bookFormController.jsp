@@ -13,24 +13,32 @@ try {
     if (book == null) {
         String title = request.getParameter("title");
         String subtitle = request.getParameter("subtitle");
-        int pagesCount = request.getParameter("page_count");
+        int pagesCount = Integer.parseInt(request.getParameter("page_count"));
         String thumbnailUrl = request.getParameter("thumbnail_url");
+        if (thumbnailUrl == null) {
+            thumbnailUrl = "#";
+        }
         String publisher = request.getParameter("publisher");
-        Date publishDate = new SimpleDateFormat("MM/dd/yyyy").parse(request.getParameter("publish_date"));
+        String date = request.getParameter("publish_date");
+        Date publishDate = null;
+        if (date != null) {
+            publishDate = new SimpleDateFormat("yyyy-MM-dd").parse(date);
+        }
         String lang = request.getParameter("language");
-        List<String> authors = Arrays.asList(request.getParameter("authors").split(" ,"));
-        List<String> subjects = Arrays.asList(request.getParameterValues("subjects").split(" ,"));
-        <!--Create new book entry-->
+        List<String> authors = Arrays.asList(request.getParameter("authors").split(", "));
+        List<String> subjects = Arrays.asList(request.getParameterValues("subjects"));
+        //Create new book entry
         DatabaseUtils.createNewBook(isbn, title, subtitle, pagesCount, thumbnailUrl,
         publisher, publishDate, lang, 0, authors, subjects);
     }
-    <!--Add book to users submissions-->
-    DatabaseUtils.addBooksSubmitted(new Timestamp(Date.getTime()), user.getId(), isbn);
-    <!--Update the books given by the user-->
+    //Add book to users submissions
+    Date date = java.util.Calendar.getInstance().getTime();
+    DatabaseUtils.addBooksSubmitted(new Timestamp(date.getTime()), user.getId(), isbn);
+    //Update the books given by the user
     DatabaseUtils.updateUserBooksGiven(user.getBooksGiven() + 1, user.getId());
     user = DatabaseUtils.getUserFromUsernameAndPassword(user.getEmail(), user.getPassword());
     session.setAttribute("user", user);
 } catch(Exception e) {
-    e.printStackTrace();
+    throw new Exception(e.getMessage());
 }%>
 <jsp:forward page="account.jsp"/>
