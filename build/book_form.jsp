@@ -75,7 +75,7 @@ if (StringUtils.isNotBlank(isbn) && StringUtils.isNumeric(isbn) &&
 %>
       <!-- Form -->
       <section class="form-section">
-        <form method="POST" class="form" action="showBook.jsp" id="bookForm">
+        <form method="POST" class="form" action="bookFormController.jsp" id="bookForm">
           <div class="form-container">
             <div class="back-btn-container">
               <ion-icon class="chevron-back-icon" name="chevron-back"></ion-icon>
