@@ -252,21 +252,24 @@ if (StringUtils.isNotBlank(isbn) && StringUtils.isNumeric(isbn) &&
               <label for="language"
                 ><ion-icon class="form-icon" name="earth"></ion-icon
               ></label>
-                <input
+              
+              
                 <%
                   if (StringUtils.isNotBlank(inputValues.get("lang"))) {
                 %>
-                readonly
-                value="<%=StringUtils.defaultString(inputValues.get("lang"))%>"
+                <input
+                  value="<%=StringUtils.defaultString(inputValues.get("lang"))%>"
+                  type="text"
+                  name="language"
+                  required
+                  readonly
+                  id="Language"
+                />
+                <%} else {%>
+                    <%@ include file="lang_selector.jsp" %>
                 <%}%>
-                type="text"
-                name="language"
-                required
-                id="Language"
-                placeholder="Language"
-              />
-              <span class="remove-arrow"></span>
             </div>
+
             
             <!-- Subjects -->
             <div class="custom-select form-group">
