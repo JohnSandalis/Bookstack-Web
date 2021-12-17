@@ -29,6 +29,7 @@ public class DatabaseUtils {
     private static final String SELECT_SUBJECT_FROM_ID = "SELECT * FROM subjects WHERE id = ?";
     private static final String SELECT_USER_FROM_EMAIL_AND_PASSWORD = "SELECT * FROM users " +
             "WHERE email = ? AND pass = ?";
+    private static final String SEARCH_SUBJECT_WITH_NAME = "SELECT name FROM subjects WHERE name LIKE ?";
     private static final String SELECT_SUBJECT_ID_FROM_SUBJECT = "SELECT id FROM subjects WHERE name = ?";
     private static final String SIGN_UP_USER = "INSERT INTO users VALUES(DEFAULT, ?, ?, 0, 0, 0," +
             "?, ?,  NULL, NULL, NULL, NULL, NULL, NULL, NULL)";
@@ -272,6 +273,29 @@ public class DatabaseUtils {
             ps.setString(1, name);
             ResultSet rs = ps.executeQuery();
             return rs.next();
+        }
+    }
+
+    /**
+     * Creates a connection to the database and returns all subjects, the names of which
+     * resemble the given string
+     * 
+     * @param str String to search resembling names
+     * @return The names of the subjects
+     * @throws SQLException
+     */
+    public static List<String> searchSubjectWithName(String str) throws SQLException {
+        try (Connection connection = createDatabaseConnection()) {
+            PreparedStatement ps = connection.prepareStatement(SEARCH_SUBJECT_WITH_NAME);
+            String strWildcards = "%" + str + "%";
+            ps.setString(1, strWildcards);
+            ResultSet rs = ps.executeQuery();
+            List<String> subjectNames = new ArrayList<>();
+            while (rs.next()) {
+                String subject = rs.getString("name");
+                subjectNames.add(subject);
+            }
+            return subjectNames;
         }
     }
 
