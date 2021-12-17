@@ -11,6 +11,7 @@ $(document).ready( () => {
             }
         },
         minimumInputLength: 3,
-        placeholder: "Subjects"
+        placeholder: "Subjects",
+        closeOnSelect: false
     })
 })
