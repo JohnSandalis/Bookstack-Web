@@ -8,6 +8,12 @@
 <%@ include file="header.jsp" %>
     <meta name="description" content="Search book by ISBNs">
     <title>Enter Your Book</title>
+
+    <script defer src="js/jquery.min.js"></script>
+    <script defer src="js/ajax-select.js"></script>
+    
+    <link href="css/select2.css" rel="stylesheet" />
+    <script defer src="js/select2.min.js"></script>
   </head>
   <body>
     <header class="header">
@@ -71,7 +77,7 @@ if (StringUtils.isNotBlank(isbn) && StringUtils.isNumeric(isbn) &&
       <section class="form-section">
         <form method="POST" class="form" action="bookFormController.jsp">
           <div class="form-container">
-          <div class="back-btn-container">
+            <div class="back-btn-container">
               <ion-icon class="chevron-back-icon" name="chevron-back"></ion-icon>
               <button type="button" class="back-btn" onclick="history.back()">Back</button>
             </div>
@@ -249,7 +255,6 @@ if (StringUtils.isNotBlank(isbn) && StringUtils.isNumeric(isbn) &&
                 name="language"
                 id="Language"
                 placeholder="Language"
-                required
               />
               <span class="remove-arrow"></span>
             </div>
@@ -259,23 +264,16 @@ if (StringUtils.isNotBlank(isbn) && StringUtils.isNumeric(isbn) &&
               <label for="subjects"
                 ><ion-icon class="form-icon" name="menu"></ion-icon
               ></label>
-                <input
-                <%
-                  if (StringUtils.isNotBlank(inputValues.get("subjects"))) {
-                %>
-                disabled
-                <%}%>
-                value="<%=StringUtils.defaultString(inputValues.get("subjects"))%>"
-                type="text"
+              <select
                 name="subjects"
                 id="subjects"
-                placeholder="Subjects"
-                required
-              />
-              <span class="remove-arrow"></span>
+                form="bookForm"
+                multiple="multiple">
+              </select>
             </div>
-
-            <button class="form-btn" type="submit">Continue</a>
+            
+            <!-- Submit button -->
+            <button class="form-btn" type="submit" form="bookForm">Continue</button>
           </div>
         </form>
       </section>
