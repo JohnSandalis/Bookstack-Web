@@ -75,7 +75,7 @@ if (StringUtils.isNotBlank(isbn) && StringUtils.isNumeric(isbn) &&
 %>
       <!-- Form -->
       <section class="form-section">
-        <form method="POST" class="form" action="bookFormController.jsp" id="bookForm">
+        <form method="POST" class="form" action="showBook.jsp" id="bookForm">
           <div class="form-container">
             <div class="back-btn-container">
               <ion-icon class="chevron-back-icon" name="chevron-back"></ion-icon>
@@ -94,12 +94,13 @@ if (StringUtils.isNotBlank(isbn) && StringUtils.isNumeric(isbn) &&
                 <%
                   if (StringUtils.isNotBlank(inputValues.get("isbn"))) {
                 %>
-                disabled
+                readonly
                 <%}%>
                 value="<%=StringUtils.defaultString(inputValues.get("isbn"))%>"
                 type="text"
                 name="isbn"
                 id="isbn"
+                required
                 placeholder="ISBN"
               />
             </div>
@@ -113,12 +114,13 @@ if (StringUtils.isNotBlank(isbn) && StringUtils.isNumeric(isbn) &&
                 <%
                   if (StringUtils.isNotBlank(inputValues.get("title"))) {
                 %>
-                disabled
+                readonly
                 <%}%>
                 value="<%=StringUtils.defaultString(inputValues.get("title"))%>"
                 type="text"
                 name="title"
                 id="title"
+                required
                 placeholder="Title"
               />
             </div>
@@ -132,12 +134,13 @@ if (StringUtils.isNotBlank(isbn) && StringUtils.isNumeric(isbn) &&
               <%
                   if (StringUtils.isNotBlank(inputValues.get("subtitle"))) {
               %>
-              disabled
+              readonly
               <%}%>
                 value="<%=StringUtils.defaultString(inputValues.get("subtitle"))%>"
                 type="text"
                 name="subtitle"
                 id="subtitle"
+                required
                 placeholder="Subtitle"
               />
             </div>
@@ -151,11 +154,12 @@ if (StringUtils.isNotBlank(isbn) && StringUtils.isNumeric(isbn) &&
                 <%
                   if (StringUtils.isNotBlank(inputValues.get("authors"))) {
                 %>
-                disabled
+                readonly
                 <%}%>
                 value="<%=StringUtils.defaultString(inputValues.get("authors"))%>"
                 type="text"
                 name="author"
+                required
                 id="author"
                 placeholder="Authors (ex Author1, Author2...)"
               />
@@ -170,12 +174,13 @@ if (StringUtils.isNotBlank(isbn) && StringUtils.isNumeric(isbn) &&
                 <%
                   if (StringUtils.isNotBlank(inputValues.get("publisher"))) {
                 %>
-                disabled
+                readonly
                 <%}%>
                 value="<%=StringUtils.defaultString(inputValues.get("publisher"))%>"
                 type="text"
                 name="publisher"
                 id="publisher"
+                required
                 placeholder="Publisher"
               />
             </div>
@@ -189,7 +194,7 @@ if (StringUtils.isNotBlank(isbn) && StringUtils.isNumeric(isbn) &&
                 <%
                   if (StringUtils.isNotBlank(inputValues.get("publishDate"))) {
                 %>
-                disabled
+                readonly
                 <%}%>
                 value="<%=StringUtils.defaultString(inputValues.get("publishDate"))%>"
                 type="text"
@@ -210,12 +215,13 @@ if (StringUtils.isNotBlank(isbn) && StringUtils.isNumeric(isbn) &&
                 <%
                   if (StringUtils.isNotBlank(inputValues.get("pageCount"))) {
                 %>
-                disabled
+                readonly
                 <%}%>
                 value="<%=StringUtils.defaultString(inputValues.get("pageCount"))%>"
                 type="number"
                 name="page_count"
                 id="page_count"
+                required
                 placeholder="Number of pages"
               />
             </div>
@@ -229,7 +235,7 @@ if (StringUtils.isNotBlank(isbn) && StringUtils.isNumeric(isbn) &&
                 <%
                   if (StringUtils.isNotBlank(inputValues.get("thumbnailUrl"))) {
                 %>
-                disabled
+                readonly
                 <%}%>
                 value="<%=StringUtils.defaultString(inputValues.get("thumbnailUrl"))%>"
                 type="text"
@@ -248,11 +254,12 @@ if (StringUtils.isNotBlank(isbn) && StringUtils.isNumeric(isbn) &&
                 <%
                   if (StringUtils.isNotBlank(inputValues.get("lang"))) {
                 %>
-                disabled
+                readonly
                 <%}%>
                 value="<%=StringUtils.defaultString(inputValues.get("lang"))%>"
                 type="text"
                 name="language"
+                required
                 id="Language"
                 placeholder="Language"
               />
@@ -268,7 +275,8 @@ if (StringUtils.isNotBlank(isbn) && StringUtils.isNumeric(isbn) &&
                 name="subjects"
                 id="subjects"
                 form="bookForm"
-                multiple="multiple">
+                multiple="multiple"
+                required>
               </select>
             </div>
             
