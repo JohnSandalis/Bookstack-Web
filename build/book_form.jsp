@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="bookstack.*, java.util.List, org.apache.commons.lang3.StringUtils, java.util.HashMap, java.text.SimpleDateFormat"%>
 <%@ page errorPage="error.jsp" %>
-<%@ page import="java.util.List, org.apache.commons.lang3.StringUtils, java.util.HashMap, java.text.SimpleDateFormat"%>
-<%@ page import="bookstack.*"%>
+
+<%@ include file="authenticate_user.jsp" %>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
