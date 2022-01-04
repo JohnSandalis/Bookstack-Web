@@ -16,8 +16,8 @@ $(document).ready( () => {
     })
 })
 
-jQuery(function ($) {        
-    $('bookForm').bind('submit', function () {
-      $(this).find('#subjects').prop('disabled', false);
-    });
-  });
+// Remove disabled state from select element, in order to submit form
+$('#bookForm').on('submit', function () {
+    $(this).find('#subjects').removeAttr('disabled');
+});
+
