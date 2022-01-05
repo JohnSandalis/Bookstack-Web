@@ -69,7 +69,7 @@ public class DatabaseUtils {
             ResultSet rs = statement.executeQuery(SELECT_SUBMITTED_BOOKS);
             while (rs.next()) {
                 String id = rs.getString("id");
-                Date time_of = rs.getDate("time_of");
+                Date time_of = rs.getTimestamp("time_of");
                 int user_id = rs.getInt("user_id");
                 String book_isbn = rs.getString("book_isbn");
                 Book book = getBookFromISBN(book_isbn);
@@ -94,7 +94,7 @@ public class DatabaseUtils {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 String id = rs.getString("id");
-                Date time_of = rs.getDate("time_of");
+                Date time_of = rs.getTimestamp("time_of");
                 String book_isbn = rs.getString("book_isbn");
                 Book book = getBookFromISBN(book_isbn);
                 userBookSubmissions.add(new BookSubmission(id, time_of, user_id, book));
@@ -349,7 +349,7 @@ public class DatabaseUtils {
             ps.setInt(4, pagesCount);
             ps.setString(5, thumbnailUrl);
             ps.setString(6, publisher);
-            ps.setDate(7, (java.sql.Date) publishDate);
+            ps.setDate(7, new java.sql.Date(publishDate.getTime()));
             ps.setString(8, lang);
             ps.setInt(9, price);
             ps.executeUpdate();
@@ -410,7 +410,7 @@ public class DatabaseUtils {
     public static void addBooksSubmitted(Date timeOf, int userId, String isbn) throws SQLException {
         try (Connection connection = createDatabaseConnection()) {
             PreparedStatement ps = connection.prepareStatement(CREATE_NEW_BOOK_SUBMITTED);
-            ps.setDate(1, (java.sql.Date) timeOf);
+            ps.setTimestamp(1, new java.sql.Timestamp(timeOf.getTime()));
             ps.setInt(2, userId);
             ps.setString(3, isbn);
             ps.executeUpdate();
