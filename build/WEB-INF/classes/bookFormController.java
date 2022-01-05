@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -66,7 +65,6 @@ public class bookFormController extends HttpServlet {
         // Add book to user's submitted books
         Date currentDate = new Date();
         try {
-            
             DatabaseUtils.addBooksSubmitted(currentDate, user.getId(), isbn);
         } catch (Exception e) {
             e.printStackTrace();
@@ -87,9 +85,7 @@ public class bookFormController extends HttpServlet {
         }
 
         session.setAttribute("user", user);
-        RequestDispatcher dispatcher = getServletContext()
-                        .getRequestDispatcher("/account.jsp");
-        dispatcher.forward(request, response);
+        response.sendRedirect(request.getContextPath() + "/account.jsp");
     }
     
 }
