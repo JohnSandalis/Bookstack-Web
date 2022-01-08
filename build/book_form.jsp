@@ -142,7 +142,6 @@ if (StringUtils.isNotBlank(isbn) && StringUtils.isNumeric(isbn) &&
                 type="text"
                 name="subtitle"
                 id="subtitle"
-                required
                 placeholder="Subtitle"
               />
             </div>
