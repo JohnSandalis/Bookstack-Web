@@ -2,7 +2,7 @@
 <%@ page errorPage="error.jsp" %>
 
 <select name="language" required id="Language" form="bookForm">
-    <option disabled selected>Language</option>
+    <option disabled selected value="">Language</option>
     <option value="af">Afrikaans</option>
     <option value="sq">Albanian</option>
     <option value="am">Amharic</option>
