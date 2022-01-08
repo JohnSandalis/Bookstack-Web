@@ -25,6 +25,7 @@ public class DatabaseUtils {
     private static final String SELECT_USER_SUBMITTED_BOOKS = "SELECT * FROM books_submitted WHERE user_id = ?";
     private static final String SELECT_BOOK_WITH_ISBN = "SELECT * FROM books WHERE isbn = ?";
     private static final String SELECT_AUTHORS_OF_BOOK = "SELECT * FROM authors WHERE isbn = ?";
+    private static final String SEARCH_AUTHOR_WITH_NAME = "SELECT name FROM authors WHERE name LIKE ?";
     private static final String SELECT_BOOK_SUBJECTS = "SELECT * FROM books_subjects WHERE isbn = ?";
     private static final String SELECT_SUBJECT_FROM_ID = "SELECT * FROM subjects WHERE id = ?";
     private static final String SELECT_USER_FROM_EMAIL_AND_PASSWORD = "SELECT * FROM users " +
@@ -296,6 +297,29 @@ public class DatabaseUtils {
                 subjectNames.add(subject);
             }
             return subjectNames;
+        }
+    }
+
+    /**
+     * Creates a connection to the database and returns all authors, the names of which
+     * resemble the given string
+     * 
+     * @param str String to search resembling names
+     * @return The names of the authors
+     * @throws SQLException
+     */
+    public static List<String> searchAuthorWithName(String str) throws SQLException {
+        try (Connection connection = createDatabaseConnection()) {
+            PreparedStatement ps = connection.prepareStatement(SEARCH_AUTHOR_WITH_NAME);
+            String strWildcards = "%" + str + "%";
+            ps.setString(1, strWildcards);
+            ResultSet rs = ps.executeQuery();
+            List<String> authorNames = new ArrayList<>();
+            while (rs.next()) {
+                String author = rs.getString("name");
+                authorNames.add(author);
+            }
+            return authorNames;
         }
     }
 
