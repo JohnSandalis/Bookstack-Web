@@ -147,24 +147,33 @@ if (StringUtils.isNotBlank(isbn) && StringUtils.isNumeric(isbn) &&
               />
             </div>
 
-            <!-- Author -->
-            <div class="form-group">
-              <label for="author"
+            <!-- Authors -->
+            <div class="custom-select form-group">
+              <label for="authors"
                 ><ion-icon class="form-icon" name="person"></ion-icon
               ></label>
-                <input
-                <%
-                  if (StringUtils.isNotBlank(inputValues.get("authors"))) {
-                %>
-                readonly
-                value="<%=StringUtils.defaultString(inputValues.get("authors"))%>"
-                <%}%>
-                type="text"
+              <select
                 name="authors"
-                required
                 id="authors"
-                placeholder="Authors (ex Author1, Author2...)"
-              />
+                form="bookForm"
+                multiple="multiple"
+                required
+                <%
+                if (StringUtils.isNotBlank(inputValues.get("authors"))) {
+                %>
+                disabled
+                <%}%>
+                >
+                <%  
+                  if (StringUtils.isNotBlank(inputValues.get("authors"))) {
+                    String[] allAuthors = inputValues.get("authors").split(", ");
+                    for (String author : allAuthors) {%>
+                      <option selected="selected" value="<%=author%>"><%=author%></option>
+                  <%
+                    }
+                  }
+                %>
+              </select>
             </div>
 
             <!-- Publisher -->
