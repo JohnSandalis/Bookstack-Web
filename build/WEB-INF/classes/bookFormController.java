@@ -49,7 +49,7 @@ public class bookFormController extends HttpServlet {
                 e.printStackTrace();
             }
             String lang = request.getParameter("language");
-            List<String> authors = Arrays.asList(request.getParameter("authors").split(", "));
+            List<String> authors = Arrays.asList(request.getParameterValues("authors"));
             List<String> subjects = Arrays.asList(request.getParameterValues("subjects"));
 
             // Create new book entry
