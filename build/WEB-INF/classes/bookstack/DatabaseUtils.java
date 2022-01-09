@@ -22,6 +22,7 @@ public class DatabaseUtils {
 
     // Queries used in methods below
     private static final String SELECT_SUBMITTED_BOOKS = "SELECT * FROM books_submitted";
+    private static final String SELECT_COUNT_SUBMITTED_BOOKS = "SELECT COUNT(*) AS count FROM books_submitted";
     private static final String SELECT_USER_SUBMITTED_BOOKS = "SELECT * FROM books_submitted WHERE user_id = ?";
     private static final String SELECT_BOOK_WITH_ISBN = "SELECT * FROM books WHERE isbn = ?";
     private static final String SELECT_AUTHORS_OF_BOOK = "SELECT * FROM authors WHERE isbn = ?";
@@ -77,6 +78,21 @@ public class DatabaseUtils {
                 bookSubmissions.add(new BookSubmission(id, time_of, user_id, book));
             }
             return bookSubmissions;
+        }
+    }
+
+    /**
+     * Creates a connection to the database and gets the count of user submitted books
+     * 
+     * @return int total number of books
+     * @throws SQLException when a connection to the database cannot be established
+     */
+    public static int getCountOfSubmittedBooks() throws SQLException {
+        try (Connection connection = createDatabaseConnection()) {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(SELECT_COUNT_SUBMITTED_BOOKS);
+            int count = rs.getInt("count");
+            return count;
         }
     }
 
