@@ -25,7 +25,8 @@ public class DatabaseUtils {
     private static final String SELECT_COUNT_SUBMITTED_BOOKS = "SELECT COUNT(*) AS count FROM books_submitted";
     private static final String SELECT_USER_SUBMITTED_BOOKS = "SELECT * FROM books_submitted WHERE user_id = ?";
     private static final String SELECT_BOOK_WITH_ISBN = "SELECT * FROM books WHERE isbn = ?";
-    private static final String SELECT_AUTHORS_OF_BOOK = "SELECT * FROM authors WHERE isbn = ?";
+    private static final String SELECT_AUTHORS_OF_BOOK = "SELECT a.name FROM authors a, books_authors ba WHERE " +
+            "ba.author_id = a.id AND ba.book_isbn = ?";
     private static final String SEARCH_AUTHOR_WITH_NAME = "SELECT name FROM authors WHERE name LIKE ?";
     private static final String SELECT_BOOK_SUBJECTS = "SELECT * FROM books_subjects WHERE isbn = ?";
     private static final String SELECT_SUBJECT_FROM_ID = "SELECT * FROM subjects WHERE id = ?";
@@ -33,10 +34,12 @@ public class DatabaseUtils {
             "WHERE email = ? AND pass = ?";
     private static final String SEARCH_SUBJECT_WITH_NAME = "SELECT name FROM subjects WHERE name LIKE ?";
     private static final String SELECT_SUBJECT_ID_FROM_SUBJECT = "SELECT id FROM subjects WHERE name = ?";
+    private static final String SELECT_AUTHOR_ID_FROM_NAME = "SELECT id FROM authors WHERE name = ?";
     private static final String SIGN_UP_USER = "INSERT INTO users VALUES(DEFAULT, ?, ?, 0, 0, 0," +
             "?, ?,  NULL, NULL, NULL, NULL, NULL, NULL, NULL)";
     private static final String CREATE_NEW_BOOK = "INSERT INTO books VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    private static final String CREATE_NEW_AUTHOR = "INSERT INTO authors VALUES(DEFAULT, ?, ?)";
+    private static final String CREATE_NEW_AUTHOR = "INSERT INTO authors VALUES(DEFAULT, ?)";
+    private static final String CREATE_NEW_BOOK_AUTHOR = "INSERT INTO books_author VALUES(?, ?)";
     private static final String CREATE_NEW_BOOK_SUBJECTS = "INSERT INTO book_subjects VALUES(?, ?)";
     private static final String CREATE_NEW_BOOK_SUBMITTED = "INSERT INTO books_submitted VALUES(DEFAULT, ?, ?, ?)";
     private static final String CREATE_NEW_SUBJECT = "INSERT INTO subjects VALUES(DEFAULT, ?)";
@@ -393,7 +396,23 @@ public class DatabaseUtils {
             ps.setString(8, lang);
             ps.setInt(9, price);
             ps.executeUpdate();
-            createNewAuthors(isbn, authors);
+
+            List<String> createAuthors = new ArrayList<>();
+            for (String authorName : authors) {
+                addBookAuthor(isbn, authorName);
+                List<String> foundAuthors = searchAuthorWithName(authorName);
+                if (!foundAuthors.contains(authorName)) {
+                    createAuthors.add(authorName);
+                }
+            }
+            createNewAuthors(createAuthors);
+
+            for (String subjectName : subjects) {
+                List<String> foundSubjects = searchSubjectWithName(subjectName);
+                if (!foundSubjects.contains(subjectName)) {
+                    addNewSubject(subjectName);
+                }
+            }
             addBookSubjects(isbn, subjects);
         }
     }
@@ -401,19 +420,52 @@ public class DatabaseUtils {
     /**
      * Creates a connection to the database and inserts the authors
      * 
-     * @param isbn  The isbn of the books the authors have written
      * @param names The names of the authors
      * @throws SQLException when a connection to the database cannot be established
      */
-    public static void createNewAuthors(String isbn, List<String> names) throws SQLException {
+    public static void createNewAuthors(List<String> names) throws SQLException {
         try (Connection connection = createDatabaseConnection()) {
             for (String name : names) {
                 PreparedStatement ps = connection.prepareStatement(CREATE_NEW_AUTHOR);
-                ps.setString(1, isbn);
-                ps.setString(2, name);
+                ps.setString(1, name);
                 ps.executeUpdate();
             }
         }
+    }
+
+    /**
+     * Creates a connection to the database and adds id and isbn to books_authors
+     * table
+     * 
+     * @param isbn book isbn
+     * @param name author name, with which id will be found
+     * @throws SQLException
+     */
+    public static void addBookAuthor(String isbn, String name) throws SQLException {
+        try (Connection connection = createDatabaseConnection()) {
+            PreparedStatement ps = connection.prepareStatement(CREATE_NEW_BOOK_AUTHOR);
+            int author_id = getAuthorIdFromName(name);
+            ps.setInt(1, author_id);
+            ps.setString(2, isbn);
+                ps.executeUpdate();
+            }
+        }
+
+    /**
+     * Creates a connection to the database and gets author's id by their name
+     * 
+     * @param name author's name
+     * @return int author's id
+     * @throws SQLException
+     */
+    public static int getAuthorIdFromName(String name) throws SQLException {
+        try (Connection connection = createDatabaseConnection()) {
+            PreparedStatement ps = connection.prepareStatement(SELECT_AUTHOR_ID_FROM_NAME);
+            ps.setString(1, name);
+            ResultSet rs = ps.executeQuery();
+            int id = rs.getInt("id");
+            return id;
+        } 
     }
 
     /**
