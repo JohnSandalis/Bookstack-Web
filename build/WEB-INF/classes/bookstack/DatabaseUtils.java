@@ -22,7 +22,8 @@ public class DatabaseUtils {
 
     // Queries used in methods below
     private static final String SELECT_SUBMITTED_BOOKS = "SELECT * FROM books_submitted";
-    private static final String SELECT_COUNT_SUBMITTED_BOOKS = "SELECT COUNT(*) AS count FROM books_submitted";
+    private static final String SELECT_AVAILABLE_BOOKS = "SELECT * FROM books WHERE b.isbn IN (SELECT DISTINCT " +
+            "bs.book_isbn FROM books_submitted bs)";
     private static final String SELECT_USER_SUBMITTED_BOOKS = "SELECT * FROM books_submitted WHERE user_id = ?";
     private static final String SELECT_BOOK_WITH_ISBN = "SELECT * FROM books WHERE isbn = ?";
     private static final String SELECT_AUTHORS_OF_BOOK = "SELECT a.name FROM authors a, books_authors ba WHERE " +
@@ -85,21 +86,37 @@ public class DatabaseUtils {
     }
 
     /**
-     * Creates a connection to the database and gets the count of user submitted books
+     * Creates a connection to the database and gets info on all available books
      * 
-     * @return int total number of books
+     * @return books available
      * @throws SQLException when a connection to the database cannot be established
      */
-    public static int getCountOfSubmittedBooks() throws SQLException {
+    public static List<Book> getBooks() throws SQLException {
         try (Connection connection = createDatabaseConnection()) {
+            List<Book> books = new ArrayList<>();
             Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery(SELECT_COUNT_SUBMITTED_BOOKS);
-            int count = rs.getInt("count");
-            return count;
+            ResultSet rs = statement.executeQuery(SELECT_AVAILABLE_BOOKS);
+            while (rs.next()) {
+                String isbn = rs.getString("isbn");
+                String title = rs.getString("title");
+                String subtitle = rs.getString("subtitle");
+                int pageCount = rs.getInt("page_count");
+                String thumbnailUrl = rs.getString("thumbnail_url");
+                String publisher = rs.getString("publisher");
+                Date publishDate = rs.getDate("publish_date");
+                String lang = rs.getString("lang");
+                int price = rs.getInt("price");
+                List<String> authors = getAuthorsOfBook(isbn);
+                List<String> subjects = getBookSubjects(isbn);
+                Book book = new Book(isbn, title, subtitle, pageCount, thumbnailUrl, publisher,
+                         publishDate, lang, price, authors, subjects);
+                books.add(book);
+            }
+            return books;
         }
     }
 
-        /**
+    /**
      * Creates a connection to the database and gets the user's submitted books
      * 
      * @param user_id The unique ID of the specific user
@@ -217,6 +234,23 @@ public class DatabaseUtils {
             }
             return null;
         }
+    }
+
+    /**
+     * Creates a connection to the database and gets author's id by their name
+     * 
+     * @param name author's name
+     * @return int author's id
+     * @throws SQLException
+     */
+    public static int getAuthorIdFromName(String name) throws SQLException {
+        try (Connection connection = createDatabaseConnection()) {
+            PreparedStatement ps = connection.prepareStatement(SELECT_AUTHOR_ID_FROM_NAME);
+            ps.setString(1, name);
+            ResultSet rs = ps.executeQuery();
+            int id = rs.getInt("id");
+            return id;
+        } 
     }
 
     /**
@@ -447,25 +481,8 @@ public class DatabaseUtils {
             int author_id = getAuthorIdFromName(name);
             ps.setInt(1, author_id);
             ps.setString(2, isbn);
-                ps.executeUpdate();
-            }
+            ps.executeUpdate();
         }
-
-    /**
-     * Creates a connection to the database and gets author's id by their name
-     * 
-     * @param name author's name
-     * @return int author's id
-     * @throws SQLException
-     */
-    public static int getAuthorIdFromName(String name) throws SQLException {
-        try (Connection connection = createDatabaseConnection()) {
-            PreparedStatement ps = connection.prepareStatement(SELECT_AUTHOR_ID_FROM_NAME);
-            ps.setString(1, name);
-            ResultSet rs = ps.executeQuery();
-            int id = rs.getInt("id");
-            return id;
-        } 
     }
 
     /**
