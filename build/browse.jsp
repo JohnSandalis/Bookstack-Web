@@ -2,7 +2,25 @@
 <%@ page import="bookstack.*, java.sql.*, java.util.ArrayList, java.util.Date, java.util.List" %>
 <%@ page errorPage="error.jsp" %>
 
+<%
 
+if (session.getAttribute("current_page") == null) {
+  int page = 1;
+} else {
+  int page = session.getAttribute("current_page");
+}
+
+DatabaseUtils db = new DatabaseUtils();
+
+try {
+  List<BookSubmission> bookSubmissions = db.getSubmittedBooks();
+} catch(Exception e) {
+  throw new Exception(e.getMessage());
+}
+
+
+
+%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -10,9 +28,6 @@
 ]   <%@ include file="header.jsp" %>
     <meta name="description" content="Bookstack browse page where you can find all the available books to be acquired with credits">
     <title>Bookstack - Browse</title>
-
-    <script defer src="js/jquery.min.js"></script>
-    <script defer src="js/browse.js"></script>
   </head>
   <body>
     <header class="header bg-light">
@@ -53,8 +68,7 @@
           <div class="browse-information">
             <div class="browse-credits">
               <ion-icon class="credits-icon" name="cash-outline"></ion-icon>
-              <!-- TODO show user credits -->
-              <span class="credits">1.100</span> 
+              <span class="credits">1.100</span>
             </div>
 
             <a class="btn btn-md btn-trade" href="#">Trade-in</a>
@@ -64,24 +78,24 @@
         <div class="browse-container grid-browse">
 
           <% 
-             for (int i = 0; i < 12; i++) { 
+            /* for (int i = 0; i <= books_list.size(); i++) { */
           %>
           <div class="item-container flex-item">
             <div class="itm-img-box">
               <img
                 class="itm-img"
-                src=""
+                src="<%= /*get thumbnail_url of book i*/%>"
                 alt="book cover"
               />
             </div>
             <div class="itm-description-box">
-              <p class="itm-title">test title</p>
-              <p class="itm-author">test author</p>
+              <p class="itm-title"><%= /*get title of book i*/%></p>
+              <p class="itm-author"><%= /*get author(s) of book i*/%></p>
               <a class="btn btn-sm btn-itm" href="#">View Details</a>
             </div>
           </div>
 
-          <% } %>
+          <% /* } */ %>
         </div>
 
         <div class="pagination">
@@ -89,7 +103,25 @@
             <ion-icon class="btn-icon" name="chevron-back-outline"></ion-icon>
           </button>
 
+          <%  /*
+          Not sure how href is going to work with pagination and jsp
+          
+          if (pages <= 7) {
+            for (int i = 1; i <= pages; i++) { */ %>
+              <a href="#" class="page-link <%= (current_page == i) ? "page-link--current" : "" %>">i</a>
+          <%  /*
+            }
+          } else { 
+            for (int i = ++++++++)
+          */ %>
 
+            <%--  ++++++++++
+              <a href="#" class="page-link">1</a>
+
+            <a href="#" class="page-link"><%= /* pages */</a> --%>
+            <% /*
+            } 
+            */ %>
           <button class="btn-page">
             <ion-icon
               class="btn-icon"
