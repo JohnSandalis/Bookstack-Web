@@ -1,5 +1,5 @@
 
-$(document).ready( () => {
+jQuery( () => {
     // Retrieve subjects from serlet
     $("#subjects").select2({
         ajax: {
@@ -35,11 +35,13 @@ $(document).ready( () => {
         placeholder: 'Authors'
     });
 
+    // Remove disabled state from select element, in order to submit form
+    $('#bookForm').on('submit', function () {
+        $(this).find('#subjects, #authors').removeAttr('disabled');
+    });
+
 })
 
 
-// Remove disabled state from select element, in order to submit form
-$('#bookForm').on('submit', function () {
-    $(this).find('#subjects, #authors').removeAttr('disabled');
-});
+
 
