@@ -22,7 +22,7 @@ public class DatabaseUtils {
 
     // Queries used in methods below
     private static final String SELECT_SUBMITTED_BOOKS = "SELECT * FROM books_submitted";
-    private static final String SELECT_AVAILABLE_BOOKS = "SELECT * FROM books WHERE b.isbn IN (SELECT DISTINCT " +
+    private static final String SELECT_AVAILABLE_BOOKS = "SELECT * FROM books b WHERE b.isbn IN (SELECT DISTINCT " +
             "bs.book_isbn FROM books_submitted bs)";
     private static final String SELECT_USER_SUBMITTED_BOOKS = "SELECT * FROM books_submitted WHERE user_id = ?";
     private static final String SELECT_BOOK_WITH_ISBN = "SELECT * FROM books WHERE isbn = ?";
@@ -100,7 +100,7 @@ public class DatabaseUtils {
                 String isbn = rs.getString("isbn");
                 String title = rs.getString("title");
                 String subtitle = rs.getString("subtitle");
-                int pageCount = rs.getInt("page_count");
+                int pageCount = rs.getInt("pages_count");
                 String thumbnailUrl = rs.getString("thumbnail_url");
                 String publisher = rs.getString("publisher");
                 Date publishDate = rs.getDate("publish_date");
