@@ -40,8 +40,8 @@ public class DatabaseUtils {
             "?, ?,  NULL, NULL, NULL, NULL, NULL, NULL, NULL)";
     private static final String CREATE_NEW_BOOK = "INSERT INTO books VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String CREATE_NEW_AUTHOR = "INSERT INTO authors VALUES(DEFAULT, ?)";
-    private static final String CREATE_NEW_BOOK_AUTHOR = "INSERT INTO books_author VALUES(?, ?)";
-    private static final String CREATE_NEW_BOOK_SUBJECTS = "INSERT INTO book_subjects VALUES(?, ?)";
+    private static final String CREATE_NEW_BOOK_AUTHOR = "INSERT INTO books_authors VALUES(?, ?)";
+    private static final String CREATE_NEW_BOOK_SUBJECTS = "INSERT INTO books_subjects VALUES(?, ?)";
     private static final String CREATE_NEW_BOOK_SUBMITTED = "INSERT INTO books_submitted VALUES(DEFAULT, ?, ?, ?)";
     private static final String CREATE_NEW_SUBJECT = "INSERT INTO subjects VALUES(DEFAULT, ?)";
     private static final String CREATE_MODIFICATION_REQUEST = "INSERT INTO modification_requests VALUES(DEFAULT, ?, " +
@@ -243,13 +243,15 @@ public class DatabaseUtils {
      * @return int author's id
      * @throws SQLException
      */
-    public static int getAuthorIdFromName(String name) throws SQLException {
+    public static Integer getAuthorIdFromName(String name) throws SQLException {
         try (Connection connection = createDatabaseConnection()) {
             PreparedStatement ps = connection.prepareStatement(SELECT_AUTHOR_ID_FROM_NAME);
             ps.setString(1, name);
             ResultSet rs = ps.executeQuery();
-            int id = rs.getInt("id");
-            return id;
+            if (rs.next()) {
+                return rs.getInt("id");
+            }
+            return null;
         } 
     }
 
@@ -297,18 +299,13 @@ public class DatabaseUtils {
      * @return The ids of the subjects in the subjects table
      * @throws SQLException when a connection to the database cannot be established
      */
-    public static List<Integer> getSubjectsIdsFromSubjects(List<String> subjects) throws SQLException {
+    public static Integer getSubjectIdFromSubject(String subject) throws SQLException {
         try (Connection connection = createDatabaseConnection()) {
-            List<Integer> ids = new ArrayList<>();
-            for (String subject : subjects) {
-                PreparedStatement ps = connection.prepareStatement(SELECT_SUBJECT_ID_FROM_SUBJECT);
-                ps.setString(1, subject);
-                ResultSet rs = ps.executeQuery();
-                if (rs.next()) {
-                    int id = rs.getInt("id");
-                    ids.add(id);
-                }
-                return ids;
+            PreparedStatement ps = connection.prepareStatement(SELECT_SUBJECT_ID_FROM_SUBJECT);
+            ps.setString(1, subject);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("id");
             }
             return null;
         }
@@ -418,6 +415,7 @@ public class DatabaseUtils {
     public static void createNewBook(String isbn, String title, String subtitle, int pagesCount, String thumbnailUrl,
             String publisher, Date publishDate, String lang, int price, List<String> authors,
             List<String> subjects) throws SQLException {
+
         try (Connection connection = createDatabaseConnection()) {
             PreparedStatement ps = connection.prepareStatement(CREATE_NEW_BOOK);
             ps.setString(1, isbn);
@@ -433,19 +431,26 @@ public class DatabaseUtils {
 
             List<String> createAuthors = new ArrayList<>();
             for (String authorName : authors) {
-                addBookAuthor(isbn, authorName);
                 List<String> foundAuthors = searchAuthorWithName(authorName);
-                if (!foundAuthors.contains(authorName)) {
+                if (foundAuthors.isEmpty() || !foundAuthors.contains(authorName)) {
                     createAuthors.add(authorName);
                 }
             }
-            createNewAuthors(createAuthors);
-
+            if (!createAuthors.isEmpty()) {
+                createNewAuthors(createAuthors);
+            }
+            addBookAuthors(isbn, authors);
+            
+            List<String> createSubjects = new ArrayList<>();
             for (String subjectName : subjects) {
                 List<String> foundSubjects = searchSubjectWithName(subjectName);
-                if (!foundSubjects.contains(subjectName)) {
-                    addNewSubject(subjectName);
+                if (foundSubjects.isEmpty() || !foundSubjects.contains(subjectName)) {
+                    createSubjects.add(subjectName);
                 }
+            }
+
+            if (!createSubjects.isEmpty()) {
+                createNewSubjects(createSubjects);
             }
             addBookSubjects(isbn, subjects);
         }
@@ -468,20 +473,39 @@ public class DatabaseUtils {
     }
 
     /**
-     * Creates a connection to the database and adds id and isbn to books_authors
+     * Creates a connection to the database and adds a new subject to the subjects
+     * table
+     * 
+     * @param name The name of the subject
+     * @throws SQLException when a connection to the database cannot be established
+     */
+    public static void createNewSubjects(List<String> subjects) throws SQLException {
+        try (Connection connection = createDatabaseConnection()) {
+            for (String subject : subjects) {
+                PreparedStatement ps = connection.prepareStatement(CREATE_NEW_SUBJECT);
+                ps.setString(1, subject);
+                ps.executeUpdate();
+            }
+        }
+    }
+
+    /**
+     * Creates a connection to the database and adds id(s) and isbn to books_authors
      * table
      * 
      * @param isbn book isbn
-     * @param name author name, with which id will be found
+     * @param authors List with author name(s), with which id will be found
      * @throws SQLException
      */
-    public static void addBookAuthor(String isbn, String name) throws SQLException {
+    public static void addBookAuthors(String isbn, List<String> authors) throws SQLException {
         try (Connection connection = createDatabaseConnection()) {
-            PreparedStatement ps = connection.prepareStatement(CREATE_NEW_BOOK_AUTHOR);
-            int author_id = getAuthorIdFromName(name);
-            ps.setInt(1, author_id);
-            ps.setString(2, isbn);
-            ps.executeUpdate();
+            for (String authorName : authors) {
+                int id = getAuthorIdFromName(authorName);
+                PreparedStatement ps = connection.prepareStatement(CREATE_NEW_BOOK_AUTHOR);
+                ps.setInt(1, id);
+                ps.setString(2, isbn);
+                ps.executeUpdate();
+            }
         }
     }
 
@@ -495,14 +519,12 @@ public class DatabaseUtils {
      */
     public static void addBookSubjects(String isbn, List<String> subjects) throws SQLException {
         try (Connection connection = createDatabaseConnection()) {
-            List<Integer> ids = getSubjectsIdsFromSubjects(subjects);
-            if (ids != null) {
-                for (Integer id : ids) {
-                    PreparedStatement ps = connection.prepareStatement(CREATE_NEW_BOOK_SUBJECTS);
-                    ps.setString(1, isbn);
-                    ps.setInt(2, id);
-                    ps.executeUpdate();
-                }
+            for (String subject : subjects) {
+                int id = getSubjectIdFromSubject(subject);
+                PreparedStatement ps = connection.prepareStatement(CREATE_NEW_BOOK_SUBJECTS);
+                ps.setString(1, isbn);
+                ps.setInt(2, id);
+                ps.executeUpdate();
             }
         }
     }
@@ -522,21 +544,6 @@ public class DatabaseUtils {
             ps.setTimestamp(1, new java.sql.Timestamp(timeOf.getTime()));
             ps.setInt(2, userId);
             ps.setString(3, isbn);
-            ps.executeUpdate();
-        }
-    }
-
-    /**
-     * Creates a connection to the database and adds a new subject to the subjects
-     * table
-     * 
-     * @param name The name of the subject
-     * @throws SQLException when a connection to the database cannot be established
-     */
-    public static void addNewSubject(String name) throws SQLException {
-        try (Connection connection = createDatabaseConnection()) {
-            PreparedStatement ps = connection.prepareStatement(CREATE_NEW_SUBJECT);
-            ps.setString(1, name);
             ps.executeUpdate();
         }
     }
