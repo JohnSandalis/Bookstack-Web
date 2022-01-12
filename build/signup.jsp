@@ -8,7 +8,7 @@ String alertText = (String)request.getAttribute("alertText");
 <html lang="en">
   <head>
 <%@ include file="header.jsp" %>
-    <meta name="description" content="Search book by ISBNs">
+    <meta name="description" content="Sign up">
     <title>Sign Up</title>
   </head>
   <body>

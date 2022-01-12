@@ -51,7 +51,7 @@ try {
 <%
               if(user.getAddress() == null && user.getCity() == null && user.getRegion() == null && user.getPostalCode() == null && user.getPhoneNumber() == null && user.getCountry() == null) {
 %>
-              <a class="btn btn-md address-form-btn" href="address_form.jsp">Address form</a>
+              <a class="btn btn-md address-form-btn" href="submit_residence_info.jsp">Address form</a>
 <%
               } else {
 %>

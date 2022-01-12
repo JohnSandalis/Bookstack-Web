@@ -8,7 +8,7 @@
 <html lang="en">
   <head>
 <%@ include file="header.jsp" %>
-    <meta name="description" content="Search book by ISBNs">
+    <meta name="description" content="Sign in">
     <title>Sign In</title>
   </head>
   <body>
@@ -17,7 +17,7 @@
     </header>
         <main>
             <section class="form-section">
-                <form method="POST" class="form" action="signInController.jsp">
+                <form method="POST" class="form" action="servlet/SignInServlet">
                 <div class="form-container">
                     <p class="form-title">Sign in</p>
                     <%if (alertText != null){%>

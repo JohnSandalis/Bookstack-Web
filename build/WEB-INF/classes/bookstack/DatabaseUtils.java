@@ -109,7 +109,7 @@ public class DatabaseUtils {
                 List<String> authors = getAuthorsOfBook(isbn);
                 List<String> subjects = getBookSubjects(isbn);
                 Book book = new Book(isbn, title, subtitle, pageCount, thumbnailUrl, publisher,
-                         publishDate, lang, price, authors, subjects);
+                        publishDate, lang, price, authors, subjects);
                 books.add(book);
             }
             return books;
@@ -252,7 +252,7 @@ public class DatabaseUtils {
                 return rs.getInt("id");
             }
             return null;
-        } 
+        }
     }
 
     /**
@@ -328,7 +328,8 @@ public class DatabaseUtils {
     }
 
     /**
-     * Creates a connection to the database and returns all subjects, the names of which
+     * Creates a connection to the database and returns all subjects, the names of
+     * which
      * resemble the given string
      * 
      * @param str String to search resembling names
@@ -351,7 +352,8 @@ public class DatabaseUtils {
     }
 
     /**
-     * Creates a connection to the database and returns all authors, the names of which
+     * Creates a connection to the database and returns all authors, the names of
+     * which
      * resemble the given string
      * 
      * @param str String to search resembling names
@@ -440,7 +442,7 @@ public class DatabaseUtils {
                 createNewAuthors(createAuthors);
             }
             addBookAuthors(isbn, authors);
-            
+
             List<String> createSubjects = new ArrayList<>();
             for (String subjectName : subjects) {
                 List<String> foundSubjects = searchSubjectWithName(subjectName);
@@ -493,7 +495,7 @@ public class DatabaseUtils {
      * Creates a connection to the database and adds id(s) and isbn to books_authors
      * table
      * 
-     * @param isbn book isbn
+     * @param isbn    book isbn
      * @param authors List with author name(s), with which id will be found
      * @throws SQLException
      */
