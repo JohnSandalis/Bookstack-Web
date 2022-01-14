@@ -17,12 +17,11 @@ String alertText = (String)request.getAttribute("alertText");
     </header>
         <main>
             <section class="form-section">
-                <form method="POST" class="form" action="signUpController.jsp">
+                <form method="POST" class="form" action="servlet/SignUpServlet">
                   <div class="form-container">
                     <p class="form-title">Sign up</p>
-                    <%if (alertText != null){%>
-                      <p class="alert-danger"><%=alertText%></p>
-                    <%}%>
+
+                    <!--First name-->
                     <div class="form-group">
                       <label for="firstname"
                         ><ion-icon class="form-icon" name="person"></ion-icon
@@ -32,8 +31,11 @@ String alertText = (String)request.getAttribute("alertText");
                         name="firstname"
                         id="firstname"
                         placeholder="First Name"
+                        required
                       />
                     </div>
+
+                    <!--Last name-->
                     <div class="form-group">
                       <label for="lastname"
                         ><ion-icon class="form-icon" name="person"></ion-icon
@@ -43,8 +45,12 @@ String alertText = (String)request.getAttribute("alertText");
                         name="lastname"
                         id="lastname"
                         placeholder="Last Name"
+                        required
+                        minlength="3"
                       />
                     </div>
+
+                    <!--Username-->
                     <div class="form-group">
                       <label for="username"
                         ><ion-icon class="form-icon" name="person-circle"></ion-icon
@@ -54,14 +60,31 @@ String alertText = (String)request.getAttribute("alertText");
                         name="username"
                         id="username"
                         placeholder="Username"
+                        required
+                        minlength="4"
                       />
                     </div>
+
+                    <!--Email-->
                     <div class="form-group">
                       <label for="email"
                         ><ion-icon class="form-icon" name="mail-open"></ion-icon
                       ></label>
-                      <input type="email" name="email" id="email" placeholder="Email" />
+                      <input type="email" name="email" id="email" placeholder="Email" required />
                     </div>
+                    <!--Password-->
+                    <!--JS script to check password and confirm-->
+                    <script>var check = function() {
+                      if (document.getElementById('password').value ==
+                        document.getElementById('confirm_password').value) {
+                        document.getElementById('password-message').innerHTML = "";
+                      } else {
+                        document.getElementById('password-message').innerHTML = "Password and confirm do not match";
+                        document.getElementById('password-message').style.cssText = "font-size: 1.6rem; padding-top: 0.1cm;"
+                        + " padding-bottom: 0cm; color: #a94442;";
+                      }
+                    }</script>
+
                     <div class="form-group">
                       <label for="password"
                         ><ion-icon class="form-icon" name="lock-open"></ion-icon
@@ -71,8 +94,13 @@ String alertText = (String)request.getAttribute("alertText");
                         name="password"
                         id="password"
                         placeholder="Password"
+                        required
+                        minlength="4"
+                        onkeyup='check();'
                       />
                     </div>
+
+                    <!--Confirm-->
                     <div class="form-group">
                       <label for="confirm_password"
                         ><ion-icon class="form-icon" name="lock-closed"></ion-icon
@@ -82,8 +110,11 @@ String alertText = (String)request.getAttribute("alertText");
                         name="confirm_password"
                         id="confirm_password"
                         placeholder="Confirm Password"
+                        required
+                        onkeyup='check();'
                       />
                     </div>
+                    <p id="password-message"></p>
                     <button class="form-btn" type="submit">Register</button>
                     <a class="form-link" href="signin.jsp">Already have an account?</a>
                   </div>

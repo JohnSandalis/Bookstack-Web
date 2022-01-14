@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page errorPage="error.jsp" %>
 <%@ page import="bookstack.DatabaseUtils"%>
+<%@ page import="bookstack.User"%>
 <%@ page import="java.util.regex.Pattern, java.util.regex.Matcher" %>
 <% String email = request.getParameter("email");
 String password = request.getParameter("password");

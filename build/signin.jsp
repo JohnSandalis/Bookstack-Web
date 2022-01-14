@@ -2,7 +2,7 @@
 <%@ page errorPage="error.jsp" %>
 <%@ page import="bookstack.*"%>
 <% request.setAttribute("destination", request.getHeader("Referer"));
-   String alertText = (String)request.getAttribute("alertText");
+   String alertText = (String)session.getAttribute("alertText");
 %>
 <!DOCTYPE html>
 <html lang="en">

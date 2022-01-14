@@ -15,24 +15,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpServletResponse;
 
-public class SignInServlet extends HttpServlet {
+public class SignUpServlet extends HttpServlet {
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String destination = (String) request.getAttribute("destination");
+        String firstname = request.getParameter("firstname");
+        String lastname = request.getParameter("lastname");
+        String username = request.getParameter("username");
         HttpSession session = request.getSession(true);
+        // Registers user
         try {
+            DatabaseUtils.createNewUser(firstname, lastname, username,
+                    email, password);
             User user = DatabaseUtils.getUserFromUsernameAndPassword(email, password);
-            if (user == null) {
-                String alertText = "Wrong email or password. User does not exist.";
-                session.setAttribute("alertText", alertText);
-                destination = "signin.jsp";
-            } else {
-                session.setAttribute("user", user);
-            }
+            session.setAttribute("user", user);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -41,6 +40,5 @@ public class SignInServlet extends HttpServlet {
         }
         destination = "/" + destination;
         response.sendRedirect(request.getContextPath() + destination);
-        ;
     }
 }

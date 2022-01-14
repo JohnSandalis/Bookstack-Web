@@ -37,7 +37,7 @@ public class DatabaseUtils {
     private static final String SELECT_SUBJECT_ID_FROM_SUBJECT = "SELECT id FROM subjects WHERE name = ?";
     private static final String SELECT_AUTHOR_ID_FROM_NAME = "SELECT id FROM authors WHERE name = ?";
     private static final String SIGN_UP_USER = "INSERT INTO users VALUES(DEFAULT, ?, ?, 0, 0, 0," +
-            "?, ?,  NULL, NULL, NULL, NULL, NULL, NULL, NULL)";
+            "?, ?,  NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)";
     private static final String CREATE_NEW_BOOK = "INSERT INTO books VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String CREATE_NEW_AUTHOR = "INSERT INTO authors VALUES(DEFAULT, ?)";
     private static final String CREATE_NEW_BOOK_AUTHOR = "INSERT INTO books_authors VALUES(?, ?)";
