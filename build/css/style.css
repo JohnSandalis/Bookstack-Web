@@ -496,7 +496,8 @@
 }
 
 .address-form-btn {
-  align-self: center;
+  align-self: right;
+  float: right;
 }
 
 .stats {
