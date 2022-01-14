@@ -37,6 +37,7 @@ const loadBooks = () => {
         $(bookSelector + " p.itm-title").text(books[bookIndex].title);
         $(bookSelector + " p.itm-author").text(authors);
         $(bookSelector + " img.itm-img").attr("src", books[bookIndex].thumbnailUrl);
+        $(bookSelector + " a.btn-itm").attr("href", `book_preview.jsp?${books[bookIndex].isbn}`)
     }
 }
 
