@@ -445,8 +445,7 @@ public class DatabaseUtils {
 
             List<String> createSubjects = new ArrayList<>();
             for (String subjectName : subjects) {
-                List<String> foundSubjects = searchSubjectWithName(subjectName);
-                if (foundSubjects.isEmpty() || !foundSubjects.contains(subjectName)) {
+                if (getSubjectIdFromSubject(subjectName) == null) {
                     createSubjects.add(subjectName);
                 }
             }
@@ -629,8 +628,8 @@ public class DatabaseUtils {
     public static void updateUserCredits(int id, int newCredits) throws SQLException {
         try (Connection connection = createDatabaseConnection()) {
             PreparedStatement ps = connection.prepareStatement(UPDATE_USER_CREDITS);
-            ps.setInt(1, id);
-            ps.setInt(2, newCredits);
+            ps.setInt(1, newCredits);
+            ps.setInt(2, id);
             ps.executeUpdate();
         }
     }

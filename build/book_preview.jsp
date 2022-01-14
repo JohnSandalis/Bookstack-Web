@@ -2,24 +2,26 @@
 pageEncoding="UTF-8"%>
 <%@ page errorPage="error.jsp" %>
 <%@ page import="bookstack.*" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.List, java.util.ArrayList, org.apache.commons.lang3.StringUtils" %>
+
 <%
-  Book selectedBook = (Book) session.getAttribute("selectedBook");
-  List<String> authors = selectedBook.getAuthors();
-  StringBuilder sbAuthors = new StringBuilder();
-  sbAuthors.append(authors.get(0));
-  for (int i = 1; i < authors.size(); i++) {
-    sbAuthors.append(",");
-    sbAuthors.append(authors.get(i));
+  String isbn = request.getParameter("isbn");
+  Book selectedBook = null;
+  try {
+    selectedBook = DatabaseUtils.getBookFromISBN(isbn);
+  } catch (Exception e) {
+    throw new Exception("getBookFromISBN error");
   }
-  List<String> subjects = selectedBook.getSubjects();
-  StringBuilder sbSubjects = new StringBuilder();
-  sbSubjects.append(subjects.get(0));
-  for (int i = 1; i < subjects.size(); i++) {
-    sbSubjects.append(",");
-    sbSubjects.append(subjects.get(i));
+
+  if (selectedBook == null) {
+    %>
+    <jsp:forward page="browse.jsp"/>
+    <%
   }
+
+  String authors = StringUtils.join(selectedBook.getAuthors(), ", ");
+
+  String subjects = StringUtils.join(selectedBook.getSubjects(), ", ");
 %>
 
 <!DOCTYPE html>
@@ -51,11 +53,11 @@ pageEncoding="UTF-8"%>
             <p class="itm-subtitle">
               <%=selectedBook.getSubtitle()%>
             </p>
-            <p class="itm-preview">Author Names: <%=sbAuthors.toString()%></p>
+            <p class="itm-preview">Author Names: <%=authors%></p>
             <p class="itm-preview">Publisher: <%=selectedBook.getPublisher()%></p>
             <p class="itm-preview">Publish Date: <%=selectedBook.getPublishDate()%></p>
             <p class="itm-preview">Page Count: <%=selectedBook.getPageCount()%></p>
-            <p class="itm-preview">Subjects: <%=sbSubjects.toString()%></p>
+            <p class="itm-preview">Subjects: <%=subjects%></p>
             <p class="itm-preview">Language: <%=selectedBook.getLang()%></p>
             <div class="itm-credits-preview">
               <ion-icon class="credits-icon" name="cash-outline"></ion-icon>

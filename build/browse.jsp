@@ -61,7 +61,7 @@
             <%
             }
             %>
-            <a class="btn btn-md btn-trade" href="#">Trade-in</a>
+            <a class="btn btn-md btn-trade" href="isbn_form.jsp">Trade-in</a>
           </div>
         </div>
 
@@ -81,7 +81,7 @@
             <div class="itm-description-box">
               <p class="itm-title"></p>
               <p class="itm-author"></p>
-              <a class="btn btn-sm btn-itm" href="#">View Details</a>
+              <a class="btn btn-sm btn-itm" href="">View Details</a>
             </div>
           </div>
 
