@@ -3,6 +3,7 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -29,7 +30,7 @@ public class bookFormController extends HttpServlet {
         try {
             book = DatabaseUtils.getBookFromISBN(isbn);
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new ServletException("bookForm");
         }
 
         if (book == null) {
@@ -46,19 +47,21 @@ public class bookFormController extends HttpServlet {
             try {
                 publishDate = DATE_FORMAT.parse(strDate);
             } catch (Exception e) {
-                e.printStackTrace();
+                throw new ServletException("bookForm");
             }
             String lang = request.getParameter("language");
             List<String> authors = Arrays.asList(request.getParameterValues("authors"));
             List<String> subjects = Arrays.asList(request.getParameterValues("subjects"));
 
+            int price = (new Random().nextInt(10) + 1) * 10;
+
             // Create new book entry
             try {
                 DatabaseUtils.createNewBook(isbn, title, subtitle, pageCount, 
                                         thumbnailUrl, publisher, publishDate, 
-                                        lang, 0, authors, subjects);
+                                        lang, price, authors, subjects);
             } catch (Exception e) {
-                e.printStackTrace();
+                throw new ServletException("bookForm");
             }
         }
 
@@ -67,21 +70,28 @@ public class bookFormController extends HttpServlet {
         try {
             DatabaseUtils.addBooksSubmitted(currentDate, user.getId(), isbn);
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new ServletException("bookForm");
+        }
+
+        // Add credits to user
+        try {
+            DatabaseUtils.updateUserCredits(user.getId(), user.getCredits() + book.getPrice());
+        } catch (Exception e) {
+            throw new ServletException("bookForm");
         }
 
         // Update the books given by the user
         try {
             DatabaseUtils.updateUserBooksGiven(user.getBooksGiven() + 1, user.getId());
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new ServletException("bookForm");
         }
 
         // Refresh User
         try {
             user = DatabaseUtils.getUserFromUsernameAndPassword(user.getEmail(), user.getPassword());
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new ServletException("bookForm");
         }
 
         session.setAttribute("user", user);

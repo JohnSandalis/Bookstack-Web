@@ -629,8 +629,8 @@ public class DatabaseUtils {
     public static void updateUserCredits(int id, int newCredits) throws SQLException {
         try (Connection connection = createDatabaseConnection()) {
             PreparedStatement ps = connection.prepareStatement(UPDATE_USER_CREDITS);
-            ps.setInt(1, id);
-            ps.setInt(2, newCredits);
+            ps.setInt(1, newCredits);
+            ps.setInt(2, id);
             ps.executeUpdate();
         }
     }
