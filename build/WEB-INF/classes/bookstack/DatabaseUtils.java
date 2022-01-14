@@ -445,8 +445,7 @@ public class DatabaseUtils {
 
             List<String> createSubjects = new ArrayList<>();
             for (String subjectName : subjects) {
-                List<String> foundSubjects = searchSubjectWithName(subjectName);
-                if (foundSubjects.isEmpty() || !foundSubjects.contains(subjectName)) {
+                if (getSubjectIdFromSubject(subjectName) == null) {
                     createSubjects.add(subjectName);
                 }
             }
