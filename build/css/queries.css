@@ -544,6 +544,10 @@
     justify-self: end;
   }
 
+  .btn-preview {
+    grid-column: 1 / 2;
+  }
+
   /* Account Page */
   .account-container,
   .profile-page .browse-section {

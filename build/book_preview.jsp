@@ -38,6 +38,10 @@ pageEncoding="UTF-8"%>
     <main>
       <section class="itm-preview-section">
         <div class="itm-preview-container">
+          <div class="back-btn-container btn-preview">
+            <ion-icon class="chevron-back-icon" name="chevron-back"></ion-icon>
+            <button class="back-btn" onclick="history.back()">Back</button>
+          </div>
           <div class="itm-img-col">
             <div class="img-box-preview">
               <img
