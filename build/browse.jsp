@@ -89,11 +89,11 @@
         </div>
 
         <div class="pagination">
-          <button class="btn-page" id="prev">
+          <button type="button" class="btn-page" id="prev">
             <ion-icon class="btn-icon" name="chevron-back-outline"></ion-icon>
           </button>
 
-          <button class="btn-page" id="next">
+          <button type="button" class="btn-page" id="next">
             <ion-icon class="btn-icon" name="chevron-forward-outline"></ion-icon>
           </button>
         </div>
