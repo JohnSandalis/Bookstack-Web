@@ -44,9 +44,9 @@ try {
               <p class="information">
                 <%=user.getEmail() %>
               </p>
-              <p class="information"><%=user.getLang() %></p>
-
-
+              <%if (user.getLang() != null) {%>
+                <p class="information"><%=user.getLang() %></p>
+              <%}%>
               <h3 class="information-heading">Address</h3>
 <%
               if(user.getAddress() == null && user.getCity() == null && user.getRegion() == null && user.getPostalCode() == null && user.getPhoneNumber() == null && user.getCountry() == null) {

@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.ServletException;
+
 /**
  * Provides the utility fields and functions, regarding the Bookstack Database.
  * 

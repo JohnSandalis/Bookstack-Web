@@ -22,6 +22,7 @@ public class SubmitResidenceServlet extends HttpServlet {
 
         // Get parameter values
         HttpSession session = request.getSession(true);
+        User user = (User) session.getAttribute("user");
         String address = request.getParameter("address");
         int atFloor = Integer.parseInt(request.getParameter("floor"));
         String city = request.getParameter("city");
@@ -32,12 +33,9 @@ public class SubmitResidenceServlet extends HttpServlet {
         String lang = country;
 
         // Assign values to user object
-        User user = (User) request.getAttribute("user");
         try {
-            if (user != null) {
-                DatabaseUtils.updateUserInfo(address, country, postalCode, atFloor,
-                        region, city, lang, phoneNumber, user.getId());
-            }
+            DatabaseUtils.updateUserInfo(address, country, postalCode, atFloor,
+                    region, city, lang, phoneNumber, user.getId());
             user = DatabaseUtils.getUserFromUsernameAndPassword(user.getEmail(), user.getPassword());
             session.setAttribute("user", user);
         } catch (Exception e) {
