@@ -20,8 +20,18 @@ pageEncoding="UTF-8"%>
   }
 
   String authors = StringUtils.join(selectedBook.getAuthors(), ", ");
-
   String subjects = StringUtils.join(selectedBook.getSubjects(), ", ");
+
+  String error_message = null;
+  User user = (User) session.getAttribute("user");
+  
+  if (user == null) {
+    error_message = "You have to be signed in to acquire a book";
+  } else if (user.getCredits() < selectedBook.getPrice()) {
+    error_message = "Sorry, you don't have enough credits";
+  } else if (user.getAddress() == null) {
+    error_message = "Please fill your address details from the account page";
+  }
 %>
 
 <!DOCTYPE html>
@@ -69,12 +79,20 @@ pageEncoding="UTF-8"%>
               <ion-icon class="credits-icon" name="cash-outline"></ion-icon>
               <span class="itm-credits"><%=selectedBook.getPrice()%></span>
             </div>
+            <%
+            if (error_message == null) {
+            %>
+            <button type="button" id="confirmation-btn" class="tooltip form-btn" href="#">Acquire</button>
+            <%
+            } else {
+            %>
             <button disabled type="button" id="confirmation-btn" class="tooltip form-btn" href="#">
               Acquire 
-              <span class="tooltiptext">
-                Please fill your addres details from your account page
-              </span>
+              <span class="tooltiptext"><%=error_message %></span>
             </button>
+            <%
+            }
+            %>
           </div>
         </div>
       </section>
