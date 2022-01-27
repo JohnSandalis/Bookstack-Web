@@ -631,6 +631,7 @@ public class DatabaseUtils {
             PreparedStatement ps = connection.prepareStatement(UPDATE_USER_BOOKS_GIVEN);
             ps.setInt(1, booksGiven);
             ps.setInt(2, id);
+            ps.executeUpdate();
         }
     }
 
@@ -647,6 +648,7 @@ public class DatabaseUtils {
             PreparedStatement ps = connection.prepareStatement(UPDATE_USER_BOOKS_TAKEN);
             ps.setInt(1, booksTaken);
             ps.setInt(2, id);
+            ps.executeUpdate();
         }
     }
 
