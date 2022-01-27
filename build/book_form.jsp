@@ -213,6 +213,7 @@ if (StringUtils.isNotBlank(isbn) && StringUtils.isNumeric(isbn) &&
                 placeholder="Publish Date"
                 onfocus="(this.type='date')"
                 onblur="(this.type='text')"
+                required
               />
             </div>
 
