@@ -17,9 +17,10 @@ try {
   }
 } catch (Exception e) {}
 
-Boolean tempboo = (Boolean) request.getAttribute("book_acquired");
+Boolean tempboo = (Boolean) session.getAttribute("book_acquired");
 boolean book_acquired = false;
 if (tempboo != null) {
+  session.removeAttribute("book_acquired");
   book_acquired = tempboo.booleanValue();
 }
 %>
