@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-]   <%@ include file="header.jsp" %>
+   <%@ include file="header.jsp" %>
     <meta name="description" content="Bookstack browse page where you can find all the available books to be acquired with credits">
     <title>Bookstack - Browse</title>
     <script defer src="js/jquery.min.js"></script>
