@@ -48,9 +48,11 @@ public class DatabaseUtils {
     private static final String CREATE_NEW_SUBJECT = "INSERT INTO subjects VALUES(DEFAULT, ?)";
     private static final String CREATE_MODIFICATION_REQUEST = "INSERT INTO modification_requests VALUES(DEFAULT, ?, " +
             "?, ?)";
+    private static final String DELETE_BOOK_SUBMISSION = "DELETE FROM books_submitted WHERE book_isbn = ? LIMIT 1";
     private static final String UPDATE_USER_INFO = "UPDATE users SET address = ?, country = ?, " +
             "postal_code = ?, at_floor = ?, region = ?, city = ?, lang = ?, phone_number = ? WHERE id = ?";
     private static final String UPDATE_USER_BOOKS_GIVEN = "UPDATE users SET books_given = ? WHERE id = ?";
+    private static final String UPDATE_USER_BOOKS_TAKEN = "UPDATE users SET books_taken = ? WHERE id = ?";
     private static final String UPDATE_USER_CREDITS = "UPDATE users SET credits = ? WHERE id = ?";
 
     // Returns an active connection object to the project's database
@@ -572,6 +574,19 @@ public class DatabaseUtils {
     }
 
     /**
+     * Creates a connection to the database and deletes the first occurence
+     * of the given ISBN in the books_submitted table
+     * @param isbn Book's ISBN
+     */
+    public static void deleteBookSubmission(String isbn) throws SQLException {
+        try (Connection connection = createDatabaseConnection()) {
+            PreparedStatement ps = connection.prepareStatement(DELETE_BOOK_SUBMISSION);
+            ps.setString(1, isbn);
+            ps.executeUpdate();
+        }
+    }
+
+    /**
      * Creates a connection to the database and updates the user's - with the
      * specific id - details
      * 
@@ -615,6 +630,22 @@ public class DatabaseUtils {
         try (Connection connection = createDatabaseConnection()) {
             PreparedStatement ps = connection.prepareStatement(UPDATE_USER_BOOKS_GIVEN);
             ps.setInt(1, booksGiven);
+            ps.setInt(2, id);
+        }
+    }
+
+    /**
+     * Creasts a connection to the database and updates the user's - with the
+     * specific id - books_taken
+     * 
+     * @param id         The id of the user
+     * @param booksTaken The new number of books acquired by the user
+     * @throws SQLException when a connection to the database cannot be established
+     */
+    public static void updateUserBooksTaken(int booksTaken, int id) throws SQLException {
+        try (Connection connection = createDatabaseConnection()) {
+            PreparedStatement ps = connection.prepareStatement(UPDATE_USER_BOOKS_TAKEN);
+            ps.setInt(1, booksTaken);
             ps.setInt(2, id);
         }
     }
