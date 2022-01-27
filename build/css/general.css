@@ -125,6 +125,31 @@ strong {
   margin-bottom: 0 !important;
 }
 
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 25rem;
+  background-color: #000;
+  color: #f2f5f6;
+  text-align: center;
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(96%, -50%);
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
 /************************/
 /* FORMS */
 /************************/
@@ -279,6 +304,18 @@ label {
 .form-link:hover,
 .form-link:active {
   color: #7e9ba9;
+}
+
+.form-btn:disabled {
+  background-color: #3f4e55;
+  color: #f2f5f6;
+  opacity: 0.6;
+}
+
+.form-btn:disabled:hover {
+  cursor: default;
+  background-color: #3f4e55;
+  box-shadow: none;
 }
 
 select {
