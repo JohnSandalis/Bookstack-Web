@@ -82,17 +82,17 @@ pageEncoding="UTF-8"%>
             <%
             if (error_message == null) {
             %>
-            <a type="button" id="confirmation-btn" class="form-btn"
+            <button type="button" id="confirmation-btn" class="form-btn"
               href="servlet/BookAcquisitionServlet?isbn=<%=isbn%>">
               Acquire 
-            </a>
+            </button>
             <%
             } else {
             %>
-            <a disabled type="button" id="confirmation-btn" class="tooltip form-btn" href="#">
+            <button disabled type="button" id="confirmation-btn" class="tooltip form-btn" href="#">
               Acquire 
               <span class="tooltiptext"><%=error_message %></span>
-            </a>
+            </button>
             <%
             }
             %>

@@ -313,7 +313,7 @@ label {
 }
 
 .form-btn:disabled:hover {
-  cursor: default;
+  cursor: not-allowed;
   background-color: #3f4e55;
   box-shadow: none;
 }
