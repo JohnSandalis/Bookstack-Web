@@ -30,10 +30,12 @@ const loadBooks = () => {
         const bookIndex = i + 9 * (currentPage - 1)
         const bookSelector = `#bookContainer${i}`;
         if (bookIndex >= books.length) {
-            $(bookSelector).children().css("display", "none")
+            $(bookSelector).css("display", "none")
+            $(bookSelector).css("border-bottom", "none")
             continue;
         } else {
-            $(bookSelector).children().css("display", "flex")
+            $(bookSelector).css("display", "flex")
+            $(bookSelector).css("border-bottom", "2px solid #f2f5f6")
         }
         const authors = books[bookIndex].authors.join(", ");
         $(bookSelector + " p.itm-title").text(books[bookIndex].title);
