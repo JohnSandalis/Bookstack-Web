@@ -29,6 +29,8 @@ pageEncoding="UTF-8"%>
   <head>
     <%@ include file="header.jsp" %>
     <title>Bookstack</title>
+    <script defer src="js/jquery.min.js"></script>
+    <script defer src="js/bookAcquisition.js"></script>
   </head>
   <body>
     <header class="header bg-light">
@@ -67,7 +69,12 @@ pageEncoding="UTF-8"%>
               <ion-icon class="credits-icon" name="cash-outline"></ion-icon>
               <span class="itm-credits"><%=selectedBook.getPrice()%></span>
             </div>
-            <a class="btn btn-md" href="#">Acquire</a>
+            <button disabled type="button" id="confirmation-btn" class="tooltip form-btn" href="#">
+              Acquire 
+              <span class="tooltiptext">
+                Please fill your addres details from your account page
+              </span>
+            </button>
           </div>
         </div>
       </section>
