@@ -15,6 +15,8 @@ jQuery( () => {
 
 var currentPage = 1;
 var totalPages = 1;
+var leftEnd = 1;
+var rightEnd = 1;
 var books = []
 
 /**
@@ -47,6 +49,8 @@ const loadBooks = () => {
  */
 const addPaginationItems = () => {
     totalPages = Math.ceil(books.length / 9);
+    rightEnd = totalPages
+    setChevronState(currentPage)
     for (let i = 1; i <= totalPages; i++) {
         const paginationItem = document.createElement("button");
         paginationItem.setAttribute("class", "page-link");
@@ -57,7 +61,7 @@ const addPaginationItems = () => {
         }
         const text = document.createTextNode(i.toString());
         paginationItem.append(text);
-        $("#next").before(paginationItem);
+        $("div.pagination #next").before(paginationItem);
     }
 
 };
@@ -70,6 +74,34 @@ const addPaginationItems = () => {
 const changePage = (pageNum) => {
     $(`#page_${currentPage}`).removeClass("page-link--current");
     currentPage = pageNum;
+    setChevronState(currentPage)
     $(`#page_${pageNum}`).addClass("page-link--current");
     loadBooks()
 };
+
+/**
+ * Changes Chevron-Buttons' state, based on current page
+ * 
+ * @param {number} currentPage 
+ */
+const setChevronState = (currentPage) => {
+    if (currentPage == leftEnd) {
+        $('div.pagination #prev').prop('disabled', true)
+    } else {
+        $('div.pagination #prev').prop('disabled', false)
+    }
+
+    if (currentPage == rightEnd) {
+        $('div.pagination #next').prop('disabled', true)
+    } else {
+        $('div.pagination #next').prop('disabled', false)        
+    }
+}
+
+const handleChevronClick = (isNext) => {
+    if (isNext) {
+        changePage(currentPage + 1)
+    } else {
+        changePage(currentPage - 1)
+    }
+}
