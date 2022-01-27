@@ -16,6 +16,12 @@ try {
     books.add(userBooks.get(i).getBook());
   }
 } catch (Exception e) {}
+
+Boolean tempboo = (Boolean) request.getAttribute("book_acquired");
+boolean book_acquired = false;
+if (tempboo != null) {
+  book_acquired = tempboo.booleanValue();
+}
 %>
 
 <!DOCTYPE html>
@@ -34,7 +40,13 @@ try {
         <h1 class="heading-profile">Profile</h1>
         <a class="btn btn-md" href="isbn_submission.jsp">Trade-in</a>
       </div>
-
+      <%
+      if (book_acquired == true) {
+      %>
+      <p class="alert-success alert-account">Your book is on its way!</p>
+      <%
+      }
+      %>
       <div class="profile-page">
         <section class="profile-section">
           <div class="profile">
