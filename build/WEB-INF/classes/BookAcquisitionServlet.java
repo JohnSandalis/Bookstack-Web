@@ -58,8 +58,7 @@ public class BookAcquisitionServlet extends HttpServlet {
         }
 
         session.setAttribute("user", user);
-        request.setAttribute("book_acquired", true);
-        request.getRequestDispatcher("/account.jsp")
-            .forward(request, response);
+        session.setAttribute("book_acquired", true);
+        response.sendRedirect(request.getContextPath() + "/account.jsp");
     }
 }
