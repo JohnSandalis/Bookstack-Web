@@ -82,10 +82,12 @@ pageEncoding="UTF-8"%>
             <%
             if (error_message == null) {
             %>
-            <button type="button" id="confirmation-btn" class="form-btn"
-              href="servlet/BookAcquisitionServlet?isbn=<%=isbn%>">
-              Acquire 
-            </button>
+            <form action="servlet/BookAcquisitionServlet" method="GET">
+              <input type="hidden" name="isbn" value="<%=isbn%>">
+              <button type="submit" id="confirmation-btn" class="form-btn">
+                Acquire 
+              </button>
+            </form>
             <%
             } else {
             %>
