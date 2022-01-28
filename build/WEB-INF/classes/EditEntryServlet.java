@@ -36,19 +36,19 @@ public class EditEntryServlet extends HttpServlet {
 
         // Build modifications string
         String modificationString = "";
-        modificationString.concat("isbn=" + isbn + "&");
-        modificationString.concat("title=" + title + "&");
-        modificationString.concat("subtitle=" + subtitle + "&");
-        modificationString.concat("pages_count=" + String.valueOf(pageCount) + "&");
-        modificationString.concat("thumbnail_url=" + thumbnailUrl + "&");
-        modificationString.concat("publisher=" + publisher + "&");
-        modificationString.concat("publish_date=" + strDate + "&");
-        modificationString.concat("lang=" + lang + "&");
+        modificationString += "isbn=" + isbn + "&";
+        modificationString += "title=" + title + "&";
+        modificationString += "subtitle=" + subtitle + "&";
+        modificationString += "pages_count=" + String.valueOf(pageCount) + "&";
+        modificationString += "thumbnail_url=" + thumbnailUrl + "&";
+        modificationString += "publisher=" + publisher + "&";
+        modificationString += "publish_date=" + strDate + "&";
+        modificationString += "lang=" + lang + "&";
         for (String author : authors) {
-            modificationString.concat("authors=" + author + "&");
+            modificationString += "authors=" + author + "&";
         }
         for (String subject : subjects) {
-            modificationString.concat("subjects=" + subject + "&");
+            modificationString += "subjects=" + subject + "&";
         }
         modificationString = StringUtils.chop(modificationString); // Remove '&' from string's end
 
