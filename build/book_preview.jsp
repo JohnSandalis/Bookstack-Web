@@ -40,7 +40,6 @@ pageEncoding="UTF-8"%>
     <%@ include file="header.jsp" %>
     <title>Bookstack</title>
     <script defer src="js/jquery.min.js"></script>
-    <script defer src="js/bookAcquisition.js"></script>
   </head>
   <body>
     <header class="header bg-light">
@@ -82,7 +81,7 @@ pageEncoding="UTF-8"%>
             <%
             if (error_message == null) {
             %>
-            <form action="servlet/BookAcquisitionServlet" method="GET" id="acquire_form" onsubmit="return confirm('Are you sure?')">
+            <form action="servlet/BookAcquisitionServlet" method="GET" id="acquire_form" onsubmit="return confirm('You are about to spend credits to get this book. Are you sure you want to proceed?')">
               <input type="hidden" name="isbn" value="<%=isbn%>">
               <button type="submit" id="confirmation-btn" class="form-btn">
                 Acquire 
