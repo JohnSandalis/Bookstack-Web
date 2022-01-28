@@ -50,7 +50,7 @@ public class EditEntryServlet extends HttpServlet {
         for (String subject : subjects) {
             modificationString.concat("subjects=" + subject + "&");
         }
-        StringUtils.chop(modificationString); // Remove '&' from string's end
+        modificationString = StringUtils.chop(modificationString); // Remove '&' from string's end
 
         try {
             DatabaseUtils.addNewModificationRequest(user.getId(), isbn, modificationString);
