@@ -310,7 +310,7 @@ if (StringUtils.isNotBlank(isbn) && StringUtils.isNumeric(isbn) &&
             </div>
             
             <!-- Submit button -->
-            <button class="form-btn" type="submit" form="bookForm">Continue</button>
+            <button class="form-btn" type="submit" form="bookForm">Submit</button>
           </div>
         </form>
       </section>
