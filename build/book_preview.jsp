@@ -82,7 +82,7 @@ pageEncoding="UTF-8"%>
             <%
             if (error_message == null) {
             %>
-            <form action="servlet/BookAcquisitionServlet" method="GET" id="acquire_form" onsubmit="confirmAcquisition()">
+            <form action="servlet/BookAcquisitionServlet" method="GET" id="acquire_form" onsubmit="return confirmAcquisition()">
               <input type="hidden" name="isbn" value="<%=isbn%>">
               <button type="submit" id="confirmation-btn" class="form-btn">
                 Acquire 
