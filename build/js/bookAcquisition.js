@@ -4,6 +4,8 @@ function confirmAcquisition() {
 
                 alert("Successful book acquisition!");
 		return true;
-        else {
+	} else {
         	return false;
 	}
+}
+
