@@ -128,7 +128,7 @@ if (temp != null) {
               <div class="itm-description-box">
                 <p class="itm-title"><%=book.getTitle() %></p>
                 <p class="itm-author"><%=sbAuthors.toString() %></p>
-                <a class="btn btn-sm btn-itm" href="book_preview.jsp?isbn=<%=book.getIsbn()%>">Edit Entry</a>
+                <a class="btn btn-sm btn-itm" href="edit_entry.jsp?isbn=<%=book.getIsbn()%>">Edit Entry</a>
               </div>
             </div>
 <%
