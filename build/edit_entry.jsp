@@ -285,7 +285,7 @@ inputValues.put("subjects", StringUtils.join(book.getSubjects(), ", "));
             </div>
             
             <!-- Submit button -->
-            <button class="form-btn" type="submit" form="editForm">Continue</button>
+            <button class="form-btn" type="submit" form="editForm">Submit</button>
           </div>
         </form>
       </section>
