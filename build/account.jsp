@@ -23,6 +23,13 @@ if (tempboo != null) {
   session.removeAttribute("book_acquired");
   book_acquired = tempboo.booleanValue();
 }
+
+Boolean temp = (Boolean) session.getAttribute("modification_entry");
+boolean modify = false;
+if (temp != null) {
+  session.removeAttribute("modification_entry");
+  modify = temp.booleanValue();
+}
 %>
 
 <!DOCTYPE html>
@@ -45,6 +52,13 @@ if (tempboo != null) {
       if (book_acquired == true) {
       %>
       <p class="alert-success alert-account">Your book is on its way!</p>
+      <%
+      }
+      %>
+      <%
+      if (modify == true) {
+      %>
+      <p class="alert-success alert-account">Modification request was submitted successfully!</p>
       <%
       }
       %>

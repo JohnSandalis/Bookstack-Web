@@ -57,5 +57,8 @@ public class EditEntryServlet extends HttpServlet {
         } catch (SQLException e) {
             throw new ServletException(e.getMessage());
         }
+
+        session.setAttribute("modification_entry", true);
+        response.sendRedirect(request.getContextPath() + "/account.jsp");
     }
 }
