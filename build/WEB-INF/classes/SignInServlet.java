@@ -27,7 +27,7 @@ public class SignInServlet extends HttpServlet {
         try {
             User user = DatabaseUtils.getUserFromUsernameAndPassword(email, password);
             if (user == null) {
-                String alertText = "Wrong email or password. User does not exist.";
+                String alertText = "Wrong email or password";
                 session.setAttribute("alertText", alertText);
                 destination = "signin.jsp";
             } else {

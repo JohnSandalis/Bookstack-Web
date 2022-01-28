@@ -8,7 +8,7 @@ String destination = (String)request.getAttribute("destination");
 try{
     User user = DatabaseUtils.getUserFromUsernameAndPassword(email, password);
     if (user == null) {
-        String alertText = "Wrong email or password. User does not exist.";
+        String alertText = "Wrong email or password";
         request.setAttribute("alertText", alertText);%>
         <jsp:forward page="signin.jsp"/>
     <%} else {
